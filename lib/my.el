@@ -48,7 +48,7 @@
    (insert (format fmtstr (string-to-number (del-by-regexp "[^0-9.]")))))
 )
 
-(global-set-key (kbd "C-c C-a") (lambda () (interactive) (adjust-precision 2)))
+;(global-set-key (kbd "C-c C-a") (lambda () (interactive) (adjust-precision 2)))
 ;(global-set-key (kbd "C-c C-a") (lambda () (interactive) (adjust-precision 4)))
 
 

@@ -5,60 +5,15 @@
 
 
 ; add library directories
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lib"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
 
 ; load platform specific customisation file, currently 'darwin' for
 ; OS X, 'gnu-linux' for linux
-;
-;; thanks http://github.com/markhepburndotemacs/blob/master/init.el
-(load (concat "~/.emacs.d/" 
-      (subst-char-in-string ?/ ?- (symbol-name system-type))) t)
+(load (subst-char-in-string ?/ ?- (symbol-name system-type)))
 
-
-(setq el-get-emacswiki-base-url "http://www.emacswiki.org/emacs/download/")
-
-; make sure el-get is present and up to date
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
-
-; custom el-get repositories
-(setq el-get-sources
-  '((:name      zenburn-theme
-     :type      github
-     :pkgname   "bbatsov/zenburn-emacs"
-     :post-init (add-to-list 'custom-theme-load-path default-directory))
-    (:name      org-journal
-     :type      github
-     :pkgname   "bastibe/org-journal")))
-
-; all installed packages
-(setq *eg/packages*
- '(el-get
-    auctex
-    auto-complete
-    buffer-move
-    color-theme
-    ctable
-    deferred
-    epc
-    fill-column-indicator
-    fuzzy
-    gtags
-    jedi
-    popup
-    yasnippet
-    zenburn-theme
-    zencoding-mode
-    org-journal))
-
-(el-get-cleanup *eg/packages*)
-(el-get 'sync *eg/packages*)
+(load "dependencies")
 
 (require 'my)
 
@@ -71,6 +26,7 @@
 (load "custom-html")
 (load "custom-python")
 (load "custom-c")
+(load "custom-org")
 
 (yas-global-mode t)
 
@@ -104,6 +60,7 @@
 (add-to-list 'same-window-buffer-names "*Occur*")
 (add-to-list 'same-window-buffer-names "*Help*")
 (add-to-list 'same-window-buffer-names "*grep*")
+(add-to-list 'same-window-buffer-names "Calendar")
 
 
 ;; haskell-mode for haskell files
@@ -115,8 +72,6 @@
 (setq-default indent-tabs-mode  nil) ;; no tabs
 (setq-default tab-width         2)   ;; 2 spaces for tabs
 (setq-default standard-indent   2)   ;; indents are 2 spaces wide
-(setq-default py-indent-offset  2)   ;; 2 for python
-(setq-default python-indent     2)   ;; 2 for python, again
 (setq-default tab-always-indent t)   ;; make tab work
 (global-hl-line-mode            1)   ;; highlight current line
 (line-number-mode               1)   ;; show line number
@@ -274,5 +229,5 @@
             (add-to-list 'face-remapping-alist '(default (:background "#555555")))))
 (put 'downcase-region 'disabled nil)
 
-;; set  directory for org-journal entries
-(setq org-journal-dir "~/Documents/journal/")
+;; start the emacs daemon
+(server-start)
