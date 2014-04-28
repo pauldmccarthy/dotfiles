@@ -45,7 +45,9 @@
     zencoding-mode
     org-journal
     virtualenvwrapper
-    flycheck))
+    flycheck
+    flycheck-color-mode-line
+    powerline))
 
 (el-get-cleanup *eg/packages*)
 (el-get 'sync *eg/packages*)
