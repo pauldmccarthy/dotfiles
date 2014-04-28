@@ -214,14 +214,6 @@
 
 (global-set-key (kbd "C-c f") 'find-name-dired)
 
-;; Set font size for mode line and minibuffera
-(set-face-attribute 'mode-line          nil :height 140 :weight 'bold)
-(set-face-attribute 'mode-line-inactive nil :height 140 :weight 'normal)
-(set-face-attribute 'minibuffer-prompt  nil :height 140 :weight 'bold)
-
-; and main font size
-(set-face-attribute 'default nil :family "Anonymous Pro" :height 220)
-
 ;; change minibuffer background when active
 (add-hook 'minibuffer-setup-hook
           (lambda ()
