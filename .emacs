@@ -26,6 +26,7 @@
 
 (load "custom-html")
 (load "custom-python")
+(load "custom-js")
 (load "custom-c")
 (load "custom-org")
 

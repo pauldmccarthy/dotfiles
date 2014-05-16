@@ -17,9 +17,9 @@
 (setq mac-command-modifier 'meta)
 
 ;; Set font size for mode line and minibuffer
-(set-face-attribute 'mode-line          nil :height 140 :weight 'bold)
-(set-face-attribute 'mode-line-inactive nil :height 140 :weight 'normal)
-(set-face-attribute 'minibuffer-prompt  nil :height 140 :weight 'bold)
+(set-face-attribute 'mode-line          nil :height 80 :weight 'bold)
+(set-face-attribute 'mode-line-inactive nil :height 80 :weight 'normal)
+(set-face-attribute 'minibuffer-prompt  nil :height 80 :weight 'bold)
 
 ; and main font size
 (set-face-attribute 'default nil :family "Anonymous Pro" :height 220)
