@@ -29,6 +29,7 @@
 (load "custom-js")
 (load "custom-c")
 (load "custom-org")
+(load "custom-tex")
 
 (yas-global-mode t)
 
@@ -113,22 +114,10 @@
 ;; line wrapping is on by default
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; enable reftex in auctex
-(add-hook 'LaTeX-mode-hook (lambda () (reftex-mode t)))
-(add-hook 'latex-mode-hook (lambda () (reftex-mode t)))
-(setq reftex-plug-into-AUCTeX t)
 
 ;; disable backup and auto save
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
-;; make auctex aware of multi file documents
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default Tex-master nil)
-
-;;make dvi output the default
-(setq-default TeX-PDF-mode nil)
 
 ;; set up file templates
 (add-hook 'find-file-hooks 'auto-insert)
@@ -152,10 +141,7 @@
 )
 
 
-
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-
 
 
 (put 'upcase-region 'disabled nil)
