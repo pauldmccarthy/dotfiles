@@ -47,6 +47,7 @@
     virtualenvwrapper
     flycheck
     flycheck-color-mode-line
+    magit
     powerline))
 
 (el-get-cleanup *eg/packages*)
