@@ -4,7 +4,6 @@
 ;
 
 ; add library directories
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lib"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
 
@@ -63,6 +62,10 @@
 (add-to-list 'same-window-buffer-names "*Occur*")
 (add-to-list 'same-window-buffer-names "*Help*")
 (add-to-list 'same-window-buffer-names "*grep*")
+
+
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 
 ;; haskell-mode for haskell files
