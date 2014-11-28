@@ -27,6 +27,7 @@
 (load "custom-python")
 (load "custom-js")
 (load "custom-c")
+(load "custom-cpp")
 (load "custom-org")
 (load "custom-tex")
 
@@ -66,6 +67,7 @@
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
+(setq magit-emacsclient-executable "/usr/local/Cellar/emacs/HEAD/bin/emacsclient")
 
 
 ;; haskell-mode for haskell files
@@ -201,7 +203,6 @@
 (global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
 (global-unset-key (kbd "C-x C-c"))
 
-
 (global-set-key (kbd "C-c f") 'find-name-dired)
 
 ;; change minibuffer background when active
@@ -213,18 +214,3 @@
 
 ;; start the emacs daemon
 (server-start)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((project-venv-name . "pyfsl-env")))))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(flycheck-color-mode-line-error-face ((t (:inherit flycheck-fringe-error :background "#ff3333" :foreground "#efefef" :weight normal))))
- '(flycheck-color-mode-line-warning-face ((t (:inherit flycheck-fringe-warning :background "#aaaa00" :foreground "#efefef" :weight normal)))))

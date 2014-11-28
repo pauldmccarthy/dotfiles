@@ -10,6 +10,12 @@
    "/opt/local/bin" ":"
    (getenv "PATH")))
 
+;; add latex to path
+(setenv "PATH"
+  (concat
+   "/usr/texbin" ":"
+   (getenv "PATH")))
+
 ;; disable noise
 (setq ring-bell-function 'ignore)
 
