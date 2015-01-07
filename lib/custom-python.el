@@ -20,8 +20,6 @@
     (setq flycheck-pylintrc "~/.pylintrc")
     (setq flycheck-flake8rc "~/.flake8rc"))
 
-(add-hook 'flycheck-mode-hook 'my-flycheck-mode-hook)
-
 (defun my-python-mode-hook ()
 
   (pyvenv-auto-activate)
@@ -32,8 +30,9 @@
   (setq jedi:tooltip-method             nil) 
   (setq jedi:get-in-function-call-delay 200) 
   (jedi:setup)
-  (flycheck-mode)
 
+  (flycheck-mode)
+  
   ; syntax settings
   (subword-mode             1)
   (setq indent-tabs-mode    nil)
@@ -42,10 +41,11 @@
   (setq python-guess-indent 4)
   (setq python-indent       4)
   (setq tab-width           4)
-  (local-set-key (kbd "C-c e") 'flycheck-next-error)
-  (local-set-key (kbd "RET")   'newline-and-indent)
-  (local-set-key (kbd "C-c c") 'comment-or-uncomment-region)
-  (define-key python-mode-map "\C-m" 'newline-and-indent))
+  
+  (define-key python-mode-map [(control c) (n)] 'flycheck-next-error)
+  (define-key python-mode-map [(control c) (p)] 'flycheck-previous-error)
+  (define-key python-mode-map [(control c) (c)] 'comment-or-uncomment-region)
+  (define-key python-mode-map [(return)]        'newline-and-indent))
 
-
-(add-hook 'python-mode-hook 'my-python-mode-hook)
+(add-hook 'flycheck-mode-hook 'my-flycheck-mode-hook)
+(add-hook 'python-mode-hook   'my-python-mode-hook)
