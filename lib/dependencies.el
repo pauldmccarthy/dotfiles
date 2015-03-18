@@ -22,7 +22,10 @@
      :pkgname   "bastibe/org-journal")
     (:name      virtualenvwrapper
      :type      github
-     :pkgname   "porterjamesj/virtualenvwrapper.el")))
+     :pkgname   "porterjamesj/virtualenvwrapper.el")
+    (:name      glsl-mode
+     :type      github
+     :pkgname   "jimhourihan/glsl-mode")))
 
 
 ; all installed packages
@@ -48,7 +51,8 @@
     flycheck
     flycheck-color-mode-line
     magit
-    powerline))
+    powerline
+    glsl-mode))
 
 (el-get-cleanup *eg/packages*)
 (el-get 'sync *eg/packages*)

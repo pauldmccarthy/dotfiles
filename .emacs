@@ -30,6 +30,11 @@
 (load "custom-cpp")
 (load "custom-org")
 (load "custom-tex")
+(load "custom-glsl")
+
+;; enable local and directory-local variables
+(setq enable-local-eval      t)
+(setq enable-local-variables t)
 
 (yas-global-mode t)
 
