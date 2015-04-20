@@ -27,7 +27,7 @@
   ; jedi for auto-completion
   (setq jedi:setup-keys                 t) 
   (setq jedi:complete-on-dot            nil) 
-  (setq jedi:tooltip-method             nil) 
+  (setq jedi:tooltip-method             '(popup)) 
   (setq jedi:get-in-function-call-delay 200) 
   (jedi:setup)
 
