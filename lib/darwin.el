@@ -28,4 +28,4 @@
 (set-face-attribute 'minibuffer-prompt  nil :height 80 :weight 'bold)
 
 ; and main font size
-(set-face-attribute 'default nil :family "Anonymous Pro" :height 190)
+(set-face-attribute 'default nil :family "Anonymous Pro" :height 200)

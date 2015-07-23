@@ -17,6 +17,10 @@
      :type      github
      :pkgname   "bbatsov/zenburn-emacs"
      :post-init (add-to-list 'custom-theme-load-path default-directory))
+    (:name      light-soap-theme
+     :type      github
+     :pkgname   "mswift42/light-soap-theme"
+     :post-init (add-to-list 'custom-theme-load-path default-directory)) 
     (:name      org-journal
      :type      github
      :pkgname   "bastibe/org-journal")
@@ -45,6 +49,7 @@
     popup
     yasnippet
     zenburn-theme
+    light-soap-theme
     zencoding-mode
     org-journal
     virtualenvwrapper

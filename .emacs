@@ -115,6 +115,30 @@
 (global-set-key (kbd "C-c <up>")    'buf-move-up)
 (global-set-key (kbd "C-c <down>")  'buf-move-down)
 
+;; Disable annoying key bindings, because I
+;; accidentally hit them far too often.
+;; downcase-region and upcase-region
+(global-set-key (kbd "C-x C-l") nil)
+(global-set-key (kbd "C-x C-u") nil)
+
+;; Make those window keybindings
+;; work in org mode
+(add-hook 'org-mode-hook
+  (lambda ()
+    (local-unset-key (kbd "<S-up>"))
+    (local-unset-key (kbd "<S-down>"))
+    (local-unset-key (kbd "<S-left>"))
+    (local-unset-key (kbd "<S-right>"))
+    (local-unset-key (kbd "<C-S-up>")) 
+    (local-unset-key (kbd "<C-S-down>"))  
+    (local-unset-key (kbd "<C-S-left>")) 
+    (local-unset-key (kbd "<C-S-right>"))
+    (local-unset-key (kbd "C-c <up>"))
+    (local-unset-key (kbd "C-c <down>")) 
+    (local-unset-key (kbd "C-c <left>"))
+    (local-unset-key (kbd "C-c <right>"))))
+
+
 ;; auto-refresh buffers of files changed on disk
 (global-auto-revert-mode t)`
 
@@ -198,11 +222,6 @@
 ;; disable overwrite mode
 (put 'overwrite-mode 'disabled t)
 
-;; Make windmove work in org-mode:
-(add-hook 'org-shiftup-final-hook 'windmove-up)
-(add-hook 'org-shiftleft-final-hook 'windmove-left)
-(add-hook 'org-shiftdown-final-hook 'windmove-down)
-(add-hook 'org-shiftright-final-hook 'windmove-right)
 
 ;; change exit key binding; C-x C-c is too easy to accidentally hit
 (global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
