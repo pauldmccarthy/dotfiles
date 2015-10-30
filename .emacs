@@ -17,12 +17,13 @@
 
 (require 'my)
 
+(require 'diminish)
+
 (when (require 'zenburn-theme nil t)
   (load-theme 'zenburn t))
 
-(require 'auto-complete)
-(global-auto-complete-mode t)
-
+(load "custom-window")
+(load "custom-insert")
 (load "custom-html")
 (load "custom-python")
 (load "custom-js")
@@ -36,47 +37,16 @@
 (setq enable-local-eval      t)
 (setq enable-local-variables t)
 
-(yas-global-mode t)
 
-;; add some shotcuts in popup menu mode
-(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
-(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
-(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
-(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
-(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+(desktop-save-mode 1)
 
-(defun yas/popup-isearch-prompt (prompt choices &optional display-fn)
-  (when (featurep 'popup)
-    (popup-menu*
-     (mapcar
-      (lambda (choice)
-        (popup-make-item
-         (or (and display-fn (funcall display-fn choice))
-             choice)
-         :value choice))
-      choices)
-     :prompt prompt
-     ;; start isearch mode immediately
-     :isearch t
-     )))
- 
-(setq yas/prompt-functions '(yas/popup-isearch-prompt yas/no-prompt))
-
+;; highlight the current line in all modes
 (global-hl-line-mode -1)
-
-
-(add-to-list 'same-window-buffer-names "*Occur*")
-(add-to-list 'same-window-buffer-names "*Help*")
-(add-to-list 'same-window-buffer-names "*grep*")
-
 
 ;; magit
 (global-set-key (kbd "C-x g") 'magit-status)
 (setq magit-emacsclient-executable "/usr/local/Cellar/emacs/HEAD/bin/emacsclient")
-
-
-;; haskell-mode for haskell files
-(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+(setq git-commit-finish-query-functions '())
 
 ;; line and tab settings. lots of major modes have their own
 ;; indentation settings, which is very frustrating
@@ -89,55 +59,15 @@
 (line-number-mode               1)   ;; show line number
 (column-number-mode             1)   ;; show column number
 
-;; bind copy word under cursor to C-c w
-(global-set-key (kbd "C-c w") 'copy-word)
-
-;; turn off trimmings
-(menu-bar-mode   0)
-(tool-bar-mode   0)
-(scroll-bar-mode 0)
-
-;; use bs-show instead of standard buffer list
-(global-set-key (kbd "C-x C-b") 'bs-show)
-
-;; use shift+arrows for window switching
-(windmove-default-keybindings 'shift)
-
-;; use C-S-arrows for window resizing
-(global-set-key (kbd "C-S-<up>")    'shrink-window)
-(global-set-key (kbd "C-S-<down>")  'enlarge-window)
-(global-set-key (kbd "C-S-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
-
-;; use C-c arrows for buffer moving
-(global-set-key (kbd "C-c <left>")  'buf-move-left)
-(global-set-key (kbd "C-c <right>") 'buf-move-right)
-(global-set-key (kbd "C-c <up>")    'buf-move-up)
-(global-set-key (kbd "C-c <down>")  'buf-move-down)
+(require 'helm)
+(helm-mode 1)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
 
 ;; Disable annoying key bindings, because I
 ;; accidentally hit them far too often.
 ;; downcase-region and upcase-region
 (global-set-key (kbd "C-x C-l") nil)
 (global-set-key (kbd "C-x C-u") nil)
-
-;; Make those window keybindings
-;; work in org mode
-(add-hook 'org-mode-hook
-  (lambda ()
-    (local-unset-key (kbd "<S-up>"))
-    (local-unset-key (kbd "<S-down>"))
-    (local-unset-key (kbd "<S-left>"))
-    (local-unset-key (kbd "<S-right>"))
-    (local-unset-key (kbd "<C-S-up>")) 
-    (local-unset-key (kbd "<C-S-down>"))  
-    (local-unset-key (kbd "<C-S-left>")) 
-    (local-unset-key (kbd "<C-S-right>"))
-    (local-unset-key (kbd "C-c <up>"))
-    (local-unset-key (kbd "C-c <down>")) 
-    (local-unset-key (kbd "C-c <left>"))
-    (local-unset-key (kbd "C-c <right>"))))
-
 
 ;; auto-refresh buffers of files changed on disk
 (global-auto-revert-mode t)`
@@ -148,35 +78,9 @@
 ;; line wrapping is on by default
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-
 ;; disable backup and auto save
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
-;; set up file templates
-(add-hook 'find-file-hooks 'auto-insert)
-(setq auto-insert-directory (expand-file-name "~/.emacs.d/insert/"))
-(setq auto-insert-query nil)
-
-(define-auto-insert "\\.py\\'" ["insert.py" update-insert-file])
-(define-auto-insert "\\.hs\\'" ["insert.hs" update-insert-file])
-
-;; in the template files, replace '@filename@' with the file name.
-;; Thanks http://www.emacswiki.org/emacs/AutoInsertMode
-(defun update-insert-file ()
-  (save-excursion
-    (while (search-forward "@filename@" nil t)
-      (save-restriction
-        (narrow-to-region (match-beginning 0) (match-end 0))
-        (replace-match (file-name-nondirectory buffer-file-name))
-      )
-    )
-  )
-)
-
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
 
 (put 'upcase-region 'disabled nil)
 
@@ -189,7 +93,6 @@
   (global-unset-key k))
 
 (fset 'mouse-buffer-menu nil)
-
 
 ;; globally disable fill/wrap
 (auto-fill-mode -1)
@@ -218,16 +121,54 @@
 ;; make compile output auto-scroll
 (setq compilation-scroll-output t)
 
-
 ;; disable overwrite mode
 (put 'overwrite-mode 'disabled t)
 
+;; projectile and helm
+;; https://github.com/markhepburn/dotemacs/blob/master/custom-general.el
+(projectile-global-mode)
+(setq projectile-indexing-method 'native)
+(setq projectile-enable-caching t)
+(setq projectile-project-root-files (quote (".projectile")))
+(setq projectile-project-root-files-bottom-up (quote (".projectile")))
+(setq projectile-project-root-files-top-down-recurring (quote (".projectile")))
+
+(after 'projectile
+  (setq projectile-completion-system 'helm
+        projectile-switch-project-action 'helm-projectile
+        ;; http://iqbalansari.github.io/blog/2014/02/22/switching-repositories-with-magit/
+        ;; http://irreal.org/blog/?p=4177
+        magit-repository-directories (mapcar (lambda (dir)
+                                               (substring dir 0 -1))
+                                             (nreverse
+                                              (remove-if-not (lambda (project)
+                                                               (file-directory-p (concat project "/.git/")))
+                                                             (projectile-relevant-known-projects)))))
+  (diminish 'projectile-mode))
+
+(defun maybe-projectile-find-file ()
+  (interactive)
+  (call-interactively
+   (if (projectile-project-p)
+       #'projectile-find-file
+     #'helm-find-files)))
+
+;; use helm/projectile for file/buffer selection
+(global-set-key (kbd "C-x C-f") 'maybe-projectile-find-file)
+(global-set-key (kbd "C-c f")   'helm-find-files)
+(global-set-key (kbd "C-c k")   'projectile-find-file-in-known-projects)
+(global-set-key (kbd "M-x")     'helm-M-x)
+(global-set-key (kbd "M-y")     'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-b") 'helm-mini)
+(global-set-key (kbd "C-x   b") 'bs-show)
+
+;; use enter to select auto completions
+(require 'auto-complete)
+(ac-config-default)
 
 ;; change exit key binding; C-x C-c is too easy to accidentally hit
 (global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
 (global-unset-key (kbd "C-x C-c"))
-
-(global-set-key (kbd "C-c f") 'find-name-dired)
 
 ;; change minibuffer background when active
 (add-hook 'minibuffer-setup-hook

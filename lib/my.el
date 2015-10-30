@@ -46,7 +46,15 @@
   (interactive "p")
   (let ((fmtstr (format "%%0.%df" arg)))
    (insert (format fmtstr (string-to-number (del-by-regexp "[^0-9.]")))))
-)
+  )
+
+
+;; https://github.com/markhepburn/dotemacs/blob/master/custom-functions.el
+(defmacro after (mode &rest body)
+  "`eval-after-load' MODE evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,mode
+     '(progn ,@body)))
 
 ;(global-set-key (kbd "C-c C-a") (lambda () (interactive) (adjust-precision 2)))
 ;(global-set-key (kbd "C-c C-a") (lambda () (interactive) (adjust-precision 4)))

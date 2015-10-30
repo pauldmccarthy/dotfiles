@@ -1,6 +1,7 @@
 
 ; All virtualenvs are stored here
-(setq venv-location "~/.virtualenvs/")
+(setq venv-location (expand-file-name "~/.virtualenvs/"))
+(setq python-environment-directory venv-location)
 
 ; Auto-activate virtualenv on a buffer
 ; if project-venv-name is set
@@ -41,6 +42,9 @@
   (setq python-guess-indent 4)
   (setq python-indent       4)
   (setq tab-width           4)
+
+  (highlight-symbol-mode            1)
+  (setq highlight-symbol-idle-delay 0.25)
   
   (define-key python-mode-map [(control c) (n)] 'flycheck-next-error)
   (define-key python-mode-map [(control c) (p)] 'flycheck-previous-error)

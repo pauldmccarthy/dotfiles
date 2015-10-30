@@ -1,63 +1,45 @@
-; Install a bunch of third party packages.
-
-(setq el-get-emacswiki-base-url "http://www.emacswiki.org/emacs/download/")
-
-; make sure el-get is present and up to date
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
-
-; custom el-get repositories
-(setq el-get-sources
-  '((:name      zenburn-theme
-     :type      github
-     :pkgname   "bbatsov/zenburn-emacs"
-     :post-init (add-to-list 'custom-theme-load-path default-directory))
-    (:name      light-soap-theme
-     :type      github
-     :pkgname   "mswift42/light-soap-theme"
-     :post-init (add-to-list 'custom-theme-load-path default-directory)) 
-    (:name      org-journal
-     :type      github
-     :pkgname   "bastibe/org-journal")
-    (:name      virtualenvwrapper
-     :type      github
-     :pkgname   "porterjamesj/virtualenvwrapper.el")
-    (:name      glsl-mode
-     :type      github
-     :pkgname   "jimhourihan/glsl-mode")))
+;; Install a bunch of third party packages.
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
 
 
-; all installed packages
-(setq *eg/packages*
- '(el-get
-    auctex
+(setq *pmc/packages*
+  '(auctex
     auto-complete
     buffer-move
-    color-theme
-    ctable
-    deferred
-    epc
-    fill-column-indicator
-    fuzzy
-    gtags
-    jedi
-    popup
-    yasnippet
-    zenburn-theme
-    light-soap-theme
-    zencoding-mode
-    org-journal
-    virtualenvwrapper
+    diminish
+    dash
     flycheck
     flycheck-color-mode-line
+    glsl-mode
+    helm
+    highlight-symbol
+    jedi
+    org-journal
     magit
+    popup
     powerline
-    glsl-mode))
+    projectile
+    virtualenvwrapper
+    yasnippet
+    zenburn-theme
+    zencoding-mode))
 
-(el-get-cleanup *eg/packages*)
-(el-get 'sync *eg/packages*)
+(require 'cl)
+(require 'package)
+(package-initialize)
+
+(defun pmc/all-packages-installed-p ()
+  (cl-every (lambda (p) (package-installed-p p))
+            *pmc/packages*))
+
+(unless (pmc/all-packages-installed-p)
+  (message "Refreshing package database...")
+  (package-refresh-contents)
+  (message "Done.")
+  (dolist (package *pmc/packages*)
+   (unless (package-installed-p package)
+     (package-install package))))
