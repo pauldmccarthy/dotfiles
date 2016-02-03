@@ -9,6 +9,7 @@
 (setq *pmc/packages*
   '(auctex
     auto-complete
+    pos-tip
     buffer-move
     diminish
     dash

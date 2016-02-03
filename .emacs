@@ -16,13 +16,16 @@
 (powerline-default-theme)
 
 (require 'my)
-
 (require 'diminish)
+(require 'pos-tip)
 
 (when (require 'zenburn-theme nil t)
   (load-theme 'zenburn t))
 
 (load "custom-window")
+(load "custom-auto-complete")
+(load "custom-magit")
+(load "custom-powerline")
 (load "custom-insert")
 (load "custom-html")
 (load "custom-python")
@@ -37,16 +40,12 @@
 (setq enable-local-eval      t)
 (setq enable-local-variables t)
 
-
+;; save layout on exit
 (desktop-save-mode 1)
 
 ;; highlight the current line in all modes
 (global-hl-line-mode -1)
 
-;; magit
-(global-set-key (kbd "C-x g") 'magit-status)
-(setq magit-emacsclient-executable "/usr/local/Cellar/emacs/HEAD/bin/emacsclient")
-(setq git-commit-finish-query-functions '())
 
 ;; line and tab settings. lots of major modes have their own
 ;; indentation settings, which is very frustrating
@@ -70,7 +69,7 @@
 (global-set-key (kbd "C-x C-u") nil)
 
 ;; auto-refresh buffers of files changed on disk
-(global-auto-revert-mode t)`
+(global-auto-revert-mode t)
 
 ;; new buffers are text by default
 (setq-default default-major-mode 'text-mode)
@@ -161,10 +160,6 @@
 (global-set-key (kbd "M-y")     'helm-show-kill-ring)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "C-x   b") 'bs-show)
-
-;; use enter to select auto completions
-(require 'auto-complete)
-(ac-config-default)
 
 ;; change exit key binding; C-x C-c is too easy to accidentally hit
 (global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
