@@ -21,13 +21,15 @@
     jedi
     org-journal
     magit
+    midnight
     popup
     powerline
     projectile
     virtualenvwrapper
     yasnippet
     zenburn-theme
-    zencoding-mode))
+    zencoding-mode
+    cython-mode))
 
 (require 'cl)
 (require 'package)

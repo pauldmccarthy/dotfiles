@@ -18,6 +18,7 @@
 (require 'my)
 (require 'diminish)
 (require 'pos-tip)
+(require 'midnight)
 
 (when (require 'zenburn-theme nil t)
   (load-theme 'zenburn t))
