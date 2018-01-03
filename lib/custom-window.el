@@ -14,10 +14,10 @@
 (windmove-default-keybindings 'shift)
 
 ;; use C-S-arrows for window resizing
-(global-set-key (kbd "C-S-<up>")    'shrink-window)
-(global-set-key (kbd "C-S-<down>")  'enlarge-window)
-(global-set-key (kbd "C-S-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-S-<up>")    (lambda () (interactive (shrink-window 10))))
+(global-set-key (kbd "C-S-<down>")  (lambda () (interactive (enlarge-window 10))))
+(global-set-key (kbd "C-S-<left>")  (lambda () (interactive (shrink-window-horizontally 10))))
+(global-set-key (kbd "C-S-<right>") (lambda () (interactive (enlarge-window-horizontally 10))))
 
 ;; use C-c arrows for buffer moving
 (global-set-key (kbd "C-c <left>")  'buf-move-left)
@@ -34,11 +34,11 @@
     (local-unset-key (kbd "<S-down>"))
     (local-unset-key (kbd "<S-left>"))
     (local-unset-key (kbd "<S-right>"))
-    (local-unset-key (kbd "<C-S-up>")) 
-    (local-unset-key (kbd "<C-S-down>"))  
-    (local-unset-key (kbd "<C-S-left>")) 
+    (local-unset-key (kbd "<C-S-up>"))
+    (local-unset-key (kbd "<C-S-down>"))
+    (local-unset-key (kbd "<C-S-left>"))
     (local-unset-key (kbd "<C-S-right>"))
     (local-unset-key (kbd "C-c <up>"))
-    (local-unset-key (kbd "C-c <down>")) 
+    (local-unset-key (kbd "C-c <down>"))
     (local-unset-key (kbd "C-c <left>"))
     (local-unset-key (kbd "C-c <right>"))))

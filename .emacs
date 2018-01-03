@@ -4,6 +4,13 @@
 ;
 
 ; add library directories
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lib"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
 
@@ -20,8 +27,6 @@
 (require 'pos-tip)
 (require 'midnight)
 
-(when (require 'zenburn-theme nil t)
-  (load-theme 'zenburn t))
 
 (load "custom-window")
 (load "custom-auto-complete")
@@ -36,6 +41,7 @@
 (load "custom-org")
 (load "custom-tex")
 (load "custom-glsl")
+(load "custom-theme")
 
 ;; enable local and directory-local variables
 (setq enable-local-eval      t)
@@ -85,7 +91,7 @@
 (put 'upcase-region 'disabled nil)
 
 ;; disable mouse (thanks http://stackoverflow.com/questions/4906534/disable-mouse-clicks-in-emacs)
-(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]  
+(dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]
              [mouse-2] [down-mouse-2] [drag-mouse-2] [double-mouse-2] [triple-mouse-2]
              [mouse-3] [down-mouse-3] [drag-mouse-3] [double-mouse-3] [triple-mouse-3]
              [mouse-4] [down-mouse-4] [drag-mouse-4] [double-mouse-4] [triple-mouse-4]
@@ -123,6 +129,10 @@
 
 ;; disable overwrite mode
 (put 'overwrite-mode 'disabled t)
+
+;; Make tooltips show in the minibuffer
+(tooltip-mode -1)
+(setq tooltip-use-echo-area t)
 
 ;; projectile and helm
 ;; https://github.com/markhepburn/dotemacs/blob/master/custom-general.el
@@ -164,7 +174,14 @@
 
 ;; change exit key binding; C-x C-c is too easy to accidentally hit
 (global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
-(global-unset-key (kbd "C-x C-c"))
+
+
+;; Disable nex/prev buffer shortcuts,
+;; because i always accidentally hit
+;; them and end up editing a different
+;; file without realising it.
+(global-unset-key (kbd "C-x <left>"))
+(global-unset-key (kbd "C-x <right>"))
 
 ;; change minibuffer background when active
 (add-hook 'minibuffer-setup-hook
@@ -173,5 +190,13 @@
             (add-to-list 'face-remapping-alist '(default (:background "#555555")))))
 (put 'downcase-region 'disabled nil)
 
+;; tell magit not to restore the previous window
+;; config when killing the magit buffer
+(setq magit-bury-buffer-function 'magit-mode-quit-window)
+
 ;; start the emacs daemon
 (server-start)
+
+;; No scrollbars
+(scroll-bar-mode            -1)
+(horizontal-scroll-bar-mode -1)

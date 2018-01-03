@@ -29,7 +29,8 @@
     yasnippet
     zenburn-theme
     zencoding-mode
-    cython-mode))
+    cython-mode
+    realgud))
 
 (require 'cl)
 (require 'package)

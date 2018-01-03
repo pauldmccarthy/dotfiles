@@ -3,6 +3,11 @@
 (setq venv-location (expand-file-name "~/.virtualenvs/"))
 (setq python-environment-directory venv-location)
 
+; Allow me to set the virtualenv in .dir-locals.el
+; without an unsafe variable warning
+(put 'project-venv-name 'safe-local-variable
+     (lambda (x) t))
+
 ; Auto-activate virtualenv on a buffer
 ; if project-venv-name is set
 ; maybe manually add ./bin/ to PATH?
@@ -26,14 +31,14 @@
   (pyvenv-auto-activate)
 
   ; jedi for auto-completion
-  (setq jedi:setup-keys                 t) 
-  (setq jedi:complete-on-dot            nil) 
-  (setq jedi:tooltip-method             '(popup)) 
-  (setq jedi:get-in-function-call-delay 200) 
+  (setq jedi:setup-keys                 t)
+  (setq jedi:complete-on-dot            nil)
+  (setq jedi:tooltip-method             nil)
+  (setq jedi:get-in-function-call-delay 200)
   (jedi:setup)
 
   (flycheck-mode)
-  
+
   ; syntax settings
   (subword-mode             1)
   (setq indent-tabs-mode    nil)
@@ -45,11 +50,19 @@
 
   (highlight-symbol-mode            1)
   (setq highlight-symbol-idle-delay 0.25)
-  
+
+  ;; I'll stick with C-c . / C-c ,
+  ;; It's too easy to hit these shortcuts.
+  (define-key jedi-mode-map (kbd "C-.") nil)
+  (define-key jedi-mode-map (kbd "C-,") nil)
+
   (define-key python-mode-map [(control c) (n)] 'flycheck-next-error)
   (define-key python-mode-map [(control c) (p)] 'flycheck-previous-error)
   (define-key python-mode-map [(control c) (c)] 'comment-or-uncomment-region)
-  (define-key python-mode-map [(return)]        'newline-and-indent))
+  (define-key python-mode-map [(return)]        'newline-and-indent)
+
+  ;; Remove trailing whitespace on save
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
 
 (add-hook 'flycheck-mode-hook 'my-flycheck-mode-hook)
 (add-hook 'python-mode-hook   'my-python-mode-hook)

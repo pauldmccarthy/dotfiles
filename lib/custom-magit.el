@@ -2,3 +2,4 @@
 (setq magit-emacsclient-executable "/usr/local/Cellar/emacs/HEAD/bin/emacsclient")
 (setq git-commit-finish-query-functions '())
 (setq magit-revert-buffers nil)
+(setq magit-save-repository-buffers nil)
