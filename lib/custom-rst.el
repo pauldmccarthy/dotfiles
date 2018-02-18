@@ -7,6 +7,7 @@
     ; treat some characters as part of words
     (modify-syntax-entry ?` "w" $temp-syn-table)
     (modify-syntax-entry ?. "w" $temp-syn-table)
+    (modify-syntax-entry ?' "w" $temp-syn-table)
 
     (with-syntax-table $temp-syn-table
       (let* ((bounds (if (use-region-p)

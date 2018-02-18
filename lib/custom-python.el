@@ -40,13 +40,9 @@
   (flycheck-mode)
 
   ; syntax settings
-  (subword-mode             1)
-  (setq indent-tabs-mode    nil)
-
-  (setq py-indent-offset    4)
-  (setq python-guess-indent 4)
-  (setq python-indent       4)
-  (setq tab-width           4)
+  (subword-mode              1)
+  (setq indent-tabs-mode     nil)
+  (setq python-indent-offset 4)
 
   (highlight-symbol-mode            1)
   (setq highlight-symbol-idle-delay 0.25)
