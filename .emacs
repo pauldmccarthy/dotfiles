@@ -73,9 +73,10 @@
 
 ;; Disable annoying key bindings, because I
 ;; accidentally hit them far too often.
-;; downcase-region and upcase-region
-(global-set-key (kbd "C-x C-l") nil)
-(global-set-key (kbd "C-x C-u") nil)
+(global-set-key (kbd "C-x C-l") nil) ;; downcase-region
+(global-set-key (kbd "C-x C-u") nil) ;; upcase-region
+(global-set-key (kbd "C-z")     nil) ;; suspend-frame
+(global-set-key (kbd "C-x C-z") nil) ;; suspend-frame
 
 ;; auto-refresh buffers of files changed on disk
 (global-auto-revert-mode t)
