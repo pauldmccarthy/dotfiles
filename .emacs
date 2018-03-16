@@ -41,6 +41,7 @@
 (load "custom-c")
 (load "custom-cpp")
 (load "custom-org")
+(load "custom-sh")
 (load "custom-tex")
 (load "custom-glsl")
 (load "custom-theme")
@@ -77,6 +78,12 @@
 (global-set-key (kbd "C-x C-u") nil) ;; upcase-region
 (global-set-key (kbd "C-z")     nil) ;; suspend-frame
 (global-set-key (kbd "C-x C-z") nil) ;; suspend-frame
+(global-set-key (kbd "C-x C-c") nil) ;; save-buffers-kill-terminal
+
+;; this is harder to accidentally hit
+(global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
+
+
 
 ;; auto-refresh buffers of files changed on disk
 (global-auto-revert-mode t)
@@ -174,10 +181,6 @@
 (global-set-key (kbd "M-y")     'helm-show-kill-ring)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "C-x   b") 'bs-show)
-
-;; change exit key binding; C-x C-c is too easy to accidentally hit
-(global-set-key   (kbd "C-c X") 'save-buffers-kill-terminal)
-
 
 ;; Disable nex/prev buffer shortcuts,
 ;; because i always accidentally hit
