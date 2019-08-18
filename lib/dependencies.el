@@ -14,6 +14,7 @@
     diminish
     dash
     flycheck
+    flycheck-mypy
     flycheck-color-mode-line
     glsl-mode
     helm
@@ -28,9 +29,11 @@
     virtualenvwrapper
     yasnippet
     zenburn-theme
+    doneburn-theme
     zencoding-mode
     cython-mode
-    realgud))
+    realgud
+    csv-mode))
 
 (require 'cl)
 (require 'package)

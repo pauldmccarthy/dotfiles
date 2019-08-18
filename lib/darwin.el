@@ -41,9 +41,16 @@
 
 (defun desktop-font ()
   (interactive)
+  (set-face-attribute 'mode-line          nil :height 80 :weight 'bold)
+  (set-face-attribute 'mode-line-inactive nil :height 80 :weight 'normal)
+  (set-face-attribute 'minibuffer-prompt  nil :height 80 :weight 'bold)
+  (set-face-attribute 'default nil :family "Anonymous Pro" :height 130))
+
+(defun work-font ()
+  (interactive)
   (set-face-attribute 'mode-line          nil :height 100 :weight 'bold)
   (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal)
   (set-face-attribute 'minibuffer-prompt  nil :height 100 :weight 'bold)
-  (set-face-attribute 'default nil :family "Anonymous Pro" :height 170))
+  (set-face-attribute 'default nil :family "Anonymous Pro" :height 160))
 
 (desktop-font)

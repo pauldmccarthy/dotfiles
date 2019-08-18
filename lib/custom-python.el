@@ -30,6 +30,13 @@
 
   (pyvenv-auto-activate)
 
+  (setq jedi:tooltip-method nil)
+
+  ; disable all auto-completion unless explicitly invoked with M-tab
+  (setq ac-auto-show-menu nil)
+  (setq ac-auto-start nil)
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+
   ; jedi for auto-completion
   (setq jedi:setup-keys                 t)
   (setq jedi:complete-on-dot            nil)
@@ -52,10 +59,10 @@
   (define-key jedi-mode-map (kbd "C-.") nil)
   (define-key jedi-mode-map (kbd "C-,") nil)
 
-  (define-key python-mode-map [(control c) (n)] 'flycheck-next-error)
-  (define-key python-mode-map [(control c) (p)] 'flycheck-previous-error)
-  (define-key python-mode-map [(control c) (c)] 'comment-or-uncomment-region)
-  (define-key python-mode-map [(return)]        'newline-and-indent)
+  (define-key python-mode-map (kbd "C-c C-n") 'flycheck-next-error)
+  (define-key python-mode-map (kbd "C-c C-p") 'flycheck-previous-error)
+  (define-key python-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
+  (define-key python-mode-map [(return)]      'newline-and-indent)
 
   ;; Remove trailing whitespace on save
   (add-to-list 'write-file-functions 'delete-trailing-whitespace))
