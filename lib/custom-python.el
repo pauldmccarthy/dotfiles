@@ -1,6 +1,6 @@
 
 ; All virtualenvs are stored here
-(setq venv-location (expand-file-name "~/.virtualenvs/"))
+(setq venv-location (expand-file-name "/home/paulmc/venvs/"))
 (setq python-environment-directory venv-location)
 
 ; Allow me to set the virtualenv in .dir-locals.el

@@ -144,6 +144,9 @@
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
 
+;; shutup emacs
+(setq ring-bell-function 'ignore)
+
 ;; projectile and helm
 ;; https://github.com/markhepburn/dotemacs/blob/master/custom-general.el
 (projectile-global-mode)
