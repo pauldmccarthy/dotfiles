@@ -4,13 +4,13 @@ set -e
 
 thisdir=$(cd $(dirname $0) && pwd)
 
-ln -s ~/.emacs.d   $thisdir/.emacs.d
-ln -s ~/.emacs     $thisdir/.emacs
-ln -s ~/.zshrc     $thisdir/.zshrc
-ln -s ~/.gitconfig $thisdir/.gitconfig
-ln -s ~/.tmux.conf $thisdir/.tmux.conf
+ln -s $thisdir/.emacs.d   ~/.emacs.d
+ln -s $thisdir/.emacs     ~/.emacs
+ln -s $thisdir/.zshrc     ~/.zshrc
+ln -s $thisdir/.gitconfig ~/.gitconfig
+ln -s $thisdir/.tmux.conf ~/.tmux.conf
 
 for f in $thisdir/oh-my-zsh-custom/*.zsh; do
   fname=$(basename $f)
-  ln -s ~/.oh-my-zsh/custom/$fname $f
+  ln -s $f ~/.oh-my-zsh/custom/$fname
 done
