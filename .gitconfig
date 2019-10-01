@@ -1,0 +1,43 @@
+[user]
+  name  = Paul McCarthy
+  email = pauldmccarthy@gmail.com
+
+[color]
+  diff   = auto
+  status = auto
+  branch = auto
+
+[alias]
+	st   = status -sb
+  rv   = remote -v
+  co   = checkout
+	ci   = commit
+  cp   = cherry-pick
+  ps   = push
+  b    = branch
+  rb   = rebase
+  upma = "!git fetch --all && git checkout master && git merge upstream/master"
+  bd   = "!git push -d origin $1 && git branch -d $1 #"
+  di   = diff --ignore-submodules
+  dis  = diff --ignore-submodules --ignore-space-at-eol
+  wd   = diff --word-diff --ignore-submodules
+  lga  = "log --decorate --date=relative --pretty=format:\"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s\" -20"
+  lg   = "log --decorate --date=relative --pretty=format:\"%C(yellow)%h %Cblue%>(12)%ad %Cred%d %Creset%s\" -20"
+  lgd  = "log --decorate --date=local    --pretty=format:\"%C(yellow)%h %Cblue%>(12)%ad %Cred%d %Creset%s\""
+  ta   = "log --decorate --date-order    --pretty=format:\"%Cblue%>(12)%ad %Cred%d\" --tags --simplify-by-decoration"
+  al   = add -u
+  ba   = branch -vva --sort=-committerdate
+  fe   = fetch --all --prune --tags
+
+[push]
+	default = simple
+[core]
+  editor = emacsclient -a '' -s ~/.emacs.d/server -nq
+  pager  = less -RXF
+  abbrev = 8
+
+[filter "lfs"]
+	clean    = git-lfs clean -- %f
+	smudge   = git-lfs smudge -- %f
+	process  = git-lfs filter-process
+	required = true
