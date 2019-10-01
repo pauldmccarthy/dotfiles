@@ -28,7 +28,7 @@
   (set-face-attribute 'mode-line          nil :family "Sans" :height 80 :weight 'bold)
   (set-face-attribute 'mode-line-inactive nil :family "Sans" :height 80 :weight 'normal)
   (set-face-attribute 'minibuffer-prompt  nil :family "Sans" :height 80 :weight 'bold)
-  (set-face-attribute 'default            nil :family "Anonymous Pro"   :height 105))
+  (set-face-attribute 'default            nil :family "Anonymous Pro"   :height 120))
 
 (defun work-font ()
   (interactive)

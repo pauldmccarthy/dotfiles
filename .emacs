@@ -192,13 +192,6 @@
 (global-unset-key (kbd "C-x <left>"))
 (global-unset-key (kbd "C-x <right>"))
 
-;; change minibuffer background when active
-(add-hook 'minibuffer-setup-hook
-          (lambda ()
-            (make-local-variable 'face-remapping-alist)
-            ;;(add-to-list 'face-remapping-alist '(default (:background "#aaaaaa" :foreground "#111111")))))
-            ;(add-to-list 'face-remapping-alist '(default (:foreground "#111111")))))
-            (add-to-list 'face-remapping-alist '(default (:background "#aaaaaa")))))
 
 (put 'downcase-region 'disabled nil)
 
