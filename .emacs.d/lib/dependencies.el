@@ -7,8 +7,7 @@
 
 
 (setq *pmc/packages*
-  '(auctex
-    auto-complete
+  '(auto-complete
     pos-tip
     buffer-move
     diminish
@@ -32,8 +31,7 @@
     doneburn-theme
     zencoding-mode
     cython-mode
-    realgud
-    csv-mode))
+    realgud))
 
 (require 'cl)
 (require 'package)
