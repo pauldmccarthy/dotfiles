@@ -1,9 +1,9 @@
 ;; Install a bunch of third party packages.
 (setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")
+      '(("gnu"       . "http://elpa.gnu.org/packages/")
+        ("melpa"     . "http://melpa.org/packages/")
         ("marmalade" . "http://marmalade-repo.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
+        ("org"       . "http://orgmode.org/elpa/")))
 
 
 (setq *pmc/packages*
