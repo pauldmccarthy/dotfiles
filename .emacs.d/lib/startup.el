@@ -192,6 +192,7 @@
 ;; start the emacs daemon, disabling the
 ;; "directory is unsafe" error, because
 ;; my ~/.emacs.d/ is typically a symlink
+(require 'server)
 (defun server-ensure-safe-dir (dir) "Noop" t)
 (setq server-socket-dir "~/.emacs.d/")
 (server-start)
