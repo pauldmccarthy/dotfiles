@@ -128,6 +128,9 @@
 ;; disable overwrite mode
 (put 'overwrite-mode 'disabled t)
 
+;; always follow symlinks
+(setq vc-follow-symlinks t)
+
 ;; Make tooltips show in the minibuffer
 (tooltip-mode -1)
 (setq tooltip-use-echo-area t)
