@@ -16,15 +16,17 @@
   (when (boundp 'project-venv-name)
     (venv-workon project-venv-name)))
 
-; Set up flycheck syntax checker
+; Set up flycheck syntax checker. We
+; assume that flake8 and pylint are available
 (defun my-flycheck-mode-hook ()
     (flycheck-color-mode-line-mode)
 
-    ;emacs can't find flake8 if it is in a virtualenv/bin ...
-    ;(flycheck-select-checker "python-flake8")
-    (setq flycheck-check-syntax-automatically '(mode-enabled save))
     (setq flycheck-pylintrc "~/.pylintrc")
-    (setq flycheck-flake8rc "~/.flake8rc"))
+    (setq flycheck-flake8rc "~/.flake8rc")
+    (setq flycheck-check-syntax-automatically '(mode-enabled save))
+    (flycheck-select-checker 'python-pylint)
+    (flycheck-add-next-checker 'python-pylint 'python-flake8))
+
 
 (defun my-python-mode-hook ()
 
