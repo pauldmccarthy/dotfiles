@@ -21,20 +21,20 @@
   (set-face-attribute 'mode-line          nil :height 80 :weight 'bold)
   (set-face-attribute 'mode-line-inactive nil :height 80 :weight 'normal)
   (set-face-attribute 'minibuffer-prompt  nil :height 80 :weight 'bold)
-  (set-face-attribute 'default nil :family "Input Mono Regular" :height 140))
+  (set-face-attribute 'default nil :family "Input Mono" :height 140))
 
 (defun desktop-font ()
   (interactive)
   (set-face-attribute 'mode-line          nil :family "Sans" :height 80 :weight 'bold)
   (set-face-attribute 'mode-line-inactive nil :family "Sans" :height 80 :weight 'normal)
   (set-face-attribute 'minibuffer-prompt  nil :family "Sans" :height 80 :weight 'bold)
-  (set-face-attribute 'default            nil :family "Input Mono Regular"   :height 100))
+  (set-face-attribute 'default            nil :family "Input Mono"   :height 100))
 
 (defun work-font ()
   (interactive)
   (set-face-attribute 'mode-line          nil :height 100 :weight 'bold)
   (set-face-attribute 'mode-line-inactive nil :height 100 :weight 'normal)
   (set-face-attribute 'minibuffer-prompt  nil :height 100 :weight 'bold)
-  (set-face-attribute 'default nil :family "Input Mono Regular" :height 160))
+  (set-face-attribute 'default nil :family "Input Mono" :height 160))
 
 (desktop-font)
