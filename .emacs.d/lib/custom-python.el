@@ -16,58 +16,62 @@
   (when (boundp 'project-venv-name)
     (venv-workon project-venv-name)))
 
+
 ; Set up flycheck syntax checker. We
 ; assume that flake8 and pylint are available
 (defun my-flycheck-mode-hook ()
-    (flycheck-color-mode-line-mode)
+  (flycheck-color-mode-line-mode)
 
-    (setq flycheck-pylintrc "~/.pylintrc")
-    (setq flycheck-flake8rc "~/.flake8rc")
-    (setq flycheck-check-syntax-automatically '(mode-enabled save))
-    (flycheck-select-checker 'python-pylint)
-    (flycheck-add-next-checker 'python-pylint 'python-flake8))
+  (setq flycheck-pylintrc "~/.pylintrc")
+  (setq flycheck-flake8rc "~/.flake8rc")
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
+
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*Flycheck errors*" eos)
+                 (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+                 (side            . bottom)
+                 (reusable-frames . visible)
+                 (window-height   . 0.33)))
+
+  (flycheck-select-checker 'python-pylint)
+  (flycheck-add-next-checker 'python-pylint 'python-flake8))
 
 
 (defun my-python-mode-hook ()
 
+  ; make sure project-specific venv is activated
   (pyvenv-auto-activate)
 
-  (setq jedi:tooltip-method nil)
+  ; enable lsp
+  (projectile-mode)
+  (lsp)
+  (lsp-ui-mode)
+  (lsp-enable-imenu)
 
-  ; disable all auto-completion unless explicitly invoked with M-tab
-  (setq ac-auto-show-menu nil)
-  (setq ac-auto-start nil)
-  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  ; use company+lsp for auto-complete
+  (company-mode)
+  (company-quickhelp-mode)
+  (add-to-list 'company-backends 'company-lsp)
 
-  ; jedi for auto-completion
-  (setq jedi:setup-keys                 t)
-  (setq jedi:complete-on-dot            nil)
-  (setq jedi:tooltip-method             nil)
-  (setq jedi:get-in-function-call-delay 200)
-  (jedi:setup)
-
-  (flycheck-mode)
+  ;; use origami for folding
+  (origami-mode)
+  (define-key origami-mode-map (kbd "C-<tab>")   'origami-recursively-toggle-node)
+  (define-key origami-mode-map (kbd "C-S-<tab>") 'origami-show-only-node)
+  (define-key origami-mode-map (kbd "C-C C-o")   'origami-toggle-all-nodes)
 
   ; syntax settings
   (subword-mode              1)
   (setq indent-tabs-mode     nil)
   (setq python-indent-offset 4)
 
+  ; highlight other instances of symbol over point
   (highlight-symbol-mode            1)
   (setq highlight-symbol-idle-delay 0.25)
 
-  ;; I'll stick with C-c . / C-c ,
-  ;; It's too easy to hit these shortcuts.
-  (define-key jedi-mode-map (kbd "C-.") nil)
-  (define-key jedi-mode-map (kbd "C-,") nil)
-
-  (define-key python-mode-map (kbd "C-c C-n") 'flycheck-next-error)
-  (define-key python-mode-map (kbd "C-c C-p") 'flycheck-previous-error)
-  (define-key python-mode-map (kbd "C-c C-c") 'comment-or-uncomment-region)
-  (define-key python-mode-map [(return)]      'newline-and-indent)
-
-  ;; Remove trailing whitespace on save
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+  ; Remove trailing whitespace on save
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+)
 
 (add-hook 'flycheck-mode-hook 'my-flycheck-mode-hook)
 (add-hook 'python-mode-hook   'my-python-mode-hook)

@@ -1,37 +1,38 @@
 ;; Install a bunch of third party packages.
 (setq package-archives
-      '(("gnu"       . "http://elpa.gnu.org/packages/")
-        ("melpa"     . "http://melpa.org/packages/")
-        ("marmalade" . "http://marmalade-repo.org/packages/")
-        ("org"       . "http://orgmode.org/elpa/")))
+      '(("gnu"       . "https://elpa.gnu.org/packages/")
+        ("melpa"     . "https://melpa.org/packages/")
+        ("marmalade" . "https://marmalade-repo.org/packages/")
+        ("org"       . "https://orgmode.org/elpa/")))
 
 
 (setq *pmc/packages*
-  '(auto-complete
-    pos-tip
-    buffer-move
-    diminish
-    dash
-    flycheck
-    flycheck-mypy
-    flycheck-color-mode-line
-    glsl-mode
-    helm
-    highlight-symbol
-    jedi
-    org-journal
+  '(buffer-move               ; essentials
     magit
-    midnight
-    popup
-    powerline
-    projectile
-    virtualenvwrapper
-    yasnippet
+    helm
+    use-package
+    doom-modeline
+    all-the-icons
+    lsp-mode                  ; lsp for IDE features
+    lsp-ui
+    projectile                ; for project management (i
+                              ; don't use it, but lsp does)
+    company                   ; company for auto-complete
+    company-lsp               ; (with lsp backend)
+    company-quickhelp
+    flycheck                  ; flycheck for linting
+    flycheck-color-mode-line
+    virtualenvwrapper         ; for python venvs
+    origami                   ; origami for code folding
+    dash
+    s
+    ;highlight-symbol
     zenburn-theme
     doneburn-theme
     zencoding-mode
-    cython-mode
-    realgud))
+    org-journal
+    glsl-mode
+    cython-mode))
 
 (require 'cl)
 (require 'package)

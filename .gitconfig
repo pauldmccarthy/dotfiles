@@ -16,6 +16,8 @@
   ps   = push
   b    = branch
   rb   = rebase
+  ss   = stash save
+  sp   = stash pop
   upma = "!git fetch --all && git checkout master && git merge upstream/master"
   bd   = "!git push -d origin $1 && git branch -d $1 #"
   di   = diff --ignore-submodules

@@ -4,7 +4,6 @@
 (setq auto-insert-query nil)
 
 (define-auto-insert "\\.py\\'" ["insert.py" update-insert-file])
-(define-auto-insert "\\.hs\\'" ["insert.hs" update-insert-file])
 
 ;; in the template files, replace '@filename@' with the file name.
 ;; Thanks http://www.emacswiki.org/emacs/AutoInsertMode

@@ -1,8 +1,9 @@
-# Big history
+# Big history, separate per terminal
 HISTFILE=~/.histfile
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt appendhistory
+setopt nosharehistory
 
 # don't pester me about rm *
 setopt rmstarsilent
