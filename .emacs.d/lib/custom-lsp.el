@@ -22,7 +22,7 @@
 
   ; customise sideline popups
   (setq lsp-ui-sideline-show-code-actions nil)
-  (setq lsp-ui-sideline-show-hover        t)
+  (setq lsp-ui-sideline-show-hover        nil)
   (setq lsp-ui-sideline-ignore-duplicate  t)
   (setq lsp-ui-sideline-delay             0.0)
 

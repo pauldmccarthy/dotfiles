@@ -16,7 +16,6 @@
 (load "custom-lsp")
 (load "custom-python")
 (load "custom-rst")
-(load "custom-python")
 (load "custom-org")
 (load "custom-sh")
 (load "custom-glsl")

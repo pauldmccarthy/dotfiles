@@ -19,9 +19,24 @@
     (flycheck-select-checker   'python-pylint)
     (flycheck-add-next-checker 'python-pylint 'python-flake8))
 
+  (defun pmc/flycheck-show-and-focus-error-list () (interactive)
+         (flycheck-list-errors)
+         (select-window (get-buffer-window "*Flycheck errors*")))
+
+  (defun pmc/flycheck-error-list-goto-error-keep-focus () (interactive)
+         (flycheck-error-list-goto-error)
+         (select-window (get-buffer-window "*Flycheck errors*")))
+
+  (defun pmc/flycheck-error-list-quit () (interactive)
+         (delete-window (get-buffer-window "*Flycheck errors*")))
+
   ; nice keybindings for error nav
-  (define-key flycheck-mode-map (kbd "C-c C-n") #'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "C-c C-p") #'flycheck-previous-error)
-  (define-key flycheck-mode-map (kbd "C-c C-l") #'flycheck-list-errors)
+  (define-key flycheck-mode-map (kbd "C-c n") #'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "C-c p") #'flycheck-previous-error)
+  (define-key flycheck-mode-map (kbd "C-c l")  'pmc/flycheck-show-and-focus-error-list)
+
+  ; within error list
+  (define-key flycheck-error-list-mode-map (kbd "C-<return>") 'pmc/flycheck-error-list-goto-error-keep-focus)
+  (define-key flycheck-error-list-mode-map (kbd "C-g")        'pmc/flycheck-error-list-quit)
 
   (add-hook 'python-mode-hook  'flycheck-python-hook))

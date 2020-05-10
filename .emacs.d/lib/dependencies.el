@@ -29,7 +29,6 @@
     zenburn-theme
     doneburn-theme
     zencoding-mode
-    org-journal
     glsl-mode
     cython-mode))
 

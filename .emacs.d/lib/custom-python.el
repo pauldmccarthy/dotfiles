@@ -61,6 +61,9 @@
   (define-key python-mode-map (kbd "C-c C-l") nil)
   (define-key python-mode-map (kbd "C-c C-r") nil)
   (define-key python-mode-map (kbd "C-c C-j") nil)
+
+  (define-key python-mode-map (kbd "C-c C-n") 'python-nav-forward-defun)
+  (define-key python-mode-map (kbd "C-c C-p") 'python-nav-backward-defun)
 )
 
 (add-hook 'python-mode-hook  'my-python-mode-hook)
