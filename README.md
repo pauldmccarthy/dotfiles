@@ -8,30 +8,31 @@ My emacs, zsh, tmux, and git configurations. Of no use to anyone.
 
 Emacs >= 26.x is required.  Emacs is configured primarily for Python
 development.  Standard Emacs key bindings are used for most things, except where
-overridden below.
+overridden/noted below.
 
 
-### Window management
+### Window/session management
 
 
-| Shortcut      | Action                  |
-| ------------- | ----------------------- |
-| `C-x 0`       | Close window            |
-| `C-x 1`       | Maximise window         |
-| `C-x 2`       | Split vertically        |
-| `C-x 3`       | Split horizontally      |
-| `C-<left>`    | Move focus left         |
-| `C-<right>`   | Move focus right        |
-| `C-<up>`      |  Move focus up          |
-| `C-<down>`    | Move focus down         |
-| `C-S-<left>`  | Resize window to left   |
-| `C-S-<right>` | Resize window to right  |
-| `C-S-<up>`    | Resize window upwards   |
-| `C-S-<down>`  | Resize window downwards |
-| `M-S-<left>`  | Move buffer left        |
-| `M-S-<right>` | Move buffer right       |
-| `M-S-<up>`    | Move buffer up          |
-| `M-S-<down>`  | Move buffer down        |
+| Shortcut      | Action                                            |
+| ------------- | ------------------------------------------------- |
+| `C-c S-x`     | Exit (I find `C-x C-c` too easy hit accidentally) |
+| `C-x 0`       | Close window                                      |
+| `C-x 1`       | Maximise window                                   |
+| `C-x 2`       | Split vertically                                  |
+| `C-x 3`       | Split horizontally                                |
+| `C-<left>`    | Move focus left                                   |
+| `C-<right>`   | Move focus right                                  |
+| `C-<up>`      | Move focus up                                     |
+| `C-<down>`    | Move focus down                                   |
+| `C-S-<left>`  | Resize window to left                             |
+| `C-S-<right>` | Resize window to right                            |
+| `C-S-<up>`    | Resize window upwards                             |
+| `C-S-<down>`  | Resize window downwards                           |
+| `M-S-<left>`  | Move buffer left                                  |
+| `M-S-<right>` | Move buffer right                                 |
+| `M-S-<up>`    | Move buffer up                                    |
+| `M-S-<down>`  | Move buffer down                                  |
 
 
 ### Magit
