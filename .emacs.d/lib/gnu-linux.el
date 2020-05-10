@@ -15,16 +15,16 @@
 
 (defun laptop-font()
   (interactive)
-  (set-face-attribute 'mode-line          nil :family "DejaVu Sans" :height 80 :weight 'bold)
-  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans" :height 80 :weight 'normal)
-  (set-face-attribute 'minibuffer-prompt  nil :family "DejaVu Sans" :height 80 :weight 'bold)
+  (set-face-attribute 'mode-line          nil :family "DejaVu Sans" :height 120 :weight 'bold)
+  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans" :height 120 :weight 'normal)
+  (set-face-attribute 'minibuffer-prompt  nil :family "DejaVu Sans" :height 120 :weight 'bold)
   (set-face-attribute 'default nil :family "Input Mono" :height 140))
 
 (defun desktop-font ()
   (interactive)
-  (set-face-attribute 'mode-line          nil :family "DejaVu Sans" :height 80 :weight 'bold)
-  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans" :height 80 :weight 'normal)
-  (set-face-attribute 'minibuffer-prompt  nil :family "DejaVu Sans" :height 80 :weight 'bold)
+  (set-face-attribute 'mode-line          nil :family "DejaVu Sans" :height 100 :weight 'bold)
+  (set-face-attribute 'mode-line-inactive nil :family "DejaVu Sans" :height 100 :weight 'normal)
+  (set-face-attribute 'minibuffer-prompt  nil :family "DejaVu Sans" :height 100 :weight 'bold)
   (set-face-attribute 'default            nil :family "Input Mono"   :height 100))
 
 (laptop-font)

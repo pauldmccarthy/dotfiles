@@ -26,6 +26,7 @@
     origami                   ; origami for code folding
     dash
     s
+    highlight-symbol          ; highlight symbol at point
     zenburn-theme
     doneburn-theme
     zencoding-mode

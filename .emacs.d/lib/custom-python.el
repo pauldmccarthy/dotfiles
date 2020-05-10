@@ -50,7 +50,7 @@
 
   ; highlight other instances of symbol over point
   (highlight-symbol-mode            1)
-  (setq highlight-symbol-idle-delay 0.25)
+  (setq highlight-symbol-idle-delay 0)
 
   ; Remove trailing whitespace on save
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
