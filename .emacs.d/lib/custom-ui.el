@@ -1,20 +1,40 @@
+; skip startup screen and be quiet
+(setq inhibit-startup-screen t)
+(setq ring-bell-function     'ignore)
 
-;; turn off trimmings
+; turn off trimmings
 (menu-bar-mode              0)
 (tool-bar-mode              0)
 (scroll-bar-mode            0)
 (horizontal-scroll-bar-mode 0)
 
+; smooth scrolling
+; (thanks https://awesomeopensource.com/project/MatthewZMD/.emacs.d)
+; Vertical Scroll
+(setq scroll-step 1)
+(setq scroll-margin 1)
+(setq scroll-conservatively 101)
+(setq scroll-up-aggressively 0.01)
+(setq scroll-down-aggressively 0.01)
+(setq auto-window-vscroll nil)
+(setq fast-but-imprecise-scrolling nil)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+;; Horizontal Scroll
+(setq hscroll-step 1)
+(setq hscroll-margin 1)
+
+; use same buffer for multiiple invocations
 (add-to-list 'same-window-buffer-names "*Occur*")
 (add-to-list 'same-window-buffer-names "*Help*")
 (add-to-list 'same-window-buffer-names "*grep*")
 
 
-;; Disable default nex/prev buffer
-;; shortcuts, because i always
-;; accidentally hit them and end
-;; up editing a different file
-;; without realising it.
+; Disable default nex/prev buffer
+; shortcuts, because i always
+; accidentally hit them and end
+; up editing a different file
+; without realising it.
 (global-unset-key (kbd "C-x <left>"))
 (global-unset-key (kbd "C-x <right>"))
 

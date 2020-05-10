@@ -5,7 +5,6 @@ set -e
 thisdir=$(cd $(dirname $0) && pwd)
 
 ln -s $thisdir/.emacs.d   ~/.emacs.d
-ln -s $thisdir/.emacs     ~/.emacs
 ln -s $thisdir/.zshrc     ~/.zshrc
 ln -s $thisdir/.gitconfig ~/.gitconfig
 ln -s $thisdir/.tmux.conf ~/.tmux.conf

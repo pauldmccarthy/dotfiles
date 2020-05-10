@@ -10,23 +10,22 @@
   '(buffer-move               ; essentials
     magit
     helm
+    helm-lsp
     use-package
     doom-modeline
     all-the-icons
+    which-key
     lsp-mode                  ; lsp for IDE features
     lsp-ui
     projectile                ; for project management (i
                               ; don't use it, but lsp does)
     company                   ; company for auto-complete
-    company-lsp               ; (with lsp backend)
-    company-quickhelp
     flycheck                  ; flycheck for linting
     flycheck-color-mode-line
     virtualenvwrapper         ; for python venvs
     origami                   ; origami for code folding
     dash
     s
-    ;highlight-symbol
     zenburn-theme
     doneburn-theme
     zencoding-mode

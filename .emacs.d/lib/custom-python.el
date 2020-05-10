@@ -1,3 +1,10 @@
+; Machinery for auto-activating project-specific
+; virtualenvs. All virtual environments are stored
+; in the venv-location directory. In each project
+; directory, add a .dir-locals.el file which contains
+; the following:
+;
+;   ((python-mode . ((project-venv-name . "name-of-venv-dir"))))
 
 ; All virtualenvs are stored here
 (setq venv-location (expand-file-name "/home/paulmc/venvs/"))
@@ -5,8 +12,7 @@
 
 ; Allow me to set the virtualenv in .dir-locals.el
 ; without an unsafe variable warning
-(put 'project-venv-name 'safe-local-variable
-     (lambda (x) t))
+(put 'project-venv-name 'safe-local-variable (lambda (x) t))
 
 ; Auto-activate virtualenv on a buffer
 ; if project-venv-name is set
@@ -17,50 +23,27 @@
     (venv-workon project-venv-name)))
 
 
-; Set up flycheck syntax checker. We
-; assume that flake8 and pylint are available
-(defun my-flycheck-mode-hook ()
-  (flycheck-color-mode-line-mode)
-
-  (setq flycheck-pylintrc "~/.pylintrc")
-  (setq flycheck-flake8rc "~/.flake8rc")
-  (setq flycheck-check-syntax-automatically '(mode-enabled save))
-
-  (add-to-list 'display-buffer-alist
-               `(,(rx bos "*Flycheck errors*" eos)
-                 (display-buffer-reuse-window
-                  display-buffer-in-side-window)
-                 (side            . bottom)
-                 (reusable-frames . visible)
-                 (window-height   . 0.33)))
-
-  (flycheck-select-checker 'python-pylint)
-  (flycheck-add-next-checker 'python-pylint 'python-flake8))
-
-
 (defun my-python-mode-hook ()
 
-  ; make sure project-specific venv is activated
+  ; First thing - make sure project-specific
+  ; venv is activated (using machinery above
+  ; to auto-identify and activate venv). It
+  ; is assumed that any packages required by
+  ; all the stuff below are installed in the
+  ; venv. This includes at least:
+  ;  - pylint
+  ;  - flake8
+  ;  - python-language-server
   (pyvenv-auto-activate)
 
-  ; enable lsp
-  (projectile-mode)
-  (lsp)
+  (projectile-mode)  ; projectile (used by lsp, not me)
+  (flycheck-mode)    ; flycheck for linting
+  (company-mode)     ; company for auto completion
+  (lsp)              ; lsp-mode for IDE features
   (lsp-ui-mode)
-  (lsp-enable-imenu)
+  (origami-mode)     ; origami for code folding
 
-  ; use company+lsp for auto-complete
-  (company-mode)
-  (company-quickhelp-mode)
-  (add-to-list 'company-backends 'company-lsp)
-
-  ;; use origami for folding
-  (origami-mode)
-  (define-key origami-mode-map (kbd "C-<tab>")   'origami-recursively-toggle-node)
-  (define-key origami-mode-map (kbd "C-S-<tab>") 'origami-show-only-node)
-  (define-key origami-mode-map (kbd "C-C C-o")   'origami-toggle-all-nodes)
-
-  ; syntax settings
+  ; General syntax settings
   (subword-mode              1)
   (setq indent-tabs-mode     nil)
   (setq python-indent-offset 4)
@@ -71,7 +54,13 @@
 
   ; Remove trailing whitespace on save
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+
+  ; unbind keys i don't use (i use
+  ; them in flycheck/lps instead)
+  (define-key python-mode-map (kbd "C-c C-p") nil)
+  (define-key python-mode-map (kbd "C-c C-l") nil)
+  (define-key python-mode-map (kbd "C-c C-r") nil)
+  (define-key python-mode-map (kbd "C-c C-j") nil)
 )
 
-(add-hook 'flycheck-mode-hook 'my-flycheck-mode-hook)
-(add-hook 'python-mode-hook   'my-python-mode-hook)
+(add-hook 'python-mode-hook  'my-python-mode-hook)
