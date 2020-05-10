@@ -55,12 +55,15 @@
 
 
 ; Disable annoying key bindings, because I
-; accidentally hit them far too often.
+; accidentally hit them far too often or
+; use them for other things.
 (global-set-key (kbd "C-x C-l") nil) ; downcase-region
 (global-set-key (kbd "C-x C-u") nil) ; upcase-region
 (global-set-key (kbd "C-z")     nil) ; suspend-frame
 (global-set-key (kbd "C-x C-z") nil) ; suspend-frame
 (global-set-key (kbd "C-x C-c") nil) ; save-buffers-kill-terminal
+(global-set-key (kbd "M-/")     nil) ;
+(global-set-key (kbd "M-r")     nil) ;
 
 (put 'upcase-region   'disabled nil)
 (put 'downcase-region 'disabled nil)

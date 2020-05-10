@@ -56,7 +56,7 @@
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
   ; unbind keys i don't use (i use
-  ; them in flycheck/lps instead)
+  ; them in flycheck/lsp instead)
   (define-key python-mode-map (kbd "C-c C-p") nil)
   (define-key python-mode-map (kbd "C-c C-l") nil)
   (define-key python-mode-map (kbd "C-c C-r") nil)

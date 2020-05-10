@@ -10,7 +10,9 @@
   (setq lsp-signature-auto-activate nil)
 
   ; nicer keybindings
-  (define-key lsp-mode-map (kbd "C-c C-r") 'lsp-rename))
+  (define-key lsp-mode-map (kbd "M-r") 'lsp-rename)
+  (define-key lsp-mode-map (kbd "M-/") 'lsp-find-references))
+
 
 (use-package lsp-ui
   :after lsp-mode
@@ -38,10 +40,4 @@
   (define-key lsp-ui-mode-map           (kbd "C-c C-h") 'show-and-focus-help)
   (define-key lsp-ui-doc-frame-mode-map (kbd "q")       'unfocus-and-hide-help)
   (define-key lsp-ui-doc-frame-mode-map (kbd "C-g")     'unfocus-and-hide-help)
-
-
-  ; nice keybindings for goto/return from definnition
-  (define-key lsp-ui-mode-map (kbd "C-c C-.") 'lsp-find-definition)
-  (define-key lsp-ui-mode-map (kbd "C-c C-,") 'show-and-focus-help)
-
 )
