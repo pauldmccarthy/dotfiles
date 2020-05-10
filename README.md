@@ -6,8 +6,9 @@ My emacs, zsh, tmux, and git configurations. Of no use to anyone.
 ## Emacs configuration
 
 
-Emacs is configured primarily for Python development.  Standard Emacs key
-bindings are used for most things, except where overridden below.
+Emacs >= 26.x is required.  Emacs is configured primarily for Python
+development.  Standard Emacs key bindings are used for most things, except where
+overridden below.
 
 
 ### Window management
@@ -64,35 +65,36 @@ open a given `.py` file:
    stored.
 2. Create a file called `.dir-locals.el` in the root directory of each
    of your of project(s), containing the following:
-       ((python-mode . ((project-venv-name . "<name-of-venv-dir>"))))
+
+   `((python-mode . ((project-venv-name . "<name-of-venv-dir>"))))`
 
 
 #### Key bindings
 
-| Shortcut                            | Action                                    |
-| ----------------------------------- | ----------------------------------------- |
-| *`.emacs.d/lib/custom-python.el`*   |                                           |
-| `C-c C-n`                           | Go to next function                       |
-| `C-c C-p`                           | Go to previous function                   |
-| *`.emacs.d/lib/custom-lsp.el`*      |                                           |
-| `C-c C-h`                           | Show help                                 |
-| `M-.`                               | Go to definition                          |
-| `M-,`                               | Return from definition                    |
-| `M-/`                               | Find references                           |
-| `M-r`                               | Rename symbol                             |
-| *`.emacs.d/lib/custom-helm.el`*     |                                           |
-| `C-c C-o`                           | `occur` - fuzzy search in current buffer  |
-| `C-c C-j`                           | `imenu` - symbol search in current buffer |
-| *`.emacs.d/lib/custom-company.el`*  |                                           |
-| `M-<tab>`                           | Complete at point                         |
-| *`.emacs.d/lib/custom-flycheck.el`* |                                           |
-| `C-c n`                             | Go to next warning/error                  |
-| `C-c p`                             | Go to previous warning/error              |
-| `C-c l`                             | Show error list                           |
-| *`.emacs.d/lib/custom-origami.el`*  |                                           |
-| `C-<tab>`                           | Fold/unfold current region                |
-| `C-S-<tab>`                         | Fold all other regions                    |
-| `C-c C-<tab>`                       | Fold/unfold all regions                   |
+| Shortcut                              | Action                                    |
+| ------------------------------------- | ----------------------------------------- |
+| **`.emacs.d/lib/custom-python.el`**   |                                           |
+| `C-c C-n`                             | Go to next function                       |
+| `C-c C-p`                             | Go to previous function                   |
+| **`.emacs.d/lib/custom-lsp.el`**      |                                           |
+| `C-c C-h`                             | Show help                                 |
+| `M-.`                                 | Go to definition                          |
+| `M-,`                                 | Return from definition                    |
+| `M-/`                                 | Find references                           |
+| `M-r`                                 | Rename symbol                             |
+| **`.emacs.d/lib/custom-helm.el`**     |                                           |
+| `C-c C-o`                             | `occur` - fuzzy search in current buffer  |
+| `C-c C-j`                             | `imenu` - symbol search in current buffer |
+| **`.emacs.d/lib/custom-company.el`**  |                                           |
+| `M-<tab>`                             | Complete at point                         |
+| **`.emacs.d/lib/custom-flycheck.el`** |                                           |
+| `C-c n`                               | Go to next warning/error                  |
+| `C-c p`                               | Go to previous warning/error              |
+| `C-c l`                               | Show error list                           |
+| **`.emacs.d/lib/custom-origami.el`**  |                                           |
+| `C-<tab>`                             | Fold/unfold current region                |
+| `C-S-<tab>`                           | Fold all other regions                    |
+| `C-c C-<tab>`                         | Fold/unfold all regions                   |
 
 
 #### Debugging
