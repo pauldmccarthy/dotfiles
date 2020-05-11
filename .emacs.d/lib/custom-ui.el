@@ -7,6 +7,8 @@
 (tool-bar-mode              0)
 (scroll-bar-mode            0)
 (horizontal-scroll-bar-mode 0)
+(fringe-mode                '(4 . 2))
+(toggle-frame-fullscreen)
 
 ; smooth scrolling
 ; (thanks https://awesomeopensource.com/project/MatthewZMD/.emacs.d)

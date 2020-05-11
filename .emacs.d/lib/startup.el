@@ -64,6 +64,10 @@
 (global-set-key (kbd "C-x C-c") nil) ; save-buffers-kill-terminal
 (global-set-key (kbd "M-/")     nil) ;
 (global-set-key (kbd "M-r")     nil) ;
+;; pgup/down keys are too close to arrow keys on my laptop
+(global-set-key (kbd "<next>")  (kbd "<right>"))
+(global-set-key (kbd "<prior>") (kbd "<left>"))
+
 
 (put 'upcase-region   'disabled nil)
 (put 'downcase-region 'disabled nil)
