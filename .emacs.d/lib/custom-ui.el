@@ -7,7 +7,7 @@
 (tool-bar-mode              0)
 (scroll-bar-mode            0)
 (horizontal-scroll-bar-mode 0)
-(fringe-mode                '(4 . 2))
+(set-fringe-mode          '(2 . 2))
 (toggle-frame-fullscreen)
 
 ; smooth scrolling

@@ -15,6 +15,7 @@
     doom-modeline
     all-the-icons
     which-key
+    realgud                   ; realgud for debugging
     lsp-mode                  ; lsp for IDE features
     lsp-ui
     projectile                ; for project management (i

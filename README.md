@@ -92,6 +92,7 @@ open a given `.py` file:
 | `C-c n`                               | Go to next warning/error                  |
 | `C-c p`                               | Go to previous warning/error              |
 | `C-c l`                               | Show error list                           |
+| `C-c c`                               | Clear errors                              |
 | **`.emacs.d/lib/custom-origami.el`**  |                                           |
 | `C-<tab>`                             | Fold/unfold current region                |
 | `C-S-<tab>`                           | Fold all other regions                    |
@@ -101,4 +102,6 @@ open a given `.py` file:
 #### Debugging
 
 
-I am currently using the standard `pdb` debugger.
+| Shortcut      | Action              |
+| ------------- | ------------------- |
+| `C-c C-d`     | Start `realgud:pdb` |

@@ -1,69 +1,87 @@
-; Machinery for auto-activating project-specific
-; virtualenvs. All virtual environments are stored
-; in the venv-location directory. In each project
-; directory, add a .dir-locals.el file which contains
-; the following:
-;
-;   ((python-mode . ((project-venv-name . "name-of-venv-dir"))))
 
-; All virtualenvs are stored here
-(setq venv-location (expand-file-name "/home/paulmc/venvs/"))
-(setq python-environment-directory venv-location)
+(use-package python
+  :config
 
-; Allow me to set the virtualenv in .dir-locals.el
-; without an unsafe variable warning
-(put 'project-venv-name 'safe-local-variable (lambda (x) t))
+  ; Machinery for auto-activating project-specific
+  ; virtualenvs. All virtual environments are stored
+  ; in the venv-location directory. In each project
+  ; directory, add a .dir-locals.el file which contains
+  ; the following:
+  ;
+  ;   ((python-mode . ((project-venv-name . "name-of-venv-dir"))))
 
-; Auto-activate virtualenv on a buffer
-; if project-venv-name is set
-; maybe manually add ./bin/ to PATH?
-(defun pyvenv-auto-activate  ()
-  (hack-local-variables)
-  (when (boundp 'project-venv-name)
-    (venv-workon project-venv-name)))
+  ; All virtualenvs are stored here
+  (setq venv-location (expand-file-name "/home/paulmc/venvs/"))
+  (setq python-environment-directory venv-location)
 
+  ; Allow me to set the virtualenv in .dir-locals.el
+  ; without an unsafe variable warning
+  (put 'project-venv-name 'safe-local-variable (lambda (x) t))
 
-(defun my-python-mode-hook ()
+  ; Auto-activate virtualenv on a buffer
+  ; if project-venv-name is set
+  ; maybe manually add ./bin/ to PATH?
+  (defun pyvenv-auto-activate  ()
+    (hack-local-variables)
+    (when (boundp 'project-venv-name)
+      (venv-workon project-venv-name)))
 
-  ; First thing - make sure project-specific
-  ; venv is activated (using machinery above
-  ; to auto-identify and activate venv). It
-  ; is assumed that any packages required by
-  ; all the stuff below are installed in the
-  ; venv. This includes at least:
-  ;  - pylint
-  ;  - flake8
-  ;  - python-language-server
-  (pyvenv-auto-activate)
+  ; realgud for debugging
+  (use-package realgud
+    :ensure t
+    :commands (realgud:pdb)
+    :config
+    (setq realgud-safe-mode nil))
 
-  (projectile-mode)  ; projectile (used by lsp, not me)
-  (flycheck-mode)    ; flycheck for linting
-  (company-mode)     ; company for auto completion
-  (lsp)              ; lsp-mode for IDE features
-  (lsp-ui-mode)
-  (origami-mode)     ; origami for code folding
+  (defun my-python-mode-hook ()
 
-  ; General syntax settings
-  (subword-mode              1)
-  (setq indent-tabs-mode     nil)
-  (setq python-indent-offset 4)
+    ; First thing - make sure project-specific
+    ; venv is activated (using machinery above
+    ; to auto-identify and activate venv). It
+    ; is assumed that any packages required by
+    ; all the stuff below are installed in the
+    ; venv. This includes at least:
+    ;  - pylint
+    ;  - flake8
+    ;  - flake8-mypy
+    ;  - python-language-server
+    (pyvenv-auto-activate)
 
-  ; highlight other instances of symbol over point
-  (highlight-symbol-mode            1)
-  (setq highlight-symbol-idle-delay 0)
+    (projectile-mode)       ; projectile (used by lsp, not me)
+    (flycheck-mode)         ; flycheck for linting
+    (company-mode)          ; company for auto completion
+    (lsp)                   ; lsp-mode for IDE features
+    (lsp-ui-mode)
+    (origami-mode)          ; origami for code folding
 
-  ; Remove trailing whitespace on save
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+    ; add project root to $PYTHONPATH
+    (setenv "PYTHONPATH"
+            (concat (projectile-project-root) ":" (getenv "PYTHONPATH")))
 
-  ; unbind keys i don't use (i use
-  ; them in flycheck/lsp instead)
-  (define-key python-mode-map (kbd "C-c C-p") nil)
-  (define-key python-mode-map (kbd "C-c C-l") nil)
-  (define-key python-mode-map (kbd "C-c C-r") nil)
-  (define-key python-mode-map (kbd "C-c C-j") nil)
+    ; General syntax settings
+    (subword-mode              1)
+    (setq indent-tabs-mode     nil)
+    (setq python-indent-offset 4)
 
-  (define-key python-mode-map (kbd "C-c C-n") 'python-nav-forward-defun)
-  (define-key python-mode-map (kbd "C-c C-p") 'python-nav-backward-defun)
+    ; highlight other instances of symbol over point
+    (highlight-symbol-mode            1)
+    (setq highlight-symbol-idle-delay 0)
+
+    ; Remove trailing whitespace on save
+    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+
+    ; unbind keys i don't use (i use
+    ; them in flycheck/lsp instead)
+    (define-key python-mode-map (kbd "C-c C-p") nil)
+    (define-key python-mode-map (kbd "C-c C-l") nil)
+    (define-key python-mode-map (kbd "C-c C-r") nil)
+    (define-key python-mode-map (kbd "C-c C-j") nil)
+
+    (define-key python-mode-map (kbd "C-c C-n") 'python-nav-forward-defun)
+    (define-key python-mode-map (kbd "C-c C-p") 'python-nav-backward-defun)
+
+    (define-key python-mode-map (kbd "C-c C-d") 'realgud:pdb)
+  )
+
+  (add-hook 'python-mode-hook  'my-python-mode-hook)
 )
-
-(add-hook 'python-mode-hook  'my-python-mode-hook)
