@@ -70,6 +70,14 @@ open a given `.py` file:
    `((python-mode . ((project-venv-name . "<name-of-venv-dir>"))))`
 
 
+#### Linting
+
+`.emacs.d/lib/custom-flycheck.el` assumes that user configuration
+files are stored at:
+ - `~/.flake8rc`
+ - `~/.pylintrc`
+
+
 #### Key bindings
 
 | Shortcut                              | Action                                    |

@@ -22,3 +22,13 @@ function hd() {
   delim=$(_delim $2)
   head -n1 $1 | tr "$delim" "\n" | less -N
 }
+
+
+function pyclaen() {
+  find . -name "__pycache__" -exec rm -r "{}" \;
+  find . -name ".mypy_cache" -exec rm -r "{}" \;
+  find . -name "*.pyc"       -delete
+  find . -name "*.pye"       -delete
+  find . -name "*.ipynbe"    -delete
+  rm -f .coverage .coverage.*
+}

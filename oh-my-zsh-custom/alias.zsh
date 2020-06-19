@@ -13,7 +13,6 @@ alias less="less -RFX"
 alias diff="colordiff"
 alias pp='export PATH=$(pwd):$PATH; echo $PATH'
 alias pyp='export PYTHONPATH=$(pwd):$PYTHONPATH; echo $PYTHONPATH'
-alias pyclean='find . -name "__pycache__" -exec rm -r "{}" \; ; find . -name "*.pyc" -delete; find . -name "*.pye" -delete; find . -name "*.ipynbe" -delete'
 alias fslconf=". /home/paulmc/fsl/fslconf.sh"
 alias fedev=". /home/paulmc/Projects/fsleyes/fsleyes.gtk3.dev.sh; pushd /home/paulmc/Projects/fsleyes"
 alias fedev3=". /home/paulmc/Projects/fsleyes/fsleyes.gtk3.dev.sh; pushd /home/paulmc/Projects/fsleyes"

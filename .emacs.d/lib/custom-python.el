@@ -23,7 +23,9 @@
   ; maybe manually add ./bin/ to PATH?
   (defun pyvenv-auto-activate  ()
     (hack-local-variables)
-    (when (boundp 'project-venv-name)
+    (when (not (boundp 'project-venv-name))
+      (setq project-venv-name "default"))
+    (when (file-directory-p project-venv-name)
       (venv-workon project-venv-name)))
 
   ; realgud for debugging
@@ -54,6 +56,8 @@
     (lsp-ui-mode)
     (origami-mode)          ; origami for code folding
 
+    (setq flycheck-check-syntax-automatically '(mode-enabled save))
+
     ; add project root to $PYTHONPATH
     (setenv "PYTHONPATH"
             (concat (projectile-project-root) ":" (getenv "PYTHONPATH")))
@@ -62,10 +66,6 @@
     (subword-mode              1)
     (setq indent-tabs-mode     nil)
     (setq python-indent-offset 4)
-
-    ; highlight other instances of symbol over point
-    (highlight-symbol-mode            1)
-    (setq highlight-symbol-idle-delay 0)
 
     ; Remove trailing whitespace on save
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
