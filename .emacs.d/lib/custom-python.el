@@ -25,7 +25,8 @@
     (hack-local-variables)
     (when (not (boundp 'project-venv-name))
       (setq project-venv-name "default"))
-    (when (file-directory-p project-venv-name)
+    (when (file-directory-p (concat venv-location "/" project-venv-name))
+      (message "Activating virtual environment %s" project-venv-name)
       (venv-workon project-venv-name)))
 
   ; realgud for debugging
