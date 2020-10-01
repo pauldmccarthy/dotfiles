@@ -55,7 +55,7 @@
     (company-mode)          ; company for auto completion
     (lsp)                   ; lsp-mode for IDE features
     (lsp-ui-mode)
-    (origami-mode)          ; origami for code folding
+    ; (origami-mode)          ; origami for code folding
 
     (setq flycheck-check-syntax-automatically '(mode-enabled save))
 

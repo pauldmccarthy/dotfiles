@@ -68,6 +68,9 @@
 (global-set-key (kbd "<next>")  (kbd "<right>"))
 (global-set-key (kbd "<prior>") (kbd "<left>"))
 
+; ctrl+z for undo, in addition to ctrl+/
+; (they're symmetric on my keyboard)
+(global-set-key (kbd "C-z") 'undo)
 
 (put 'upcase-region   'disabled nil)
 (put 'downcase-region 'disabled nil)

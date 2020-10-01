@@ -1,14 +1,59 @@
 # dotfiles
 
-My emacs, zsh, tmux, and git configurations. Of no use to anyone.
+My emacs, zsh, tmux, i3, and git configurations. Of no use to anyone.
 
 
-## Emacs configuration
+## i3
+
+
+## `tmux`
+
+Clipboard integration depends on the presence of `xclip`.
+
+
+| Shortcut      | Action                                            |
+| ------------- | ------------------------------------------------- |
+| C-q           | prefix                                            |
+| C-q r         | reload config                                     |
+| C-l           | clear history                                     |
+| C-q |         | split horizontally                                |
+| C-q -         | split vertically                                  |
+| C-M-m         | Copy mode                                         |
+| M-Left        | Select left pane                                  |
+| M-Right       | Select right pane                                 |
+| M-Up          | Select pane above                                 |
+| M-Down        | Select pane below                                 |
+| M-a           | Select left pane                                  |
+| M-d           | Select right pane                                 |
+| M-w           | Select pane above                                 |
+| M-s           | Select pane below                                 |
+| M-C-Left      | Resize pane to left                               |
+| M-C-Right     | Resize pane to right                              |
+| M-C-Up        | Resize pane to top                                |
+| M-C-Down      | Select pane to bottom                             |
+| M-C-a         | Resize pane to left                               |
+| M-C-d         | Resize pane to right                              |
+| M-C-w         | Resize pane to top                                |
+| M-C-s         | Resize pane to bottom                             |
+| C-M-m         | Copy mode                                         |
+
+
+## `emacs`
 
 
 Emacs >= 26.x is required.  Emacs is configured primarily for Python
 development.  Standard Emacs key bindings are used for most things, except where
 overridden/noted below.
+
+
+### Miscellaneous
+
+
+| Shortcut      | Action                                            |
+| ------------- | ------------------------------------------------- |
+| `C-z`         | Undo (in addition to `C-/`, as they're symmetric  |
+|               | on my keyboard)                                   |
+
 
 
 ### Window/session management
@@ -101,7 +146,7 @@ files are stored at:
 | `C-c p`                               | Go to previous warning/error              |
 | `C-c l`                               | Show error list                           |
 | `C-c c`                               | Clear errors                              |
-| **`.emacs.d/lib/custom-origami.el`**  |                                           |
+| **`.emacs.d/lib/custom-origami.el`**  | **disabled because i find it annoying**   |
 | `C-<tab>`                             | Fold/unfold current region                |
 | `C-S-<tab>`                           | Fold all other regions                    |
 | `C-c C-<tab>`                         | Fold/unfold all regions                   |
