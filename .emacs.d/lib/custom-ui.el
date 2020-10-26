@@ -40,21 +40,35 @@
 (global-unset-key (kbd "C-x <left>"))
 (global-unset-key (kbd "C-x <right>"))
 
+;; use meta+(jkli) for window switching
+(global-set-key (kbd "M-j")       'windmove-left)
+(global-set-key (kbd "M-l")       'windmove-right)
+(global-set-key (kbd "M-i")       'windmove-up)
+(global-set-key (kbd "M-k")       'windmove-down)
+(global-set-key (kbd "M-<left>")  'windmove-left)
+(global-set-key (kbd "M-<right>") 'windmove-right)
+(global-set-key (kbd "M-<up>")    'windmove-up)
+(global-set-key (kbd "M-<down>")  'windmove-down)
 
-;; use shift+arrows for focus switching
-(windmove-default-keybindings 'shift)
+;; use C-S-(jkli) for window resizing
+(global-set-key (kbd "M-C-i")       (lambda () (interactive (shrink-window               5))))
+(global-set-key (kbd "M-C-k")       (lambda () (interactive (enlarge-window              5))))
+(global-set-key (kbd "M-C-j")       (lambda () (interactive (shrink-window-horizontally  5))))
+(global-set-key (kbd "M-C-l")       (lambda () (interactive (enlarge-window-horizontally 5))))
+(global-set-key (kbd "M-C-<up>")    (lambda () (interactive (shrink-window               5))))
+(global-set-key (kbd "M-C-<down>")  (lambda () (interactive (enlarge-window              5))))
+(global-set-key (kbd "M-C-<left>")  (lambda () (interactive (shrink-window-horizontally  5))))
+(global-set-key (kbd "M-C-<right>") (lambda () (interactive (enlarge-window-horizontally 5))))
 
-;; use C-S-arrows for window resizing
-(global-set-key (kbd "C-S-<up>")    (lambda () (interactive (shrink-window               5))))
-(global-set-key (kbd "C-S-<down>")  (lambda () (interactive (enlarge-window              5))))
-(global-set-key (kbd "C-S-<left>")  (lambda () (interactive (shrink-window-horizontally  5))))
-(global-set-key (kbd "C-S-<right>") (lambda () (interactive (enlarge-window-horizontally 5))))
-
-;; use M-S+arrows for buffer moving
-(global-set-key (kbd "M-S-<left>")  'buf-move-left)
-(global-set-key (kbd "M-S-<right>") 'buf-move-right)
-(global-set-key (kbd "M-S-<up>")    'buf-move-up)
-(global-set-key (kbd "M-S-<down>")  'buf-move-down)
+;; use M-C-S+arrows for buffer moving
+(global-set-key (kbd "M-C-S-j")       'buf-move-left)
+(global-set-key (kbd "M-C-S-l")       'buf-move-right)
+(global-set-key (kbd "M-C-S-i")       'buf-move-up)
+(global-set-key (kbd "M-C-S-k")       'buf-move-down)
+(global-set-key (kbd "M-C-S-<left>")  'buf-move-left)
+(global-set-key (kbd "M-C-S-<right>") 'buf-move-right)
+(global-set-key (kbd "M-C-S-<up>")    'buf-move-up)
+(global-set-key (kbd "M-C-S-<down>")  'buf-move-down)
 
 
 ;; Make those window keybindings

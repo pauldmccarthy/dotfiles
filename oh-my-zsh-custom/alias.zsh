@@ -1,6 +1,6 @@
 # custom aliases
 alias emacs="emacs26"
-export EDITOR="emacsclient26 -a '' -s ~/.emacs.d/server -nq"
+export EDITOR="emacsclient27 -a '' -s ~/.emacs.d/server -nq"
 alias l="ls"
 alias ll="ls -hl"
 alias la="ls -ahl"

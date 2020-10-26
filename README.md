@@ -23,18 +23,18 @@ Clipboard integration depends on the presence of `xclip`.
 | M-Right       | Select right pane                                 |
 | M-Up          | Select pane above                                 |
 | M-Down        | Select pane below                                 |
-| M-a           | Select left pane                                  |
-| M-d           | Select right pane                                 |
-| M-w           | Select pane above                                 |
-| M-s           | Select pane below                                 |
+| M-j           | Select left pane                                  |
+| M-l           | Select right pane                                 |
+| M-i           | Select pane above                                 |
+| M-k           | Select pane below                                 |
 | M-C-Left      | Resize pane to left                               |
 | M-C-Right     | Resize pane to right                              |
 | M-C-Up        | Resize pane to top                                |
 | M-C-Down      | Select pane to bottom                             |
-| M-C-a         | Resize pane to left                               |
-| M-C-d         | Resize pane to right                              |
-| M-C-w         | Resize pane to top                                |
-| M-C-s         | Resize pane to bottom                             |
+| M-C-j         | Resize pane to left                               |
+| M-C-l         | Resize pane to right                              |
+| M-C-i         | Resize pane to top                                |
+| M-C-k         | Resize pane to bottom                             |
 | C-M-m         | Copy mode                                         |
 
 
@@ -59,25 +59,38 @@ overridden/noted below.
 ### Window/session management
 
 
-| Shortcut      | Action                                            |
-| ------------- | ------------------------------------------------- |
-| `C-c S-x`     | Exit (I find `C-x C-c` too easy hit accidentally) |
-| `C-x 0`       | Close window                                      |
-| `C-x 1`       | Maximise window                                   |
-| `C-x 2`       | Split vertically                                  |
-| `C-x 3`       | Split horizontally                                |
-| `C-<left>`    | Move focus left                                   |
-| `C-<right>`   | Move focus right                                  |
-| `C-<up>`      | Move focus up                                     |
-| `C-<down>`    | Move focus down                                   |
-| `C-S-<left>`  | Resize window to left                             |
-| `C-S-<right>` | Resize window to right                            |
-| `C-S-<up>`    | Resize window upwards                             |
-| `C-S-<down>`  | Resize window downwards                           |
-| `M-S-<left>`  | Move buffer left                                  |
-| `M-S-<right>` | Move buffer right                                 |
-| `M-S-<up>`    | Move buffer up                                    |
-| `M-S-<down>`  | Move buffer down                                  |
+| Shortcut        | Action                                            |
+| --------------- | ------------------------------------------------- |
+| `C-c S-x`       | Exit (I find `C-x C-c` too easy hit accidentally) |
+| `C-x 0`         | Close window                                      |
+| `C-x 1`         | Maximise window                                   |
+| `C-x 2`         | Split vertically                                  |
+| `C-x 3`         | Split horizontally                                |
+| `M-<left>`      | Move focus left                                   |
+| `M-<right>`     | Move focus right                                  |
+| `M-<up>`        | Move focus up                                     |
+| `M-<down>`      | Move focus down                                   |
+| `M-j`           | Move focus left                                   |
+| `M-l`           | Move focus right                                  |
+| `M-i`           | Move focus up                                     |
+| `M-k`           | Move focus down                                   |
+| `M-C-<left>`    | Resize window to left                             |
+| `M-C-<right>`   | Resize window to right                            |
+| `M-C-<up>`      | Resize window upwards                             |
+| `M-C-<down>`    | Resize window downwards                           |
+| `M-C-j`         | Resize window to left                             |
+| `M-C-l`         | Resize window to right                            |
+| `M-C-i`         | Resize window upwards                             |
+| `M-C-k`         | Resize window downwards                           |
+| `M-C-S-<left>`  | Move buffer left                                  |
+| `M-C-S-<right>` | Move buffer right                                 |
+| `M-C-S-<up>`    | Move buffer up                                    |
+| `M-C-S-<down>`  | Move buffer down                                  |
+| `M-C-S-j`       | Move buffer left                                  |
+| `M-C-S-l`       | Move buffer right                                 |
+| `M-C-S-i`       | Move buffer up                                    |
+| `M-C-S-k`       | Move buffer down                                  |
+
 
 
 ### Magit
