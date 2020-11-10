@@ -44,7 +44,7 @@
 
 ; line and tab settings. lots of major modes have their own
 ; indentation settings, which is very frustrating
-(setq-default fill-column       80)  ; default column width of 80 characters
+(setq-default fill-column       78)  ; default column width of 78 characters
 (setq-default indent-tabs-mode  nil) ; no tabs
 (setq-default tab-width         4)   ; 4 spaces for tabs
 (setq-default standard-indent   4)   ; indents are 4 spaces wide

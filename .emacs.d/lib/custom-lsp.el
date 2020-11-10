@@ -8,6 +8,7 @@
 
   ; lsp minibuffer signature show is buggy
   (setq lsp-signature-auto-activate nil)
+  (setq lsp-signature-doc-lines 1)
 
   ; nicer keybindings
   (define-key lsp-mode-map (kbd "M-r") 'lsp-rename)
