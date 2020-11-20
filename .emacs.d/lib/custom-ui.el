@@ -70,6 +70,13 @@
 (global-set-key (kbd "M-C-S-<up>")    'buf-move-up)
 (global-set-key (kbd "M-C-S-<down>")  'buf-move-down)
 
+;; window mgmt shortcuts are
+;; invariant w.r.t. shift state
+(global-set-key (kbd "C-x !") 'delete-other-windows)
+(global-set-key (kbd "C-x @") 'split-window-below)
+(global-set-key (kbd "C-x #") 'split-window-right)
+(global-set-key (kbd "C-x )") 'delete-window)
+
 
 ;; Make those window keybindings
 ;; work in org mode

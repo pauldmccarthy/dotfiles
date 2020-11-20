@@ -7,6 +7,9 @@
  (setq helm-completion-in-region-fuzzy-match t)
  (setq helm-autoresize-mode                  1)
 
+ ; memory leak? https://issues.guix.info/43406
+ (setq helm-ff-keep-cached-candidates nil)
+
  ; rebind tab to run persistent action
  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 
