@@ -10,7 +10,6 @@ function _delim() {
 }
 
 
-
 function shape() {
   delim=$(_delim $2)
   rows=$(cat $1 | wc -l);
@@ -31,4 +30,32 @@ function pyclaen() {
   find . -name "*.pye"       -delete
   find . -name "*.ipynbe"    -delete
   rm -f .coverage .coverage.*
+}
+
+
+function pp() {
+  if [ "$#" -eq 1 ]; then
+    dir="$1"
+  else
+    dir=$(pwd)
+  fi
+
+  # abspath
+  dir=$(cd "$dir" && pwd)
+
+  export PATH="$dir":$PATH
+  echo $PATH
+}
+
+function pyp() {
+  if [ "$#" -eq 1 ]; then
+    dir="$1"
+  else
+    dir=$(pwd)
+  fi
+
+  dir=$(cd "$dir" && pwd)
+
+  export PYTHONPATH="$dir":$PYTHONPATH
+  echo $PYTHONPATH
 }
