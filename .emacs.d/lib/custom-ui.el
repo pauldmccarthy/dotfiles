@@ -72,11 +72,10 @@
 
 ;; window mgmt shortcuts are
 ;; invariant w.r.t. shift state
-(global-set-key (kbd "C-x !") 'delete-other-windows)
-(global-set-key (kbd "C-x @") 'split-window-below)
-(global-set-key (kbd "C-x #") 'split-window-right)
-(global-set-key (kbd "C-x )") 'delete-window)
-
+(global-set-key (kbd "C-x S-0") 'delete-window)
+(global-set-key (kbd "C-x S-1") 'delete-other-windows)
+(global-set-key (kbd "C-x S-2") 'split-window-below)
+(global-set-key (kbd "C-x S-3") 'split-window-right)
 
 ;; Make those window keybindings
 ;; work in org mode
