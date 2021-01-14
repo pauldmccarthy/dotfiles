@@ -69,6 +69,12 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
+# I never intentionally float windows,
+# but it sometimes happens by accident.
+# mod+Shift+f is already taken (move
+# window right)
+bindsym $mod+Shift+t floating toggle
+
 # resize window (you can also use the mouse for that)
 mode "Resize Mode" {
         # These bindings trigger as soon as you enter the resize mode
@@ -200,10 +206,12 @@ bindsym $mod+$alt+i move workspace to output up
 bindsym $mod+$alt+k move workspace to output down
 
 
-# Disable titlebar
-hide_edge_borders smart
-default_border pixel 1
+# Borders
+hide_edge_borders       smart
+default_border          pixel 1
+default_floating_border pixel 1
 
+# Border colours
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #00d000
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
@@ -278,3 +286,13 @@ exec --no-startup-id /usr/bin/unclutter -b
 
 # Refresh wallpaper on screen resolution change
 exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh
+
+# Float all FSL GUIs
+for_window [title = "FSL.*"]             floating enable
+for_window [title = "FDT.*"]             floating enable
+for_window [title = "BET.*"]             floating enable
+for_window [title = "FEAT.*"]            floating enable
+for_window [title = "MELODIC.*"]         floating enable
+for_window [title = "General Linear.*"]  floating enable
+for_window [title = "Model"]             floating enable
+for_window [title = "Design efficiency"] floating enable

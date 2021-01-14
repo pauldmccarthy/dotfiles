@@ -8,6 +8,9 @@ setopt nosharehistory
 # don't pester me about rm *
 setopt rmstarsilent
 
+# i HATE auto_cd
+unsetopt auto_cd
+
 # use bash word style for
 # alt+f/b navigation
 autoload -U select-word-style
