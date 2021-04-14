@@ -58,6 +58,8 @@
     ; (origami-mode)          ; origami for code folding
 
     (setq flycheck-check-syntax-automatically '(mode-enabled save))
+    (setq flycheck-python-flake8-executable   "python")
+    (setq flycheck-python-pylint-executable   "python")
 
     ; add project root to $PYTHONPATH
     (setenv "PYTHONPATH"

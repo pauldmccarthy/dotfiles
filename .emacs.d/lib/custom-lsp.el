@@ -6,6 +6,8 @@
   (setq lsp-ui-peek-enable  nil)
   (setq lsp-prefer-flymake  nil)
 
+  (setq lsp-headerline-breadcrumb-enable nil)
+
   ; lsp minibuffer signature show is buggy
   (setq lsp-signature-auto-activate nil)
   (setq lsp-signature-doc-lines 1)
