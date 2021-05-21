@@ -15,10 +15,9 @@ Clipboard integration depends on the presence of `xclip`.
 | ------------- | ------------------------------------------------- |
 | C-q           | prefix                                            |
 | C-q r         | reload config                                     |
-| C-l           | clear history                                     |
+| C-q C-l       | clear screen and history                          |
 | C-q |         | split horizontally                                |
 | C-q -         | split vertically                                  |
-| C-M-m         | Copy mode                                         |
 | M-Left        | Select left pane                                  |
 | M-Right       | Select right pane                                 |
 | M-Up          | Select pane above                                 |
@@ -35,7 +34,8 @@ Clipboard integration depends on the presence of `xclip`.
 | M-C-l         | Resize pane to right                              |
 | M-C-i         | Resize pane to top                                |
 | M-C-k         | Resize pane to bottom                             |
-| C-M-m         | Copy mode                                         |
+| M-space       | Copy mode                                         |
+| C-M-space     | Search                                            |
 
 
 ## `emacs`
