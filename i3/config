@@ -69,11 +69,14 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# I never intentionally float windows,
+# I rarely intentionally float windows,
 # but it sometimes happens by accident.
 # mod+Shift+f is already taken (move
 # window right)
 bindsym $mod+Shift+t floating toggle
+
+# Switch focus between tiled/floating windows
+bindsym $mod+Ctrl+t mode_toggle
 
 # resize window (you can also use the mouse for that)
 mode "Resize Mode" {
@@ -288,11 +291,11 @@ exec --no-startup-id /usr/bin/unclutter -b
 exec --no-startup-id /usr/bin/xeventbind resolution /usr/bin/wallpaper-refresh
 
 # Float all FSL GUIs
-for_window [title = "FSL.*"]             floating enable
-for_window [title = "FDT.*"]             floating enable
-for_window [title = "BET.*"]             floating enable
-for_window [title = "FEAT.*"]            floating enable
-for_window [title = "MELODIC.*"]         floating enable
-for_window [title = "General Linear.*"]  floating enable
-for_window [title = "Model"]             floating enable
-for_window [title = "Design efficiency"] floating enable
+for_window [title = "^FSL.*(?<!Firefox)$"]               floating enable
+for_window [title = "^FDT.*(?<!Firefox)$"]               floating enable
+for_window [title = "^BET.*(?<!Firefox)$"]               floating enable
+for_window [title = "^FEAT.*(?<!Firefox)$"]              floating enable
+for_window [title = "^MELODIC.*(?<!Firefox)$"]           floating enable
+for_window [title = "^General Linear.*(?<!Firefox)$"]    floating enable
+for_window [title = "^Model.*(?<!Firefox)$"]             floating enable
+for_window [title = "^Design efficiency.*(?<!Firefox)$"] floating enable

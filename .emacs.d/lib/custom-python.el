@@ -70,6 +70,9 @@
     (setq indent-tabs-mode     nil)
     (setq python-indent-offset 4)
 
+    ; make eldoc modeline help appear fast
+    (setq eldoc_idle_delay 0.1)
+
     ; Remove trailing whitespace on save
     (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
@@ -84,6 +87,16 @@
     (define-key python-mode-map (kbd "C-c C-p") 'python-nav-backward-defun)
 
     (define-key python-mode-map (kbd "C-c C-d") 'realgud:pdb)
+
+    ; make pdb window display consistent
+    ; (not sure if this is working?)
+    (add-to-list 'display-buffer-alist
+                 `(,(rx bos "*gud pdb*" eos)
+                   (display-buffer-reuse-window
+                    display-buffer-in-side-window)
+                   (side            . bottom)
+                   (reusable-frames . visible)
+                   (window-height   . 0.33)))
   )
 
   (add-hook 'python-mode-hook  'my-python-mode-hook)

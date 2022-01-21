@@ -10,9 +10,9 @@
 
 (defun desktop-font ()
   (interactive)
-  (set-face-attribute 'default            nil :family 'pmc/text-font     :height 100 :weight 'normal)
-  (set-face-attribute 'mode-line          nil :family 'pmc/modeline-font :height 80  :weight 'normal)
-  (set-face-attribute 'mode-line-inactive nil :family 'pmc/modeline-font :height 80  :weight 'normal)
-  (set-face-attribute 'minibuffer-prompt  nil :family 'pmc/modeline-font :height 60  :weight 'bold))
+  (set-face-attribute 'default            nil :family 'pmc/text-font     :height 150 :weight 'normal)
+  (set-face-attribute 'mode-line          nil :family 'pmc/modeline-font :height 130 :weight 'normal)
+  (set-face-attribute 'mode-line-inactive nil :family 'pmc/modeline-font :height 130 :weight 'normal)
+  (set-face-attribute 'minibuffer-prompt  nil :family 'pmc/modeline-font :height 130 :weight 'bold))
 
-(laptop-font)
+(desktop-font)

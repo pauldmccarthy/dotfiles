@@ -12,6 +12,10 @@
   (setq lsp-signature-auto-activate nil)
   (setq lsp-signature-doc-lines 1)
 
+  (setq lsp-modeline-workspace-status-enable nil)
+  (setq lsp-modeline-diagnostics-enable      nil)
+  (setq lsp-modeline-code-actions-enable     nil)
+
   ; nicer keybindings
   (define-key lsp-mode-map (kbd "M-r") 'lsp-rename)
   (define-key lsp-mode-map (kbd "M-/") 'lsp-find-references))

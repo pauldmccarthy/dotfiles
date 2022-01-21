@@ -23,9 +23,9 @@ function hd() {
 }
 
 
-function pyclaen() {
-  find . -name "__pycache__" -exec rm -r "{}" \;
-  find . -name ".mypy_cache" -exec rm -r "{}" \;
+function pyclean() {
+  find . -name "__pycache__" -exec rm -rf "{}" \;
+  find . -name ".mypy_cache" -exec rm -rf "{}" \;
   find . -name "*.pyc"       -delete
   find . -name "*.pye"       -delete
   find . -name "*.ipynbe"    -delete
@@ -58,4 +58,48 @@ function pyp() {
 
   export PYTHONPATH="$dir":$PYTHONPATH
   echo $PYTHONPATH
+}
+
+
+function clearfsl() {
+  if [ "$FSLDIR" = "" ]; then
+    return
+  fi
+  PATH=${PATH/$FSLDIR\/bin/}
+  PATH=${PATH/$FSLDIR\/share\/fsl\/bin/}
+  eval $(env|sort|grep FSL|cut -d '=' -f 1|xargs -n 1 echo "unset ")
+}
+
+function getword() {
+  str=${1}
+  idx=${2}
+  word=$(echo "${str}"    |
+         tr -s ' '        |
+         sed 's/^ *//g'   |
+         cut -d ' ' -f ${idx})
+  echo ${word}
+}
+
+
+function k9() {
+
+  pat=${1}
+  hits=$(ps ax | grep ${pat})
+  hits=(${(f)"${hits}"})
+
+  for ((i=1; i<=${#hits[@]}; i++)); do
+    name=$(getword ${hits[${i}]} 5-)
+    pid=$( getword ${hits[${i}]} 1)
+    echo -e "${i}: ${pid} [${name}]\n"
+  done
+
+  echo -n "Index of process to kill: "
+  read selection
+
+  hit=${hits[${selection}]}
+  name=$(getword ${hit} 5-)
+  pid=$( getword ${hit} 1)
+
+  echo "Killing ${pid} [${name}]"
+  kill -9 ${pid}
 }

@@ -8,10 +8,11 @@
   branch = auto
 
 [alias]
-	st   = status -sb
+  sh   = show
+  st   = status -sb
   rv   = remote -v
   co   = checkout
-	ci   = commit
+  ci   = commit
   cp   = cherry-pick
   ps   = push
   b    = branch

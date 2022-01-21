@@ -19,6 +19,7 @@
 (load "custom-org")
 (load "custom-sh")
 (load "custom-glsl")
+(load "custom-fill")
 
 (which-key-mode)
 

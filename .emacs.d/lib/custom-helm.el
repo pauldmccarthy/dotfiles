@@ -6,6 +6,7 @@
  (setq helm-mode-fuzzy-match                 t)
  (setq helm-completion-in-region-fuzzy-match t)
  (setq helm-autoresize-mode                  1)
+ (setq helm-find-files-ignore-thing-at-point t)
 
  ; memory leak? https://issues.guix.info/43406
  (setq helm-ff-keep-cached-candidates nil)

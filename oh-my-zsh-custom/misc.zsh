@@ -19,6 +19,6 @@ select-word-style bash
 # assume emacs is running
 export EDITOR="emacsclient -a '' -s ~/.emacs.d/server -nq"
 
-# point CVS to the fmrib cvs repository
-export CVSROOT=:ext:jalapeno.fmrib.ox.ac.uk:/usr/local/share/sources
-export CVS_RSH=ssh
+# Report runtime for long
+# commands
+export REPORTTIME=10
