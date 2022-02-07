@@ -103,3 +103,28 @@ function k9() {
   echo "Killing ${pid} [${name}]"
   kill -9 ${pid}
 }
+
+
+function fipy() {
+  if [ "$#" -eq 1 ]; then
+    search=${1}
+    dir=$(pwd)
+  else
+    dir=${1}
+    search=${2}
+  fi
+
+  find ${dir} -name "*.py" | xargs grep -in ${search}
+}
+
+function fipyi() {
+  if [ "$#" -eq 1 ]; then
+    search=${1}
+    dir=$(pwd)
+  else
+    dir=${1}
+    search=${2}
+  fi
+
+  find ${dir} -name "*.py" | xargs grep -n  ${search}
+}

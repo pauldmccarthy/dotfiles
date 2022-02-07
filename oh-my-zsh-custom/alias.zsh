@@ -9,7 +9,7 @@ alias g=git
 
 alias md5="md5sum"
 alias tmux="tmux attach || tmux new"
-alias less="less -RFX"
+alias less="less -RFXN"
 alias diff="colordiff"
 alias fslconf=". /home/paulmc/fsl/fslconf.sh"
 alias fedev=". /home/paulmc/Projects/fsleyes/fsleyes.gtk3.dev.sh; pushd /home/paulmc/Projects/fsleyes"
@@ -28,6 +28,3 @@ alias sshp="sshpass -f ~/.ssh/fmrib_password ssh"
 alias scpp="sshpass -f ~/.ssh/fmrib_password scp"
 alias sshr="sshpass -f ~/.ssh/rescomp_password ssh"
 alias scpr="sshpass -f ~/.ssh/rescomp_password scp"
-
-alias fipy='find . -name "*.py" | xargs grep -in'
-alias fipyi='find . -name "*.py" | xargs grep -n'
