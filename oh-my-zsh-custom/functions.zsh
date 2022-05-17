@@ -104,11 +104,72 @@ function k9() {
   kill -9 ${pid}
 }
 
+function memusage() {
+  pat=${1}
+  hits=$(ps ax | grep ${pat}|grep -v grep)
+  hits=(${(f)"${hits}"})
+
+  for ((i=1; i<=${#hits[@]}; i++)); do
+    name=$(getword ${hits[${i}]} 5-)
+    pid=$( getword ${hits[${i}]} 1)
+    echo -e "${i}: ${pid} [${name}]\n"
+  done
+
+  echo -n "Index of process to monitor: "
+  read selection
+
+  hit=${hits[${selection}]}
+  name=$(getword ${hit} 5-)
+  pid=$( getword ${hit} 1)
+
+  echo "Monitoring ${pid} [${name}]"
+  for ((;;)); do
+    if [ ! -d /proc/${pid} ]; then
+      break;
+    fi
+
+    kbytes=$(ps -p ${pid} -o rss | tail -n1)
+    gbytes=$(echo "scale=3; ${kbytes} / 1048576" | bc -l)
+    echo -en "\r${gbytes} GB" >&2
+    echo "${kbytes} ${gbytes}"
+    sleep 1
+  done | sort -n | tail -n1
+}
+
+
+function fsrc() {
+  if [ "$#" -eq 2 ]; then
+    dir=$(pwd)
+    suffix=${1}
+    search=${2}
+  else
+    dir=${1}
+    suffix=${2}
+    search=${3}
+  fi
+
+  find ${dir} -name "*${suffix}" | xargs grep -in  ${search}
+}
+
+
+function fsrci() {
+  if [ "$#" -eq 2 ]; then
+    dir=$(pwd)
+    suffix=${1}
+    search=${2}
+  else
+    dir=${1}
+    suffix=${2}
+    search=${3}
+  fi
+
+  find ${dir} -name "*${suffix}" | xargs grep -n  ${search}
+}
 
 function fipy() {
   if [ "$#" -eq 1 ]; then
-    search=${1}
     dir=$(pwd)
+    search=${1}
   else
     dir=${1}
     search=${2}
@@ -119,8 +180,8 @@ function fipy() {
 
 function fipyi() {
   if [ "$#" -eq 1 ]; then
-    search=${1}
     dir=$(pwd)
+    search=${1}
   else
     dir=${1}
     search=${2}

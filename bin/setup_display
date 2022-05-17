@@ -4,6 +4,13 @@ laptop="eDP-1"
 acer27=$(xrandr    -q | grep 598mm | awk '{print $1}')
 ultrawide=$(xrandr -q | grep 797mm | awk '{print $1}')
 
-xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 1440x1440 \
-       --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
-       --output ${acer27}    --mode 1920x1080 --rate 60.00            --pos 3440x360
+# only laptop
+if   [[ ${acer27} == "" ]] && [[ ${ultrawide} == "" ]]; then
+  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 0x0
+
+# both external displays
+elif [[ ${acer27} != "" ]] && [[ ${ultrawide} != "" ]]; then
+  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 1440x1440 \
+         --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
+         --output ${acer27}    --mode 1920x1080 --rate 60.00           --pos 3440x360
+fi

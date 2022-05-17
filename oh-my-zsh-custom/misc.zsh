@@ -22,3 +22,6 @@ export EDITOR="emacsclient -a '' -s ~/.emacs.d/server -nq"
 # Report runtime for long
 # commands
 export REPORTTIME=10
+
+# Password manager database
+export DEETSDB=~/Dropbox/.deets

@@ -2,6 +2,7 @@
 alias emacs="emacs26"
 export EDITOR="emacsclient27 -a '' -s ~/.emacs.d/server -nq"
 alias l="ls"
+alias p="pwd"
 alias ll="ls -hl"
 alias la="ls -ahl"
 alias e=$EDITOR
@@ -20,6 +21,7 @@ alias workon=". /usr/local/bin/workon"
 alias o="/usr/local/bin/myopen"
 alias push="pushd"
 alias pop="popd"
+alias esl="env|sort|less"
 
 # clipcopy/clippaste are zsh functions
 alias clipc="clipcopy"
