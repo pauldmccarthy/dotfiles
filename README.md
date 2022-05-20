@@ -125,7 +125,14 @@ open a given `.py` file:
 2. Create a file called `.dir-locals.el` in the root directory of each
    of your of project(s), containing the following:
 
-   `((python-mode . ((project-venv-name . "<name-of-venv-dir>"))))`
+   ```
+   ((nil . ((eval . (setenv "PYTHONPATH" "<path-to-project-dir>"))))
+    (python-mode . ((project-venv-name . "<name-of-venv-dir>"))))
+   ```
+
+   As an alternative to adding the project directory to `$PYTHONPATH`, you
+   could (for example) install your project using `python setup.py develop`.
+
 
 
 #### Linting

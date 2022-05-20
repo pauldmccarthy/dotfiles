@@ -125,13 +125,14 @@ function memusage() {
   echo "Monitoring ${pid} [${name}]"
   for ((;;)); do
     if [ ! -d /proc/${pid} ]; then
+      echo "" >&2
       break;
     fi
 
     kbytes=$(ps -p ${pid} -o rss | tail -n1)
     gbytes=$(echo "scale=3; ${kbytes} / 1048576" | bc -l)
-    echo -en "\r${gbytes} GB" >&2
-    echo "${kbytes} ${gbytes}"
+    echo -en "\r${gbytes} GB " >&2
+    echo " ${gbytes} GB max"
     sleep 1
   done | sort -n | tail -n1
 }
