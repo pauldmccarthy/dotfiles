@@ -139,6 +139,10 @@ function memusage() {
 
 
 function fsrc() {
+  if [ "$#" -eq 0 ]; then
+    echo "usage: fsrci [dir] suffix term"
+    return
+  fi
   if [ "$#" -eq 2 ]; then
     dir=$(pwd)
     suffix=${1}
@@ -154,6 +158,10 @@ function fsrc() {
 
 
 function fsrci() {
+  if [ "$#" -eq 0 ]; then
+    echo "usage: fsrci [dir] suffix term"
+    return
+  fi
   if [ "$#" -eq 2 ]; then
     dir=$(pwd)
     suffix=${1}
@@ -168,6 +176,10 @@ function fsrci() {
 }
 
 function fipy() {
+  if [ "$#" -eq 0 ]; then
+    echo "usage: fipy [dir] term"
+    return
+  fi
   if [ "$#" -eq 1 ]; then
     dir=$(pwd)
     search=${1}
@@ -176,10 +188,17 @@ function fipy() {
     search=${2}
   fi
 
-  find ${dir} -name "*.py" | xargs grep -in ${search}
+  find ${dir} -name "*.py"  |
+    grep -v "flycheck"      |
+    grep -v "site-packages" |
+    xargs grep -in ${search}
 }
 
 function fipyi() {
+  if [ "$#" -eq 0 ]; then
+    echo "usage: fipyi [dir] term"
+    return
+  fi
   if [ "$#" -eq 1 ]; then
     dir=$(pwd)
     search=${1}

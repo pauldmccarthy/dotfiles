@@ -21,6 +21,7 @@ alias workon=". /usr/local/bin/workon"
 alias o="/usr/local/bin/myopen"
 alias push="pushd"
 alias pop="popd"
+alias esg="env|sort|grep -i"
 alias esl="env|sort|less"
 
 # clipcopy/clippaste are zsh functions

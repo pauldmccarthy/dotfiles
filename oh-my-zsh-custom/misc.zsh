@@ -23,5 +23,8 @@ export EDITOR="emacsclient -a '' -s ~/.emacs.d/server -nq"
 # commands
 export REPORTTIME=10
 
-# Password manager database
+# Password manager settings
 export DEETSDB=~/Dropbox/.deets
+export DEETSUSERNAME=pauldmccarthy@gmail.com
+export DEETSPASSWORDLENGTH=20
+export DEETSPASSWORDCLASS="lowercase uppercase numbers"
