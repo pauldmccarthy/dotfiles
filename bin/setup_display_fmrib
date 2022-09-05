@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+laptop="eDP-1"
+samsung=$(xrandr -q | grep 518mm | awk '{print $1}')
+
+# only laptop
+if   [[ ${samsung} == "" ]]; then
+  xrandr --output ${laptop} --mode 1920x1080 --rate 60.00 --primary --pos 0x0
+
+# laptop + external display
+elif [[ ${samsung} != "" ]]; then
+  xrandr --output ${laptop}  --mode 1920x1080 --rate 60.00 --primary --pos 0x1200 \
+         --output ${samsung} --mode 1920x1200 --rate 60.00           --pos 0x0    \
+fi
