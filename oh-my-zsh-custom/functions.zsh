@@ -67,8 +67,34 @@ function clearfsl() {
   fi
   PATH=${PATH/$FSLDIR\/bin/}
   PATH=${PATH/$FSLDIR\/share\/fsl\/bin/}
-  eval $(env|sort|grep FSL|cut -d '=' -f 1|xargs -n 1 echo "unset ")
+
+  if [ ! "$FSLDEVDIR" = "" ]; then
+    PATH=${PATH/$FSLDEVDIR\/bin/}
+  fi
+
+  clearenv FSL
 }
+
+
+function clearenv() {
+  tkn=${1}
+  eval $(env|sort|grep ${tkn}|cut -d '=' -f 1|xargs -n 1 echo "unset ")
+}
+
+
+function fslconf() {
+  if [ "$#" -ne 1 ]; then
+    echo "usage: fslconf version"
+    return
+  fi
+  clearfsl
+  export FSLDIR=~/fsl/fsl-${1}/
+  export FSLDEVDIR=~/fsl/fsl-${1}-dev/
+  export PATH=${FSLDEVDIR}/bin:${FSLDIR}/bin:$PATH
+  source ${FSLDIR}/etc/fslconf/fsl.sh
+  source ${FSLDIR}/etc/fslconf/fsl-devel.sh
+}
+
 
 function getword() {
   str=${1}

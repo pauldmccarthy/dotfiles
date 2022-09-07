@@ -28,7 +28,6 @@
     dash
     s
     zenburn-theme
-    doneburn-theme
     zencoding-mode
     glsl-mode
     cython-mode))

@@ -47,7 +47,7 @@
     ;  - pylint
     ;  - flake8
     ;  - flake8-mypy
-    ;  - python-language-server
+    ;  - python-lsp-server
     (pyvenv-auto-activate)
 
     (projectile-mode)       ; projectile (used by lsp, not me)
