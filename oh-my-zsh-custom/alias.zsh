@@ -6,6 +6,7 @@ alias ll="ls -hl"
 alias la="ls -ahl"
 alias e=$EDITOR
 alias g=git
+alias o=open
 
 alias md5="md5sum"
 alias tmux="tmux attach || tmux new"

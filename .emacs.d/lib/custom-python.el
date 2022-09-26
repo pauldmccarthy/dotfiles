@@ -51,15 +51,11 @@
     (pyvenv-auto-activate)
 
     (projectile-mode)       ; projectile (used by lsp, not me)
-    (flycheck-mode)         ; flycheck for linting
+    (flycheck-mode)         ; flycheck for linting - see custom-flycheck.el
     (company-mode)          ; company for auto completion
     (lsp)                   ; lsp-mode for IDE features
     (lsp-ui-mode)
     ; (origami-mode)          ; origami for code folding
-
-    (setq flycheck-check-syntax-automatically '(mode-enabled save))
-    (setq flycheck-python-flake8-executable   "python")
-    (setq flycheck-python-pylint-executable   "python")
 
     ; add project root to $PYTHONPATH
     (setenv "PYTHONPATH"

@@ -90,9 +90,9 @@ function fslconf() {
   clearfsl
   export FSLDIR=~/fsl/fsl-${1}/
   export FSLDEVDIR=~/fsl/fsl-${1}-dev/
-  export PATH=${FSLDEVDIR}/bin:${FSLDIR}/bin:$PATH
   source ${FSLDIR}/etc/fslconf/fsl.sh
   source ${FSLDIR}/etc/fslconf/fsl-devel.sh
+  export PATH=${FSLDEVDIR}/bin:${FSLDIR}/bin:$PATH
 }
 
 

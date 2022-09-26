@@ -11,6 +11,13 @@
                  (window-height   . 0.33)))
 
   (defun flycheck-python-hook ()
+
+    ; check syntax on save. Use whatever "python"
+    ; is provided by the active venv
+    (setq flycheck-check-syntax-automatically '(mode-enabled save))
+    (setq flycheck-python-flake8-executable   "python")
+    (setq flycheck-python-pylint-executable   "python")
+
     ; It is assumed that user config
     ; files are present at ~/.pylintrc
     ; and  ~/.flake8rc
