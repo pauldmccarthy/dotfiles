@@ -166,10 +166,17 @@ function memusage() {
 
 function fsrc() {
   if [ "$#" -eq 0 ]; then
-    echo "usage: fsrci [dir] suffix term"
+    echo "usage: fsrci term"
+    echo "       fsrci suffix term"
+    echo "       fsrci dir suffix term"
     return
   fi
-  if [ "$#" -eq 2 ]; then
+  if [ "$#" -eq 1 ]; then
+    # add -type f, use array
+    dir=$(pwd)
+    suffix=${1}
+    search=${2}
+  elif [ "$#" -eq 2 ]; then
     dir=$(pwd)
     suffix=${1}
     search=${2}

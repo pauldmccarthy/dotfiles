@@ -5,6 +5,7 @@ alias p="pwd"
 alias ll="ls -hl"
 alias la="ls -ahl"
 alias e=$EDITOR
+alias enw="emacs -nw"
 alias g=git
 alias o=open
 

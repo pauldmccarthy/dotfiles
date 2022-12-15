@@ -41,6 +41,9 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# don't move the mouse when moving screens
+mouse_warping none
+
 # start a terminal
 bindsym $mod+Return exec $terminal_path
 
@@ -50,8 +53,8 @@ bindsym $mod+Shift+q kill
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
 
 # rofi app and window launchers
-bindsym $mod+space       exec rofi -show run -theme $rofiTheme
-bindsym $mod+Shift+space exec rofi -show window -theme $rofiTheme
+bindsym $mod+space       exec rofi -show run #-theme $rofiTheme
+bindsym $mod+Shift+space exec rofi -show window #-theme $rofiTheme
 bindsym $mod+$alt+space  exec rofi -show file-browser
 
 # toggle split orientation
