@@ -7,15 +7,6 @@
 set $mod Mod4
 set $alt Mod1
 
-# i3xrocks config file
-set $i3xrocks_config /etc/regolith/i3xrocks/config
-
-# compton config file
-set $compton_config /etc/regolith/compton/config
-
-# path to terminal. Override this to specify a custom terminal.
-set $terminal_path /usr/bin/i3-sensible-terminal
-
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
 set_from_resource $ws1  i3-wm.workspace.01.name "1"
@@ -45,17 +36,16 @@ floating_modifier $mod
 mouse_warping none
 
 # start a terminal
-bindsym $mod+Return exec $terminal_path
+bindsym $mod+Return exec /usr/bin/i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-set_from_resource $rofiTheme rofi.theme "regolith-theme"
-
 # rofi app and window launchers
-bindsym $mod+space       exec rofi -show run #-theme $rofiTheme
-bindsym $mod+Shift+space exec rofi -show window #-theme $rofiTheme
-bindsym $mod+$alt+space  exec rofi -show file-browser
+ #-theme $rofiTheme
+bindsym $mod+space       exec rofi -show run
+bindsym $mod+Shift+space exec rofi -show window
+bindsym $mod+$alt+space  exec rofi -show filebrowser
 
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
@@ -234,55 +224,32 @@ popup_during_fullscreen smart
 # window focus follows your mouse movements as the mouse crosses window borders
 focus_follows_mouse no
 
-set_from_resource $i3-wm.bar.background.color i3-wm.bar.background.color "#002b36"
-set_from_resource $i3-wm.bar.statusline.color i3-wm.bar.statusline.color "#93a1a1"
-set_from_resource $i3-wm.bar.separator.color i3-wm.bar.separator.color "#268bd2"
-
-set_from_resource $i3-wm.bar.workspace.focused.border.color i3-wm.bar.workspace.focused.border.color "#073642"
-set_from_resource $i3-wm.bar.workspace.focused.background.color i3-wm.bar.workspace.focused.background.color "#073642"
-set_from_resource $i3-wm.bar.workspace.focused.text.color i3-wm.bar.workspace.focused.text.color "#eee8d5"
-
-set_from_resource $i3-wm.bar.workspace.active.border.color i3-wm.bar.workspace.active.border.color "#073642"
-set_from_resource $i3-wm.bar.workspace.active.background.color i3-wm.bar.workspace.active.background.color "#073642"
-set_from_resource $i3-wm.bar.workspace.active.text.color i3-wm.bar.workspace.active.text.color "#586e75"
-
-set_from_resource $i3-wm.bar.workspace.inactive.border.color i3-wm.bar.workspace.inactive.border.color "#002b36"
-set_from_resource $i3-wm.bar.workspace.inactive.background.color i3-wm.bar.workspace.inactive.background.color "#002b36"
-set_from_resource $i3-wm.bar.workspace.inactive.text.color i3-wm.bar.workspace.inactive.text.color "#586e75"
-
-set_from_resource $i3-wm.bar.workspace.urgent.border.color i3-wm.bar.workspace.urgent.border.color "#dc322f"
-set_from_resource $i3-wm.bar.workspace.urgent.background.color i3-wm.bar.workspace.urgent.background.color "#dc322f"
-set_from_resource $i3-wm.bar.workspace.urgent.text.color i3-wm.bar.workspace.urgent.text.color "#fdf6e3"
-
-set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 13, FontAwesome 13"
 
 # Configure the bar
 bar {
-  font $i3-wm.bar.font
+  font "pango:DejaVu Sans Mono 10"
   mode hide
   position top
-  separator_symbol " "
-  status_command i3xrocks -c $i3xrocks_config
-  tray_output none
+  separator_symbol "|"
+  status_command i3xrocks -c ~/.config/regolith2/i3xrocks/config
+  # status_command i3status
+  tray_output primary
   strip_workspace_numbers yes
 
-  colors {
-      background $i3-wm.bar.background.color
-      statusline $i3-wm.bar.statusline.color
-      separator  $i3-wm.bar.separator.color
+  # colors {
+  #     background $i3-wm.bar.background.color
+  #     statusline $i3-wm.bar.statusline.color
+  #     separator  $i3-wm.bar.separator.color
 
-#                        BORDER  BACKGROUND TEXT
-      focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
-      active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
-      inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
-      urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
-  }
+  #     # BORDER  BACKGROUND TEXT
+  #     focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
+  #     active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
+  #     inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
+  #     urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
+  # }
 }
 
 # Run programs when i3 starts
-
-# Start the composite manager
-exec --no-startup-id compton -f --config $compton_config
 
 # Launch the shortcut Conky window on first login
 exec --no-startup-id /usr/bin/regolith-ftue

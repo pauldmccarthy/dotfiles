@@ -1,0 +1,20 @@
+# Global properties
+separator=true
+separator_block_width=15
+markup=pango
+
+[wifi]
+command=/usr/share/i3xrocks/scripts/wifi
+interval=10
+
+[battery]
+command=/usr/share/i3xrocks/scripts/battery
+interval=60
+
+[cpu-usage]
+command=/usr/share/i3xrocks/scripts/cpu-usage
+interval=5
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1

@@ -186,7 +186,7 @@ function fsrc() {
     search=${3}
   fi
 
-  find ${dir} -name "*${suffix}" | xargs grep -in  ${search}
+  find ${dir} -name "*${suffix}" | grep -v .git | xargs grep -in  ${search}
 }
 
 
