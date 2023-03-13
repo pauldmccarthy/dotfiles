@@ -8,6 +8,7 @@
 
 (setq *pmc/packages*
   '(buffer-move               ; essentials
+    conda
     magit
     helm
     helm-lsp

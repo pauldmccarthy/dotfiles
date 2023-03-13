@@ -13,6 +13,9 @@
   ; All virtualenvs are stored here
   (setq venv-location (expand-file-name "/home/paulmc/venvs/"))
   (setq python-environment-directory venv-location)
+  (setq conda-anaconda-home      "/home/paulmc/miniconda3/")
+  (setq conda-env-home-directory "/home/paulmc/")
+  (setq conda-env-subdirectory   "venvs")
 
   ; Allow me to set the virtualenv in .dir-locals.el
   ; without an unsafe variable warning
@@ -20,14 +23,28 @@
 
   ; Auto-activate virtualenv on a buffer
   ; if project-venv-name is set
-  ; maybe manually add ./bin/ to PATH?
-  (defun pyvenv-auto-activate  ()
+  ; TODO maybe manually add ./bin/ to PATH?
+  (defun pyvenv-auto-activate ()
+    (message "Activating virtual environment %s" project-venv-name)
+    (venv-workon project-venv-name))
+
+  ; auto-activate a conda environment
+  (defun conda-env-auto-activate ()
+    (message "Activating conda environment %s" project-venv-name)
+    (setq conda-project-env-path project-venv-name)
+    (conda-env-activate-for-buffer)
+    (conda project-venv-name))
+
+  ; auto-activate a virtual or conda environment
+  (defun pyenv-auto-activate ()
     (hack-local-variables)
     (when (not (boundp 'project-venv-name))
       (setq project-venv-name "default"))
-    (when (file-directory-p (concat venv-location "/" project-venv-name))
-      (message "Activating virtual environment %s" project-venv-name)
-      (venv-workon project-venv-name)))
+
+    (when (file-directory-p (concat venv-location "/" project-venv-name "/conda-meta"))
+      (conda-env-auto-activate))
+    (when (file-exists-p (concat venv-location "/" project-venv-name "/pyvenv.cfg"))
+      (pyvenv-auto-activate)))
 
   ; realgud for debugging
   (use-package realgud
@@ -48,7 +65,7 @@
     ;  - flake8
     ;  - flake8-mypy
     ;  - python-lsp-server
-    (pyvenv-auto-activate)
+    (pyenv-auto-activate)
 
     (projectile-mode)       ; projectile (used by lsp, not me)
     (flycheck-mode)         ; flycheck for linting - see custom-flycheck.el
