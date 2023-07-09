@@ -22,6 +22,11 @@ function hd() {
   head -n1 $1 | tr "$delim" "\n" | less -N
 }
 
+function mkdcd() {
+  mkdir -p $1
+  cd       $1
+}
+
 
 function pyclean() {
   find . -name "__pycache__" -exec rm -rf "{}" \;
@@ -133,7 +138,10 @@ function k9() {
 function memusage() {
   pat=${1}
   hits=$(ps ax | grep ${pat}|grep -v grep)
+
+  # zsh-specific syntaax
   hits=(${(f)"${hits}"})
+  # readarray -t hits <<<"${hits}"
 
   for ((i=1; i<=${#hits[@]}; i++)); do
     name=$(getword ${hits[${i}]} 5-)
@@ -241,4 +249,47 @@ function fipyi() {
   fi
 
   find ${dir} -name "*.py" | xargs grep -n  ${search}
+}
+
+
+# https://stackoverflow.com/a/44811468
+function sanitise() {
+  s="${1?need a string}"                      # receive input in first argument
+  s="${s//[^[:alnum:]]/-}"                    # replace all non-alnum characters to -
+  s="${s//+(-)/-}"                            # convert multiple - to single -
+  s="${s/#-}"                                 # remove - from start
+  s="${s/%-}"                                 # remove - from end
+  s=$(echo "$s" | tr '[:upper:]' '[:lower:]') # convert to lowercase
+  echo "${s}"
+
+}
+
+
+function note() {
+
+  if [ "$#" -ge "1" ]; then
+    topic="$@"
+  else
+    topic="note"
+  fi
+
+  year=$(date +%Y)
+  month=$(date +%m)
+  day=$(date +%d)
+
+  if [ "${NOTE_DIR}" = "" ]; then
+    notedir=${HOME}/.notes/${year}/${month}/${day}/
+  else
+    notedir=${NOTE_DIR}/${year}/${month}/${day}/
+  fi
+
+  filename=$(sanitise ${topic}).md
+  filename=${notedir}/${filename}
+
+  if [ ! -e ${filename} ]; then
+    mkdir -p ${notedir}
+    echo "# ${year}/${month}/${day} - ${topic}" > ${filename}
+  fi
+
+  ${EDITOR} ${filename}
 }

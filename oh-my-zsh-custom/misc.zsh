@@ -17,7 +17,10 @@ autoload -U select-word-style
 select-word-style bash
 
 # assume emacs is running
-export EDITOR="emacsclient -a '' -s ~/.emacs.d/server -nq"
+function editor() {
+  emacsclient -a '' -s ~/.emacs.d/server -nq "$@"
+}
+export EDITOR=editor
 
 # Report runtime for long
 # commands
@@ -28,3 +31,6 @@ export DEETSDB=~/Dropbox/.deets
 export DEETSUSERNAME=pauldmccarthy@gmail.com
 export DEETSPASSWORDLENGTH=20
 export DEETSPASSWORDCLASS="lowercase uppercase numbers"
+
+# functions.zsh:note
+export NOTE_DIR=~/Documents/notes/

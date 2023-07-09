@@ -227,7 +227,7 @@ focus_follows_mouse no
 
 # Configure the bar
 bar {
-  font "pango:DejaVu Sans Mono 10"
+  font "pango:DejaVu Sans Mono 15"
   mode hide
   position top
   separator_symbol "|"

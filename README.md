@@ -108,13 +108,13 @@ overridden/noted below.
 
 The Python development configuration currently assumes that:
 
-* You use virtual environments (currently no support for conda)
-* You store all of your virtual environments in one directory
-* The following packages are installed in all of your virtual
+* You use virtual or conda environments
+* You store all of your virtual/conda environments in one directory
+* The following packages are installed in all of your virtual/conda
   environments (and maybe some others that I've forgotten):
   - `flake8`
   - `pylint`
-  - `python-language-server[all]`
+  - `python-lsp-server[all]`
 
 To have the correct environment automatically activated when you
 open a given `.py` file:
@@ -184,3 +184,7 @@ files are stored at:
 
  - Disable _Quick Find_ in Firefox (opening a search bar when `/` is typed):
    _about:config_ -> `accessibility.typeaheadfind.manual` -> `false`.
+ - Disable Firefox search suggestions in address bar
+   (_Firefox settings_ -> _Search_ -> deselect _Provide search suggestions_).
+
+ - Remove incorrect password delay: https://askubuntu.com/a/877390

@@ -1,5 +1,4 @@
 # custom aliases
-export EDITOR="emacsclient -a '' -s ~/.emacs.d/server -nq"
 alias l="ls"
 alias p="pwd"
 alias ll="ls -hl"
@@ -8,6 +7,9 @@ alias e=$EDITOR
 alias enw="emacs -nw"
 alias g=git
 alias o=open
+
+alias ff="find . -name"
+alias fc="find . -type f | xargs grep -i"
 
 alias md5="md5sum"
 alias tmux="tmux attach || tmux new"

@@ -31,7 +31,7 @@
   ta   = "log --decorate --date-order    --pretty=format:\"%Cblue%>(12)%ad %Cred%d\" --tags --simplify-by-decoration"
   al   = add -u
   ba   = branch -vva --sort=-committerdate
-  fe   = fetch --all --prune --tags
+  fe   = fetch --all --prune --tags --force
 
 [push]
 	default = simple

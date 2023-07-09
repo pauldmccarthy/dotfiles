@@ -1,4 +1,4 @@
-(setq pmc/text-font     "Hermit")
+(setq pmc/text-font     "DejaVu Sans Mono")
 (setq pmc/modeline-font "DejaVu Sans")
 
 (defun laptop-font()

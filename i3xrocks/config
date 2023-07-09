@@ -16,5 +16,5 @@ command=/usr/share/i3xrocks/scripts/cpu-usage
 interval=5
 
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%a %d %B %Y %H:%M:%S'
 interval=1
