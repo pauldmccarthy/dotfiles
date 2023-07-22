@@ -38,6 +38,9 @@ mouse_warping none
 # start a terminal
 bindsym $mod+Return exec /usr/bin/i3-sensible-terminal
 
+# start a file browser
+bindsym $mod+n nautilus
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -69,7 +72,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+t floating toggle
 
 # Switch focus between tiled/floating windows
-bindsym $mod+Ctrl+t mode_toggle
+bindsym $mod+Ctrl+t focus mode_toggle
 
 # resize window (you can also use the mouse for that)
 mode "Resize Mode" {

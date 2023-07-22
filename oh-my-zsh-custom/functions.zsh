@@ -278,9 +278,9 @@ function note() {
   day=$(date +%d)
 
   if [ "${NOTE_DIR}" = "" ]; then
-    notedir=${HOME}/.notes/${year}/${month}/${day}/
+    notedir=${HOME}/.notes/${year}/${month}/
   else
-    notedir=${NOTE_DIR}/${year}/${month}/${day}/
+    notedir=${NOTE_DIR}/${year}/${month}/
   fi
 
   filename=$(sanitise ${topic}).md
@@ -288,8 +288,9 @@ function note() {
 
   if [ ! -e ${filename} ]; then
     mkdir -p ${notedir}
-    echo "# ${year}/${month}/${day} - ${topic}" > ${filename}
   fi
+
+  echo "\n\n# ${year}/${month}/${day} - ${topic}\n" >> ${filename}
 
   ${EDITOR} ${filename}
 }
