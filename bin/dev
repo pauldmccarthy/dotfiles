@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+projdir=~/Projects/${1}/
+setup=${projdir}/dev.sh
+
+if [ ! -d ${projdir} ]; then
+  echo "${projdir} does not exist!"
+  return 1
+fi
+
+if [ -f ${setup} ]; then
+  source ${setup}
+else
+  echo "No setup script - put initialisation code in ${setup}"
+fi
+
+pushd  ~/Projects/${1}/ > /dev/null

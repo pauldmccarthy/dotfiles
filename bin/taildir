@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+#
+# track.py -
+#
+# Author: Paul McCarthy <pauldmccarthy@gmail.com>
+#
+
+import os
+import os.path as op
+import sys
+import time
+
+seen      = set()
+targetdir = sys.argv[1]
+
+while True:
+
+    files = sorted(os.listdir(targetdir))
+
+    for fname in files:
+        fpath = op.join(targetdir, fname)
+        if not op.isfile(fpath):
+            continue
+        if fpath in seen:
+            continue
+        seen.add(fpath)
+        print(f'\n\n%%%%%% {fname} %%%%%%%%%\n\n')
+        print(open(fpath).read())
+        print(f'\n\n%%%%%% {fname} %%%%%%%%%\n\n')
+
+    time.sleep(5)
