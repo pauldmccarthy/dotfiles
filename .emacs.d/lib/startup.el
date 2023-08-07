@@ -14,6 +14,7 @@
 (load "custom-company")
 (load "custom-flycheck")
 (load "custom-lsp")
+(load "custom-markdown")
 (load "custom-python")
 (load "custom-rst")
 (load "custom-org")

@@ -174,16 +174,15 @@ function memusage() {
 
 function fsrc() {
   if [ "$#" -eq 0 ]; then
-    echo "usage: fsrci term"
-    echo "       fsrci suffix term"
-    echo "       fsrci dir suffix term"
+    echo "usage: fsrc term"
+    echo "       fsrc suffix term"
+    echo "       fsrc dir suffix term"
     return
   fi
   if [ "$#" -eq 1 ]; then
-    # add -type f, use array
     dir=$(pwd)
-    suffix=${1}
-    search=${2}
+    suffix=""
+    search=${1}
   elif [ "$#" -eq 2 ]; then
     dir=$(pwd)
     suffix=${1}
@@ -193,17 +192,22 @@ function fsrc() {
     suffix=${2}
     search=${3}
   fi
-
-  find ${dir} -name "*${suffix}" | grep -v .git | xargs grep -in  ${search}
+  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -in ${search}
 }
 
 
 function fsrci() {
   if [ "$#" -eq 0 ]; then
-    echo "usage: fsrci [dir] suffix term"
+    echo "usage: fsrci term"
+    echo "       fsrci suffix term"
+    echo "       fsrci dir suffix term"
     return
   fi
-  if [ "$#" -eq 2 ]; then
+  if [ "$#" -eq 1 ]; then
+    dir=$(pwd)
+    suffix=""
+    search=${1}
+  elif [ "$#" -eq 2 ]; then
     dir=$(pwd)
     suffix=${1}
     search=${2}
@@ -212,8 +216,7 @@ function fsrci() {
     suffix=${2}
     search=${3}
   fi
-
-  find ${dir} -name "*${suffix}" | xargs grep -n  ${search}
+  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -n ${search}
 }
 
 function fipy() {

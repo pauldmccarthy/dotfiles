@@ -17,6 +17,7 @@ alias less="less -RFXN"
 alias diff="colordiff"
 alias dev=". ~/bin/dev"
 alias workon=". ~/bin/workon"
+alias ifconfig="ip address show"
 
 #alias o="/usr/local/bin/myopen"
 alias push="pushd > /dev/null"

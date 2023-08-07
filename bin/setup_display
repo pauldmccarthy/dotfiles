@@ -7,21 +7,21 @@ work=$(     xrandr -q | grep 518mm | awk '{print $1}')
 
 # only laptop
 if   [[ ${acer27} == "" ]] && [[ ${ultrawide} == "" ]] && [[ ${work} == "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 0x0
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x0
 
 # laptop+ultrawide
 elif [[ ${acer27} == "" ]] && [[ ${ultrawide} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 1440x1440 \
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 1440x1440 \
          --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0
 
 # both external displays
 elif [[ ${acer27} != "" ]] && [[ ${ultrawide} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 1440x1440 \
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 1440x1440 \
          --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
          --output ${acer27}    --mode 1920x1080 --rate 60.00           --pos 3440x360
 
 # at work
 elif [[ ${work} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1080 --rate 60.00 --primary --pos 0x1200 \
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x1200 \
          --output ${work}      --mode 1920x1200 --rate 60.00           --pos 0x0
 fi
