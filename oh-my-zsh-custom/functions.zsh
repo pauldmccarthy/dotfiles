@@ -266,34 +266,3 @@ function sanitise() {
   echo "${s}"
 
 }
-
-
-function note() {
-
-  if [ "$#" -ge "1" ]; then
-    topic="$@"
-  else
-    topic="note"
-  fi
-
-  year=$(date +%Y)
-  month=$(date +%m)
-  day=$(date +%d)
-
-  if [ "${NOTE_DIR}" = "" ]; then
-    notedir=${HOME}/.notes/${year}/${month}/
-  else
-    notedir=${NOTE_DIR}/${year}/${month}/
-  fi
-
-  filename=$(sanitise ${topic}).md
-  filename=${notedir}/${filename}
-
-  if [ ! -e ${filename} ]; then
-    mkdir -p ${notedir}
-  fi
-
-  echo "\n\n# ${year}/${month}/${day} - ${topic}\n" >> ${filename}
-
-  ${EDITOR} ${filename}
-}

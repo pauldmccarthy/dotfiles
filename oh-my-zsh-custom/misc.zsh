@@ -16,11 +16,7 @@ unsetopt auto_cd
 autoload -U select-word-style
 select-word-style bash
 
-# assume emacs is running
-function editor() {
-  emacsclient -a '' -s ~/.emacs.d/server -nq "$@"
-}
-export EDITOR=editor
+export EDITOR="/usr/bin/emacsclient -n -a=''"
 
 # Report runtime for long
 # commands

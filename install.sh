@@ -13,3 +13,9 @@ for f in $thisdir/oh-my-zsh-custom/*.zsh; do
   fname=$(basename $f)
   ln -s $f ~/.oh-my-zsh/custom/$fname
 done
+
+mkdir -p ~/bin/
+for f in $thisdir/bin/*; do
+  fname=$(basename $f)
+  ln -s $f ~/bin/$fname
+done

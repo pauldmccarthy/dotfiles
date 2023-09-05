@@ -3,8 +3,8 @@ alias l="ls"
 alias p="pwd"
 alias ll="ls -hl"
 alias la="ls -ahl"
-alias e=$EDITOR
-alias enw="emacs -nw"
+alias e=${EDITOR}
+alias enw="emacs --tty"
 alias g=git
 alias o=open
 

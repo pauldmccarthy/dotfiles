@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+
+
+import               datetime
+import               glob
+import os.path    as op
+import               os
+import               shlex
+import               string
+import subprocess as sp
+import               sys
+
+
+def note_dir():
+    home    = op.expanduser('~')
+    default = op.join(home, '.notes')
+    notedir = os.environ.get('NOTE_DIR', default)
+    return notedir
+
+
+def note_index():
+    index = {}
+    for notefile in glob.glob(op.join(note_dir(), '**', '*.md'), recursive=True):
+
+        keys = op.basename(notefile)
+        keys = '.'.join(keys.split('.')[:-1])
+        keys = keys.split('-')
+
+        for key in keys:
+            if key not in index: index[key] = [notefile]
+            else:                index[key].append(notefile)
+    return index
+
+
+def note_file(keys):
+    topic = sanitise(keys)
+    today = datetime.date.today()
+    year  = f'{today.year:04d}'
+    month = f'{today.month:02d}'
+    path  = op.join(note_dir(), year, month, f'{topic}.md')
+    return path
+
+
+def sanitise(keys):
+    chars   = []
+    key     = '-'.join(keys)
+    allowed = string.ascii_letters + string.digits + '-_'
+    for c in key:
+        if c in allowed: chars.append(c)
+        else:            chars.append('-')
+    return ''.join(chars)
+
+
+def find_related(keys):
+    index      = note_index()
+    candidates = []
+    for key in keys:
+        candidates.extend(index.get(key, []))
+    return candidates
+
+
+def prompt_user_to_select_file(keys, candidatepaths, defaultpath):
+    print('Note for', ' '.join(keys))
+    print('Add note to this file:')
+    for i, path in enumerate(candidatepaths, 1):
+        print(f' [{i}] {path}')
+    print(f'Or press enter to create a new file at {defaultpath}')
+
+    selection = -1
+
+    while True:
+        selection = input('Select file: ').strip()
+
+        if selection == '':
+            return defaultpath
+        try:
+            selection = int(selection)
+            return candidatepaths[selection - 1]
+        except Exception:
+            pass
+
+
+def open_editor(keys, filepath):
+
+    today = datetime.date.today()
+    date  = f'{today.year}/{today.month:02d}/{today.day:02d}'
+
+    if op.exists(filepath): prefix = '\n\n'
+    else:                   prefix = ''
+
+    with open(filepath, 'at') as f:
+        f.write(f'{prefix}# {date} - {" ".join(keys)}\n\n')
+
+    cmd = op.expandvars(f'${{EDITOR}} {filepath}')
+    sp.run(shlex.split(cmd), check=True)
+
+
+def main():
+    keys     = sys.argv[1:]
+    related  = find_related(keys)
+    filepath = note_file(keys)
+
+    if len(related) > 0:
+        filepath = prompt_user_to_select_file(keys, related, filepath)
+
+    open_editor(keys, filepath)
+
+
+if __name__ == '__main__':
+    main()
