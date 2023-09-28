@@ -172,6 +172,62 @@ function memusage() {
 }
 
 
+function memusage2() {
+  pat=${1}
+  echo "Monitoring all processes with name matching [${pat}]"
+  for ((;;)); do
+
+    hits=$(ps ax | grep ${pat}|grep -v grep)
+    # zsh-specific syntaax
+    hits=(${(f)"${hits}"})
+    # readarray -t hits <<<"${hits}"
+
+    if [ ${#hits[@]} = "0" ]; then
+      echo "" >&2
+      break;
+    fi
+
+    kbytes="0"
+
+    for ((i=1; i<=${#hits[@]}; i++)); do
+      pid=$( getword ${hits[${i}]} 1)
+      pkbytes=$(ps -p ${pid} -o rss | tail -n+2)
+      if [ -z "${pkbytes}" ]; then
+        pkbytes="0"
+      fi
+      kbytes=$(echo "${kbytes} + ${pkbytes}" | bc)
+    done
+
+    gbytes=$(echo "scale=3; ${kbytes} / 1048576" | bc -l)
+    echo -en "\r[#${#hits[@]}] ${gbytes} GB " >&2
+    echo " ${gbytes} GB max"
+    sleep 1
+  done | sort -n | tail -n1
+}
+
+
+function cpuusage() {
+  command=${1}
+
+  # assuming that there is only one matching process
+  pid=$(pgrep ${command} | tail -n 1)
+
+  for ((;;)); do
+    if ! ps -p ${pid} > /dev/null; then
+      break;
+    fi
+
+    if [[ $(uname) == "Darwin" ]]; then
+      cpu=$(top -pid ${pid} -l2 -s1  -stats cpu | tail -n1)
+    else
+      cpu=$(top -p ${pid} -b -d 2 -n 1 -o "%CPU"|tail -n1|tr -s ' '|cut -d ' ' -f 9)
+    fi
+
+    echo ${cpu}
+    sleep 1
+  done
+}
+
 function fsrc() {
   if [ "$#" -eq 0 ]; then
     echo "usage: fsrc term"

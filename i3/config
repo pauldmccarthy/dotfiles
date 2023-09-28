@@ -35,6 +35,9 @@ floating_modifier $mod
 # don't move the mouse when moving screens
 mouse_warping none
 
+# Don't shift focus across monitors
+focus_wrapping workspace
+
 # start a terminal
 bindsym $mod+Return exec /usr/bin/i3-sensible-terminal
 
@@ -272,3 +275,11 @@ for_window [title = "^MELODIC.*(?<!Firefox)$"]           floating enable
 for_window [title = "^General Linear.*(?<!Firefox)$"]    floating enable
 for_window [title = "^Model.*(?<!Firefox)$"]             floating enable
 for_window [title = "^Design efficiency.*(?<!Firefox)$"] floating enable
+
+# Float zoom popups
+for_window [title = "zoom"             class="[zoom]*"] floating enable
+for_window [title = "Breakout Rooms.*" class="[zoom]*"] floating enable
+
+
+# Float Cisco AnyConnect VPN windows
+for_window [title = "Cisco Secure Client.*"] floating enable
