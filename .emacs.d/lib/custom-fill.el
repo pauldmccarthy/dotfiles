@@ -5,4 +5,12 @@
   (fill-paragraph)
   (setq fill-column 'oldfill))
 
+(defun unfill-paragraph ()
+  (interactive)
+  (setq oldfill  'fill-column)
+  (setq fill-column 9999)
+  (fill-paragraph)
+  (setq fill-column 'oldfill))
+
 (define-key global-map (kbd "C-S-q") 'fill-paragraph-to-point)
+(define-key global-map (kbd "C-M-q") 'unfill-paragraph)

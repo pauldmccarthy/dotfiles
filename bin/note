@@ -85,8 +85,13 @@ def open_editor(keys, filepath):
     today = datetime.date.today()
     date  = f'{today.year}/{today.month:02d}/{today.day:02d}'
 
-    if op.exists(filepath): prefix = '\n\n'
-    else:                   prefix = ''
+    if op.exists(filepath):
+        prefix = '\n\n'
+    else:
+        prefix  = ''
+        dirname = op.dirname(filepath)
+        if not op.exists(dirname):
+            os.makedirs(dirname, exist_ok=True)
 
     with open(filepath, 'at') as f:
         f.write(f'{prefix}# {date} - {" ".join(keys)}\n\n')

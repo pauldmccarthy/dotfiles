@@ -4,7 +4,7 @@ alias p="pwd"
 alias ll="ls -hl"
 alias la="ls -ahl"
 alias e=${EDITOR}
-alias enw="emacs --tty"
+alias enw="emacs --no-window-system --no-desktop"
 alias g=git
 alias o=open
 

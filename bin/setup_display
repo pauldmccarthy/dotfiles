@@ -3,10 +3,11 @@
 laptop="eDP-1"
 acer27=$(   xrandr -q | grep 598mm | awk '{print $1}')
 ultrawide=$(xrandr -q | grep 797mm | awk '{print $1}')
-work=$(     xrandr -q | grep 518mm | awk '{print $1}')
+work1=$(    xrandr -q | grep 518mm | awk '{print $1}')
+work2=$(    xrandr -q | grep 509mm | awk '{print $1}')
 
 # only laptop
-if   [[ ${acer27} == "" ]] && [[ ${ultrawide} == "" ]] && [[ ${work} == "" ]]; then
+if   [[ ${acer27} == "" ]] && [[ ${ultrawide} == "" ]] && [[ ${work1} == "" ]] && [[ ${work2} == "" ]]; then
   xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x0
 
 # laptop+ultrawide
@@ -20,8 +21,13 @@ elif [[ ${acer27} != "" ]] && [[ ${ultrawide} != "" ]]; then
          --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
          --output ${acer27}    --mode 1920x1080 --rate 60.00           --pos 3440x360
 
-# at work
-elif [[ ${work} != "" ]]; then
+# at work (office 1)
+elif [[ ${work1} != "" ]]; then
   xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x1200 \
-         --output ${work}      --mode 1920x1200 --rate 60.00           --pos 0x0
+         --output ${work1}     --mode 1920x1200 --rate 60.00           --pos 0x0
+
+# at work (office 2)
+elif [[ ${work2} != "" ]]; then
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x1200 \
+         --output ${work2}     --mode 1920x1080 --rate 60.00           --pos 0x0
 fi

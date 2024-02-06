@@ -41,9 +41,6 @@
 (setq find-file-visit-truename t)
 (setq vc-follow-symlinks       t)
 
-; save layout on exit
-(desktop-save-mode 1)
-
 ; line and tab settings. lots of major modes have their own
 ; indentation settings, which is very frustrating
 (setq-default fill-column       78)  ; default column width of 78 characters
@@ -119,3 +116,14 @@
 
 ; disable overwrite mode
 (put 'overwrite-mode 'disabled t)
+
+; save layout on exit
+(desktop-save-mode 1)
+(setq desktop-path ("~/.emacs.d/"))
+
+; Delay loading the saved desktop session 
+; until the first frame has been created
+(defun load-desktop-hook ()
+  (desktop-read)
+)
+(add-hook 'server-after-make-frame-hook)

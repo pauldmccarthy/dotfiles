@@ -9,6 +9,7 @@ ln -s $thisdir/.zshrc     ~/.zshrc
 ln -s $thisdir/.gitconfig ~/.gitconfig
 ln -s $thisdir/.tmux.conf ~/.tmux.conf
 ln -s $thisdir/i3         ~/.i3
+ln -s $thisdir/.lesskey   ~/.lesskey
 for f in $thisdir/oh-my-zsh-custom/*.zsh; do
   fname=$(basename $f)
   ln -s $f ~/.oh-my-zsh/custom/$fname
