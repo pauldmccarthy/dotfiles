@@ -188,3 +188,16 @@ files are stored at:
    (_Firefox settings_ -> _Search_ -> deselect _Provide search suggestions_).
 
  - Remove incorrect password delay: https://askubuntu.com/a/877390
+
+ - Always suspend laptop on lid closed (including when external monitor is attached). What a ball-ache.  
+ 
+    - ```sudo nano /usr/lib/systemd/logind.conf.d/lid-switch-always-suspend.conf```, and add:
+      ```
+      HandleSuspendKey=suspend
+      HandleLidSwitch=suspend
+      HandleLidSwitchExternalPower=suspend
+      HandleLidSwitchDocked=suspend
+      LidSwitchIgnoreInhibited=no
+      ```
+    - But this isn't enough as Gnome configures a "low-level inhibitor" which causes these rules to be ignored (run `systemd-inhibit --list` to check). You also need to edit `/etc/UPower/UPower.conf`, and set `IgnoreLid=true` (it defaults to `false`).
+
