@@ -40,6 +40,11 @@
 (global-unset-key (kbd "C-x <left>"))
 (global-unset-key (kbd "C-x <right>"))
 
+; Disable emacs help, as I  frequently hit
+; it accidentally, and it does my head in
+(global-unset-key (kbd "C-h n"))
+(global-unset-key (kbd "C-h C-n"))
+
 ;; use meta+(jkli) for window switching
 (global-set-key (kbd "M-j")       'windmove-left)
 (global-set-key (kbd "M-l")       'windmove-right)

@@ -21,6 +21,7 @@
 (load "custom-sh")
 (load "custom-glsl")
 (load "custom-fill")
+(load "custom-cuda")
 
 (which-key-mode)
 
