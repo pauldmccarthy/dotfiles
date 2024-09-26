@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
 
+import               argparse
 import               datetime
+import               fnmatch
+import functools  as ft
 import               glob
 import os.path    as op
 import               os
@@ -11,16 +14,21 @@ import subprocess as sp
 import               sys
 
 
+
 def note_dir():
     home    = op.expanduser('~')
     default = op.join(home, '.notes')
     notedir = os.environ.get('NOTE_DIR', default)
     return notedir
 
+@ft.lru_cache
+def note_files():
+    return list(glob.glob(op.join(note_dir(), '**', '*.md'), recursive=True))
+
 
 def note_index():
     index = {}
-    for notefile in glob.glob(op.join(note_dir(), '**', '*.md'), recursive=True):
+    for notefile in note_files():
 
         keys = op.basename(notefile)
         keys = '.'.join(keys.split('.')[:-1])
@@ -32,7 +40,7 @@ def note_index():
     return index
 
 
-def note_file(keys):
+def note_file_name(keys):
     topic = sanitise(keys)
     today = datetime.date.today()
     year  = f'{today.year:04d}'
@@ -51,12 +59,25 @@ def sanitise(keys):
     return ''.join(chars)
 
 
-def find_related(keys):
+def find_notes(keys):
     index      = note_index()
-    candidates = []
+    candidates = set()
     for key in keys:
-        candidates.extend(index.get(key, []))
-    return candidates
+        candidates.update(index.get(key, []))
+    return sorted(list(candidates))
+
+
+def grep_notes(pattern):
+    hits = []
+    for notefile in note_files():
+        lines = open(notefile, 'rt').read().strip()
+        lines = [l.strip() for l in lines.split('\n')]
+
+        for i, line in enumerate(lines, 1):
+            if pattern in line: # fnmatch.fnmatch(line, pattern):
+                hits.append((notefile, i, line))
+
+    return sorted(hits)
 
 
 def prompt_user_to_select_file(keys, candidatepaths, defaultpath):
@@ -100,15 +121,38 @@ def open_editor(keys, filepath):
     sp.run(shlex.split(cmd), check=True)
 
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    search = parser.add_mutually_exclusive_group()
+    parser.add_argument('keys', nargs='+')
+    search.add_argument('-f', '--find', action='store_true')
+    search.add_argument('-g', '--grep', action='store_true')
+    return parser.parse_args()
+
+
+
 def main():
-    keys     = sys.argv[1:]
-    related  = find_related(keys)
-    filepath = note_file(keys)
+    args = parse_args()
+
+    if args.grep:
+        hits = grep_notes(' '.join(args.keys))
+        for hit, lineno, line in hits:
+            print(f'{hit}:{lineno}: {line}')
+        return
+
+    related = find_notes(args.keys)
+
+    if args.find:
+        for path in related:
+            print(path)
+        return
+
+    filepath = note_file_name(args.keys)
 
     if len(related) > 0:
-        filepath = prompt_user_to_select_file(keys, related, filepath)
+        filepath = prompt_user_to_select_file(args.keys, related, filepath)
 
-    open_editor(keys, filepath)
+    open_editor(args.keys, filepath)
 
 
 if __name__ == '__main__':

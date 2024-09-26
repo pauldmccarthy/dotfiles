@@ -231,7 +231,7 @@ function cpuusage() {
 function fsrc() {
   if [ "$#" -eq 0 ]; then
     echo "usage: fsrc term"
-    echo "       fsrc suffix term"
+    echo "       fsrc dir term"
     echo "       fsrc dir suffix term"
     return
   fi
@@ -240,22 +240,22 @@ function fsrc() {
     suffix=""
     search=${1}
   elif [ "$#" -eq 2 ]; then
-    dir=$(pwd)
-    suffix=${1}
+    dir=${1}
+    suffix=""
     search=${2}
   else
     dir=${1}
     suffix=${2}
     search=${3}
   fi
-  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -in ${search}
+  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -in ${search} | sort
 }
 
 
 function fsrci() {
   if [ "$#" -eq 0 ]; then
     echo "usage: fsrci term"
-    echo "       fsrci suffix term"
+    echo "       fsrci dir term"
     echo "       fsrci dir suffix term"
     return
   fi
@@ -264,15 +264,15 @@ function fsrci() {
     suffix=""
     search=${1}
   elif [ "$#" -eq 2 ]; then
-    dir=$(pwd)
-    suffix=${1}
+    dir=${1}
+    suffix=""
     search=${2}
   else
     dir=${1}
     suffix=${2}
     search=${3}
   fi
-  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -n ${search}
+  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -n ${search} | sort
 }
 
 function fipy() {
@@ -288,10 +288,11 @@ function fipy() {
     search=${2}
   fi
 
-  find ${dir} -name "*.py"  |
-    grep -v "flycheck"      |
-    grep -v "site-packages" |
-    xargs grep -in ${search}
+  find ${dir} -name "*.py"   |
+    grep -v "flycheck"       |
+    grep -v "site-packages"  |
+    xargs grep -in ${search} |
+    sort  -t ":" -k 1,2 -n
 }
 
 function fipyi() {
@@ -307,7 +308,7 @@ function fipyi() {
     search=${2}
   fi
 
-  find ${dir} -name "*.py" | xargs grep -n  ${search}
+  find ${dir} -name "*.py" | xargs grep -n  ${search} | sort -t ":"
 }
 
 
@@ -321,4 +322,22 @@ function sanitise() {
   s=$(echo "$s" | tr '[:upper:]' '[:lower:]') # convert to lowercase
   echo "${s}"
 
+}
+
+
+function actenv() {
+  if [ -e ${1}/conda-meta ]; then
+    conda=$(which conda)
+    if [[ "${conda}" == "" ]] || [[ "${conda}" == *"not found" ]]; then
+      echo 'Cannot find a base conda environment! Add <base>/bin to your $PATH'
+      return
+    fi
+    basedir=$(dirname ${conda})
+    source ${basedir}/activate ${1}
+
+  elif [ -e ${1}/pyvenv.cfg ]; then
+    source ${1}/bin/activate
+  else
+    echo "Cannot identify environment type of ${1}"
+  fi
 }
