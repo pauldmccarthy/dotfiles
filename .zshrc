@@ -103,8 +103,19 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Enable fzf keybindings and fuzzy completion
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+# macOS specific configuration
+if [ $(uname) = "Darwin" ]; then
+  # start ssh agent
+  setopt extendedglob
+  eval $(ssh-agent) > /dev/null
+  for key in ~/.ssh/id*~*pub; do
+    ssh-add  ${key} &> /dev/null
+  done
 
+# linux specific configuration
+else
+  # Enable fzf keybindings and fuzzy completion
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  source /usr/share/doc/fzf/examples/completion.zsh
 
+fi

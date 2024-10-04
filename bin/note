@@ -2,6 +2,7 @@
 
 
 import               argparse
+import               collections
 import               datetime
 import               fnmatch
 import functools  as ft
@@ -68,16 +69,16 @@ def find_notes(keys):
 
 
 def grep_notes(pattern):
-    hits = []
+    hits = collections.defaultdict(list)
     for notefile in note_files():
         lines = open(notefile, 'rt').read().strip()
         lines = [l.strip() for l in lines.split('\n')]
 
         for i, line in enumerate(lines, 1):
             if pattern in line: # fnmatch.fnmatch(line, pattern):
-                hits.append((notefile, i, line))
+                hits[notefile].append((i, line))
 
-    return sorted(hits)
+    return hits
 
 
 def prompt_user_to_select_file(keys, candidatepaths, defaultpath):
@@ -136,8 +137,10 @@ def main():
 
     if args.grep:
         hits = grep_notes(' '.join(args.keys))
-        for hit, lineno, line in hits:
-            print(f'{hit}:{lineno}: {line}')
+        for notefile in sorted(hits.keys()):
+            print(notefile)
+            for lineno, line in hits[notefile]:
+                print(f'  {lineno}: {line}')
         return
 
     related = find_notes(args.keys)
