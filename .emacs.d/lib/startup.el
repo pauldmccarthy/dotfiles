@@ -21,6 +21,7 @@
 (load "custom-sh")
 (load "custom-glsl")
 (load "custom-fill")
+(load "custom-c++")
 (load "custom-cuda")
 
 (which-key-mode)
@@ -52,7 +53,6 @@
 (global-hl-line-mode            1)   ; highlight current line
 (line-number-mode               1)   ; show line number
 (column-number-mode             1)   ; show column number
-
 
 ; Disable annoying key bindings, because I
 ; accidentally hit them far too often or
@@ -92,6 +92,7 @@
 (setq backup-inhibited t)
 (setq auto-save-default nil)
 
+
 ; disable mouse (thanks http://stackoverflow.com/questions/4906534/disable-mouse-clicks-in-emacs)
 (dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]
              [mouse-2] [down-mouse-2] [drag-mouse-2] [double-mouse-2] [triple-mouse-2]
@@ -120,11 +121,14 @@
 
 ; save layout on exit
 (desktop-save-mode 1)
-(setq desktop-path ("~/.emacs.d/"))
+(setq desktop-path (expand-file-name "~/.emacs.d/"))
 
 ; Delay loading the saved desktop session 
 ; until the first frame has been created
 (defun load-desktop-hook ()
   (desktop-read)
 )
-(add-hook 'server-after-make-frame-hook)
+
+(add-hook 'server-after-make-frame-hook 'load-desktop-hook)
+
+
