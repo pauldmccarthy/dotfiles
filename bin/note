@@ -102,21 +102,28 @@ def prompt_user_to_select_file(keys, candidatepaths, defaultpath):
             pass
 
 
-def open_editor(keys, filepath):
+def open_editor(keys, filepath, style='section'):
+    newfile = not op.exists(filepath)
 
-    today = datetime.date.today()
-    date  = f'{today.year}/{today.month:02d}/{today.day:02d}'
-
-    if op.exists(filepath):
-        prefix = '\n\n'
-    else:
-        prefix  = ''
+    if newfile:
         dirname = op.dirname(filepath)
         if not op.exists(dirname):
             os.makedirs(dirname, exist_ok=True)
 
-    with open(filepath, 'at') as f:
-        f.write(f'{prefix}# {date} - {" ".join(keys)}\n\n')
+    if style == 'section':
+
+        today = datetime.date.today()
+        date  = f'{today.year}/{today.month:02d}/{today.day:02d}'
+
+        if newfile: prefix = ''
+        else:       prefix = '\n\n'
+
+        with open(filepath, 'at') as f:
+            f.write(f'{prefix}# {date} - {" ".join(keys)}\n\n')
+
+    elif style == 'item':
+        with open(filepath, 'at') as f:
+            f.write(f'\n - {" ".join(keys)}')
 
     cmd = op.expandvars(f'${{EDITOR}} {filepath}')
     sp.run(shlex.split(cmd), check=True)
@@ -128,12 +135,17 @@ def parse_args():
     parser.add_argument('keys', nargs='+')
     search.add_argument('-f', '--find', action='store_true')
     search.add_argument('-g', '--grep', action='store_true')
+    search.add_argument('-t', '--todo', action='store_true')
     return parser.parse_args()
-
 
 
 def main():
     args = parse_args()
+
+    if args.todo:
+        todo = op.join(note_dir(), 'todo.md')
+        open_editor(args.keys, todo, style='item')
+        return
 
     if args.grep:
         hits = grep_notes(' '.join(args.keys))
