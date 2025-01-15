@@ -8,7 +8,7 @@
   branch = auto
 
 [alias]
-  sh   = show
+  s    = show
   st   = status -sb
   rv   = remote -v
   co   = checkout
@@ -37,9 +37,10 @@
 [push]
 	default = simple
 [core]
-  editor = emacsclient -a '' -s ~/.emacs.d/server -nq
-  pager  = less -RXF
-  abbrev = 8
+  editor       = emacsclient -a '' -s ~/.emacs.d/server -nq
+  pager        = less -RXF
+  abbrev       = 8
+  excludesFile = ~/.gitignore
 
 [init]
 	defaultBranch = main

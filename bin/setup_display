@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 laptop="eDP-1"
-acer27=$(   xrandr -q | grep 598mm | awk '{print $1}')
-ultrawide=$(xrandr -q | grep 797mm | awk '{print $1}')
-work1=$(    xrandr -q | grep 518mm | awk '{print $1}')
-work2=$(    xrandr -q | grep 509mm | awk '{print $1}')
+
+# home widescreen
+ultrawide=$(xrandr -q | grep 797mm           | awk '{print $1}')
+
+# Matthew's Dell
+work1=$(    xrandr -q | grep "597mm x 336mm" | awk '{print $1}')
 
 # only laptop
 if   [[ ${acer27} == "" ]] && [[ ${ultrawide} == "" ]] && [[ ${work1} == "" ]] && [[ ${work2} == "" ]]; then
@@ -16,18 +18,13 @@ elif [[ ${acer27} == "" ]] && [[ ${ultrawide} != "" ]]; then
          --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0
 
 # both external displays
-elif [[ ${acer27} != "" ]] && [[ ${ultrawide} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 1440x1440 \
-         --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
-         --output ${acer27}    --mode 1920x1080 --rate 60.00           --pos 3440x360
+# elif [[ ${acer27} != "" ]] && [[ ${ultrawide} != "" ]]; then
+#   xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 1440x1440 \
+#          --output ${ultrawide} --mode 3440x1440 --rate 50.00           --pos 0x0       \
+#          --output ${acer27}    --mode 1920x1080 --rate 60.00           --pos 3440x360
 
-# at work (office 1)
+# at work (Matthew's desk)
 elif [[ ${work1} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x1200 \
-         --output ${work1}     --mode 1920x1200 --rate 60.00           --pos 0x0
-
-# at work (office 2)
-elif [[ ${work2} != "" ]]; then
-  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 0x1200 \
-         --output ${work2}     --mode 1920x1080 --rate 60.00           --pos 0x0
+  xrandr --output ${laptop}    --mode 1920x1200 --rate 60.00 --primary --pos 295x1440 \
+         --output ${work1}     --mode 2560x1440 --rate 60.00           --pos 0x0
 fi

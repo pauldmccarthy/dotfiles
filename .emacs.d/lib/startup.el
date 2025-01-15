@@ -121,7 +121,7 @@
 
 ; save layout on exit
 (desktop-save-mode 1)
-(setq desktop-path (expand-file-name "~/.emacs.d/"))
+(setq desktop-path '("~/.emacs.d/"))
 
 ; Delay loading the saved desktop session 
 ; until the first frame has been created

@@ -8,13 +8,13 @@
 
 (setq *pmc/packages*
   '(buffer-move               ; essentials
-;    conda
     magit
     helm
     helm-lsp
     use-package
     doom-modeline
     all-the-icons
+    adaptive-wrap             ; correct indentation in visual-line-mode
     which-key
     realgud                   ; realgud for debugging
     lsp-mode                  ; lsp for IDE features
@@ -27,15 +27,18 @@
     virtualenvwrapper         ; for python venvs
     origami                   ; origami for code folding
     dash
-    s
+    s                         ; string manipulation library
     zenburn-theme
     zencoding-mode
     glsl-mode
-    cython-mode))
+    cython-mode
+    kotlin-mode))
 
 (require 'cl)
 (require 'package)
 (package-initialize)
+
+(setq package-check-signature nil)
 
 (defun pmc/all-packages-installed-p ()
   (cl-every (lambda (p) (package-installed-p p))

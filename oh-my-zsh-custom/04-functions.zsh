@@ -95,9 +95,13 @@ function fslconf() {
   clearfsl
   export FSLDIR=~/fsl/fsl-${1}/
   export FSLDEVDIR=~/fsl/fsl-${1}-dev/
+  source ${FSLDIR}/bin/activate ${FSLDIR}
   source ${FSLDIR}/etc/fslconf/fsl.sh
   source ${FSLDIR}/etc/fslconf/fsl-devel.sh
+  # export FSLCONFDIR=${FSLDEVDIR}/config
+  # export FSLCONFDIR=~/Projects/fsl/base/config
   export PATH=${FSLDEVDIR}/bin:${FSLDIR}/bin:$PATH
+  export MAKEFLAGS="-j 16"
 }
 
 
@@ -248,7 +252,10 @@ function fsrc() {
     suffix=${2}
     search=${3}
   fi
-  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -in ${search} | sort
+  find ${dir} -type f -name "*${suffix}" | \
+    grep -v .git                         | \
+    xargs grep -in ${search}             | \
+    sort -t ":" -k 1,1 -k 2n,2
 }
 
 
@@ -272,7 +279,10 @@ function fsrci() {
     suffix=${2}
     search=${3}
   fi
-  find ${dir} -type f -name "*${suffix}" | grep -v .git | xargs grep -n ${search} | sort
+  find ${dir} -type f -name "*${suffix}" | \
+    grep -v .git                         | \
+    xargs grep -n ${search}              | \
+    sort -t ":" -k 1,1 -k 2n,2
 }
 
 function fipy() {
@@ -292,7 +302,7 @@ function fipy() {
     grep -v "flycheck"       |
     grep -v "site-packages"  |
     xargs grep -in ${search} |
-    sort  -t ":" -k 1,2 -n
+    sort  -t ":" -k 1,1 -k 2n,2
 }
 
 function fipyi() {
@@ -308,7 +318,11 @@ function fipyi() {
     search=${2}
   fi
 
-  find ${dir} -name "*.py" | xargs grep -n  ${search} | sort -t ":"
+  find ${dir} -name "*.py"   | \
+    grep -v "flycheck"       | \
+    grep -v "site-packages"  | \
+    xargs grep -n  ${search} | \
+    sort  -t ":" -k 1,1 -k 2n,2
 }
 
 
