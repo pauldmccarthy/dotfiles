@@ -90,6 +90,8 @@ overridden/noted below.
 | `M-C-S-l`       | Move buffer right                                 |
 | `M-C-S-i`       | Move buffer up                                    |
 | `M-C-S-k`       | Move buffer down                                  |
+| `C-c <left>`    | Undo window configuration change (`winner-mode`)  |
+| `C-c <right>`   | Redo window configuration change                  |
 
 
 
@@ -189,8 +191,8 @@ files are stored at:
 
  - Remove incorrect password delay: https://askubuntu.com/a/877390
 
- - Always suspend laptop on lid closed (including when external monitor is attached). What a ball-ache.  
- 
+ - Always suspend laptop on lid closed (including when external monitor is attached). What a ball-ache.
+
     - ```sudo nano /usr/lib/systemd/logind.conf.d/lid-switch-always-suspend.conf```, and add:
       ```
       HandleSuspendKey=suspend
@@ -200,4 +202,3 @@ files are stored at:
       LidSwitchIgnoreInhibited=no
       ```
     - But this isn't enough as Gnome configures a "low-level inhibitor" which causes these rules to be ignored (run `systemd-inhibit --list` to check). You also need to edit `/etc/UPower/UPower.conf`, and set `IgnoreLid=true` (it defaults to `false`).
-
