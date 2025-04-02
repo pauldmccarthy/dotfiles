@@ -20,3 +20,7 @@ for f in $thisdir/bin/*; do
   fname=$(basename $f)
   ln -s $f ~/bin/$fname
 done
+
+
+mkdir -p ~/.config/gdb
+ln -s $thisdir/gdbinit ~/.config/gdb/

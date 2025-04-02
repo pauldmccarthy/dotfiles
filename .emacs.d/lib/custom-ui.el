@@ -10,6 +10,11 @@
 (set-fringe-mode          '(2 . 2))
 ; (toggle-frame-fullscreen)
 
+
+; window modification undo/redo
+; via C-c <left> and C-c <right>
+(winner-mode 1)
+
 ; smooth scrolling
 ; (thanks https://awesomeopensource.com/project/MatthewZMD/.emacs.d)
 ; Vertical Scroll

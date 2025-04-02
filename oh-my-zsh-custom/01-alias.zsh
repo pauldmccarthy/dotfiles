@@ -7,6 +7,7 @@ alias e=${EDITOR}
 alias enw="emacs --no-window-system --no-desktop"
 alias g=git
 alias o=open
+alias dud="du -h -d 1 ."
 
 alias ff="find . -name"
 alias fc="find . -type f | xargs grep -i"

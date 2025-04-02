@@ -11,11 +11,11 @@
   ;   ((python-mode . ((project-venv-name . "name-of-venv-dir"))))
 
   ; All virtualenvs are stored here
-  (setq venv-location (expand-file-name "/home/paulmc/venvs/"))
+  (setq venv-location                (expand-file-name "/home/paulmc/venvs/"))
   (setq python-environment-directory venv-location)
-  (setq conda-anaconda-home      "/home/paulmc/miniconda3/")
-  (setq conda-env-home-directory "/home/paulmc/")
-  (setq conda-env-subdirectory   "venvs")
+  (setq conda-anaconda-home          "/home/paulmc/miniconda3/")
+  (setq conda-env-home-directory     "/home/paulmc/")
+  (setq conda-env-subdirectory       "venvs")
 
   ; Allow me to set the virtualenv in .dir-locals.el
   ; without an unsafe variable warning

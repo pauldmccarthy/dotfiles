@@ -95,7 +95,16 @@ function fslconf() {
   clearfsl
   export FSLDIR=~/fsl/fsl-${1}/
   export FSLDEVDIR=~/fsl/fsl-${1}-dev/
-  source ${FSLDIR}/bin/activate ${FSLDIR}
+
+  if [ -f ${FSLDIR}/bin/activate ]; then
+    source ${FSLDIR}/bin/activate ${FSLDIR}
+  elif [ -f ${FSLDIR}bin/micromamba ]; then
+    export MAMBA_ROOT_PREFIX=${FSLDIR}
+    eval "$(${FSLDIR}/bin/micromamba shell hook --shell $(basename ${SHELL}))"
+    micromamba activate ${FSLDIR}
+  else
+    echo "No activate script or micromamba present - connot activate FSL conda environment"
+  fi
   source ${FSLDIR}/etc/fslconf/fsl.sh
   source ${FSLDIR}/etc/fslconf/fsl-devel.sh
   # export FSLCONFDIR=${FSLDEVDIR}/config
