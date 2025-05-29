@@ -30,3 +30,6 @@ export DEETSPASSWORDCLASS="lowercase uppercase numbers"
 
 # functions.zsh:note
 export NOTE_DIR=~/Documents/notes/
+
+# module pager on work cluster defaults to more
+export LMOD_PAGER=less

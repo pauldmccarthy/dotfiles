@@ -94,7 +94,19 @@ function fslconf() {
   fi
   clearfsl
   export FSLDIR=~/fsl/fsl-${1}/
+  source ${FSLDIR}/etc/fslconf/fsl.sh
+}
+
+function fsldev() {
+  if [ "$#" -ne 1 ]; then
+    echo "usage: fsldev version"
+    return
+  fi
+  clearfsl
+  fslconf ${1}
   export FSLDEVDIR=~/fsl/fsl-${1}-dev/
+
+  source ${FSLDIR}/etc/fslconf/fsl-devel.sh
 
   if [ -f ${FSLDIR}/bin/activate ]; then
     source ${FSLDIR}/bin/activate ${FSLDIR}
@@ -105,8 +117,7 @@ function fslconf() {
   else
     echo "No activate script or micromamba present - connot activate FSL conda environment"
   fi
-  source ${FSLDIR}/etc/fslconf/fsl.sh
-  source ${FSLDIR}/etc/fslconf/fsl-devel.sh
+
   # export FSLCONFDIR=${FSLDEVDIR}/config
   # export FSLCONFDIR=~/Projects/fsl/base/config
   export PATH=${FSLDEVDIR}/bin:${FSLDIR}/bin:$PATH

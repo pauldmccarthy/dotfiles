@@ -281,6 +281,9 @@ for_window [title = "^General Linear.*(?<!Firefox)$"]    floating enable
 for_window [title = "^Model.*(?<!Firefox)$"]             floating enable
 for_window [title = "^Design efficiency.*(?<!Firefox)$"] floating enable
 
+# ZSA Keymapp
+for_window [title = "Keymapp"] floating enable
+
 # Float zoom popups
 for_window [title = "zoom"             class="[zoom]*"] floating enable
 for_window [title = "Breakout Rooms.*" class="[zoom]*"] floating enable

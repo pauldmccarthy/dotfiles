@@ -182,7 +182,7 @@ files are stored at:
 | `C-c C-d`     | Start `realgud:pdb` |
 
 
-#### Miscellaneous
+## Miscellaneous
 
  - Disable _Quick Find_ in Firefox (opening a search bar when `/` is typed):
    _about:config_ -> `accessibility.typeaheadfind.manual` -> `false`.
