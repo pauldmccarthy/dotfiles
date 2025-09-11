@@ -1,6 +1,7 @@
 ;; Install a bunch of third party packages.
 (setq package-archives
       '(("gnu"       . "https://elpa.gnu.org/packages/")
+        ("nongnu"    . "https://elpa.nongnu.org/nongnu/")
         ("melpa"     . "https://melpa.org/packages/")
         ("marmalade" . "https://marmalade-repo.org/packages/")
         ("org"       . "https://orgmode.org/elpa/")))
@@ -32,7 +33,9 @@
     zencoding-mode
     glsl-mode
     cython-mode
-    kotlin-mode))
+    kotlin-mode
+    terraform-mode
+    ansi-color))
 
 (require 'cl)
 (require 'package)

@@ -11,6 +11,9 @@
  ; memory leak? https://issues.guix.info/43406
  (setq helm-ff-keep-cached-candidates nil)
 
+ ; why https://emacs.stackexchange.com/a/78810
+ (setq helm-move-to-line-cycle-in-source nil)
+
  ; rebind tab to run persistent action
  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 

@@ -103,3 +103,9 @@
     (local-unset-key (kbd "M-S-<down>"))
     (local-unset-key (kbd "M-S-<left>"))
     (local-unset-key (kbd "M-S-<right>"))))
+
+;; Make those window keybindings
+;; work in magit
+(magit-add-section-hook 'magit-status-sections-hook
+  (lambda ()
+    (local-unset-key (kbd "M-C-i"))))
