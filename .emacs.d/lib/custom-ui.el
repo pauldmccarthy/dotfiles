@@ -105,7 +105,9 @@
     (local-unset-key (kbd "M-S-<right>"))))
 
 ;; Make those window keybindings
-;; work in magit
-(magit-add-section-hook 'magit-status-sections-hook
-  (lambda ()
-    (local-unset-key (kbd "M-C-i"))))
+;; work in magit. Can't do this
+;; in diff buffers :(
+(with-eval-after-load "magit"
+  (magit-add-section-hook 'magit-status-sections-hook
+    (lambda ()
+      (local-unset-key (kbd "M-C-i")))))
