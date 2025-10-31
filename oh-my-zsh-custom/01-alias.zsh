@@ -33,3 +33,12 @@ alias sshp="sshpass -f ~/.ssh/fmrib_password ssh"
 alias scpp="sshpass -f ~/.ssh/fmrib_password scp"
 alias sshr="sshpass -f ~/.ssh/rescomp_password ssh"
 alias scpr="sshpass -f ~/.ssh/rescomp_password scp"
+
+# docker
+
+alias dim="docker images"
+alias drmi="docker rmi"
+alias dki="docker kill"
+alias dps="docker ps"
+alias drun="docker run"
+alias dex="docker exec -it"

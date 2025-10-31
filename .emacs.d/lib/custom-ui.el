@@ -8,12 +8,6 @@
 (scroll-bar-mode            0)
 (horizontal-scroll-bar-mode 0)
 (set-fringe-mode          '(2 . 2))
-; (toggle-frame-fullscreen)
-
-
-; window modification undo/redo
-; via C-c <left> and C-c <right>
-(winner-mode 1)
 
 ; smooth scrolling
 ; (thanks https://awesomeopensource.com/project/MatthewZMD/.emacs.d)
@@ -36,7 +30,6 @@
 (add-to-list 'same-window-buffer-names "*Help*")
 (add-to-list 'same-window-buffer-names "*grep*")
 
-
 ; Disable default nex/prev buffer
 ; shortcuts, because i always
 ; accidentally hit them and end
@@ -49,6 +42,7 @@
 ; it accidentally, and it does my head in
 (global-unset-key (kbd "C-h n"))
 (global-unset-key (kbd "C-h C-n"))
+(global-unset-key (kbd "C-h C-a"))
 
 ;; use meta+(jkli) for window switching
 (global-set-key (kbd "M-j")       'windmove-left)

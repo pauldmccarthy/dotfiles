@@ -13,7 +13,7 @@
   ; All virtualenvs are stored here
   (setq venv-location                (expand-file-name "/home/paulmc/venvs/"))
   (setq python-environment-directory venv-location)
-  (setq conda-anaconda-home          "/home/paulmc/miniconda3/")
+  (setq conda-anaconda-home          "/home/paulmc/mamba/")
   (setq conda-env-home-directory     "/home/paulmc/")
   (setq conda-env-subdirectory       "venvs")
 

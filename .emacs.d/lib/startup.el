@@ -10,24 +10,23 @@
 (load "custom-insert")
 (load "custom-theme")
 (load "custom-magit")
-(load "custom-origami")
 (load "custom-company")
 (load "custom-flycheck")
 (load "custom-lsp")
 (load "custom-markdown")
 (load "custom-python")
 (load "custom-rst")
-(load "custom-org")
 (load "custom-sh")
 (load "custom-glsl")
 (load "custom-fill")
 (load "custom-c++")
 (load "custom-cuda")
 
+; show options after typing a prefix
 (which-key-mode)
 
 ; load platform specific customisation
-; file, currently 'gnu-linux' for linux
+; file, currently 'gnu-linux.el' for linux
 (load (subst-char-in-string ?/ ?- (symbol-name system-type)))
 
 ; disable/simplify prompts
@@ -64,9 +63,6 @@
 (global-set-key (kbd "C-x C-c") nil) ; save-buffers-kill-terminal
 (global-set-key (kbd "M-/")     nil) ;
 (global-set-key (kbd "M-r")     nil) ;
-;; pgup/down keys are too close to arrow keys on my laptop
-(global-set-key (kbd "<next>")  (kbd "<right>"))
-(global-set-key (kbd "<prior>") (kbd "<left>"))
 
 ; ctrl+z for undo, in addition to ctrl+/
 ; (they're symmetric on my keyboard)
@@ -85,13 +81,9 @@
 ; new buffers are text by default
 (setq-default default-major-mode 'text-mode)
 
-; line wrapping is on by default
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
 ; disable backup and auto save
 (setq backup-inhibited t)
 (setq auto-save-default nil)
-
 
 ; disable mouse (thanks http://stackoverflow.com/questions/4906534/disable-mouse-clicks-in-emacs)
 (dolist (k '([mouse-1] [down-mouse-1] [drag-mouse-1] [double-mouse-1] [triple-mouse-1]
@@ -100,10 +92,6 @@
   (global-unset-key k))
 
 (fset 'mouse-buffer-menu nil)
-
-; globally disable fill/wrap
-(auto-fill-mode -1)
-(remove-hook 'text-mode-hook #'turn-on-auto-fill)
 
 ; enable copy/paste in X
 (setq x-select-enable-clipboard t)
@@ -123,12 +111,10 @@
 (desktop-save-mode 1)
 (setq desktop-path '("~/.emacs.d/"))
 
-; Delay loading the saved desktop session 
+; Delay loading the saved desktop session
 ; until the first frame has been created
 (defun load-desktop-hook ()
   (desktop-read)
 )
 
 (add-hook 'server-after-make-frame-hook 'load-desktop-hook)
-
-

@@ -75,7 +75,7 @@ def grep_notes(pattern):
         lines = [l.strip() for l in lines.split('\n')]
 
         for i, line in enumerate(lines, 1):
-            if pattern in line: # fnmatch.fnmatch(line, pattern):
+            if pattern.lower() in line.lower(): # fnmatch.fnmatch(line, pattern):
                 hits[notefile].append((i, line))
 
     return hits
