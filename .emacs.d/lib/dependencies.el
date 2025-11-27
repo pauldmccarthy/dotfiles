@@ -26,6 +26,7 @@
     flycheck                  ; flycheck for linting
     flycheck-color-mode-line
     virtualenvwrapper         ; for python venvs
+    conda                     ; for conda envs
     origami                   ; origami for code folding
     dash
     s                         ; string manipulation library

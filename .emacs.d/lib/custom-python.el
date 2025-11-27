@@ -14,8 +14,10 @@
   (setq venv-location                (expand-file-name "/home/paulmc/venvs/"))
   (setq python-environment-directory venv-location)
   (setq conda-anaconda-home          "/home/paulmc/mamba/")
-  (setq conda-env-home-directory     "/home/paulmc/")
-  (setq conda-env-subdirectory       "venvs")
+
+  ; conda.el  defaults to reading settings from .condarc,
+  ; but I just want it to search for envs in ~/venvs
+  (setf (alist-get 'envs_dirs conda--config) ["/home/paulmc/venvs/"])
 
   ; Allow me to set the virtualenv in .dir-locals.el
   ; without an unsafe variable warning
@@ -32,8 +34,7 @@
   (defun conda-env-auto-activate ()
     (message "Activating conda environment %s" project-venv-name)
     (setq conda-project-env-path project-venv-name)
-    (conda-env-activate-for-buffer)
-    (conda project-venv-name))
+    (conda-env-activate-for-buffer))
 
   ; auto-activate a virtual or conda environment
   (defun pyenv-auto-activate ()
