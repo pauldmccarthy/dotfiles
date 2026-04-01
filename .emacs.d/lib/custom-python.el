@@ -15,10 +15,6 @@
   (setq python-environment-directory venv-location)
   (setq conda-anaconda-home          "/home/paulmc/mamba/")
 
-  ; conda.el  defaults to reading settings from .condarc,
-  ; but I just want it to search for envs in ~/venvs
-  (setf (alist-get 'envs_dirs conda--config) ["/home/paulmc/venvs/"])
-
   ; Allow me to set the virtualenv in .dir-locals.el
   ; without an unsafe variable warning
   (put 'project-venv-name 'safe-local-variable (lambda (x) t))
@@ -28,11 +24,18 @@
   ; TODO maybe manually add ./bin/ to PATH?
   (defun pyvenv-auto-activate ()
     (message "Activating virtual environment %s" project-venv-name)
+    (setq project-venv-location (concat venv-location project-venv-name))
     (venv-workon project-venv-name))
 
   ; auto-activate a conda environment
   (defun conda-env-auto-activate ()
+
+    ; conda.el  defaults to reading settings from .condarc,
+    ; but I just want it to search for envs in ~/venvs
+    (setf (alist-get 'envs_dirs conda--config) ["/home/paulmc/venvs/"])
+
     (message "Activating conda environment %s" project-venv-name)
+    (setq project-venv-location (concat venv-location project-venv-name))
     (setq conda-project-env-path project-venv-name)
     (conda-env-activate-for-buffer))
 
@@ -54,7 +57,13 @@
     :config
     (setq realgud-safe-mode nil))
 
-  (defun my-python-mode-hook ()
+
+  (use-package conda
+    :ensure t
+    :demand t)
+
+
+(defun my-python-mode-hook ()
 
     ; First thing - make sure project-specific
     ; venv is activated (using machinery above
@@ -66,14 +75,17 @@
     ;  - flake8
     ;  - flake8-mypy
     ;  - python-lsp-server
+    ;  - ty
+    ;  - ruff
     (pyenv-auto-activate)
 
     (projectile-mode)       ; projectile (used by lsp, not me)
-    (flycheck-mode)         ; flycheck for linting - see custom-flycheck.el
     (company-mode)          ; company for auto completion
     (lsp)                   ; lsp-mode for IDE features
     (lsp-ui-mode)
-    ; (origami-mode)          ; origami for code folding
+
+    ; don't use LSP server for flycheck linting
+    (setq lsp-diagnostic-package :none)
 
     ; add project root to $PYTHONPATH
     (setenv "PYTHONPATH"

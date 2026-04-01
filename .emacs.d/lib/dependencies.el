@@ -36,6 +36,7 @@
     cython-mode
     kotlin-mode
     terraform-mode
+    treesit-auto
     ansi-color))
 
 (require 'cl)

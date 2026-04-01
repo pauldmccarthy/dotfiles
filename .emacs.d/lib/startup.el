@@ -22,6 +22,12 @@
 (load "custom-c++")
 (load "custom-cuda")
 
+; don't gc too frequently
+(setq gc-cons-threshold 100000000)
+
+; increase buffer when reading from called processes
+(setq read-process-output-max (* 1024 1024))
+
 ; show options after typing a prefix
 (which-key-mode)
 

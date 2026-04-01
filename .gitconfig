@@ -37,7 +37,7 @@
 [push]
 	default = simple
 [core]
-  editor       = emacsclient -a '' -s ~/.emacs.d/server -nq
+  editor       = emacsclient -n -a ''
   pager        = less -RXF
   abbrev       = 8
   excludesFile = ~/.gitignore

@@ -12,21 +12,38 @@
 
   (defun flycheck-python-hook ()
 
+    (flycheck-mode)                 ; flycheck for linting
+    (flycheck-color-mode-line-mode) ; highlight modeline with error state
+
+    ; make sure flycheck can find linters
+    (setq flycheck-python-flake8-executable (concat project-venv-location "/bin/flake8"))
+    (setq flycheck-python-pylint-executable (concat project-venv-location "/bin/pylint"))
+    (setq flycheck-python-ruff-executable   (concat project-venv-location "/bin/ruff"))
+
+    ; do not display error messages inline
+    (setq flycheck-display-errors-function nil)
+    (setq flycheck-display-errors-delay 999999)
+    (setq flycheck-auto-display-errors-after-checking nil)
+    (setq flycheck-indication-mode 'left-margin)
+    (setq flycheck-highlighting-mode 'symbols)
+
     ; check syntax on save. Use whatever "python"
     ; is provided by the active venv
     (setq flycheck-check-syntax-automatically '(mode-enabled save))
-    (setq flycheck-python-flake8-executable   "python")
-    (setq flycheck-python-pylint-executable   "python")
 
-    ; It is assumed that user config
-    ; files are present at ~/.pylintrc
-    ; and  ~/.flake8rc
-    (setq flycheck-pylintrc        "~/.pylintrc")
-    (setq flycheck-flake8rc        "~/.flake8rc")
-    (setq flycheck-python-mypy-ini "~/.mypy.ini")
-    (flycheck-select-checker   'python-flake8)
+    ; Global config files
+
+    (setq flycheck-pylintrc           "~/.pylintrc")
+    (setq flycheck-flake8rc           "~/.flake8rc")
+    (setq flycheck-python-mypy-ini    "~/.mypy.ini")
+    (setq flycheck-python-ruff-config "~/.config/ruff/ruff.toml")
+
+    ; Currently just using ruff
+    (flycheck-select-checker   'python-ruff)
+
     (flycheck-disable-checker  'python-mypy)
-    (flycheck-add-next-checker 'python-flake8 'python-pylint))
+    ;(flycheck-add-next-checker 'python-flake8 'python-pylint))
+  )
 
 
   (defun pmc/flycheck-show-and-focus-error-list () (interactive)
