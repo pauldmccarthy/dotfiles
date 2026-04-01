@@ -30,10 +30,10 @@ Clipboard integration depends on the presence of `xclip`.
 | M-C-Right     | Resize pane to right                              |
 | M-C-Up        | Resize pane to top                                |
 | M-C-Down      | Select pane to bottom                             |
-| M-C-j         | Resize pane to left                               |
-| M-C-l         | Resize pane to right                              |
-| M-C-i         | Resize pane to top                                |
-| M-C-k         | Resize pane to bottom                             |
+| M-J           | Resize pane to left                               |
+| M-L           | Resize pane to right                              |
+| M-I           | Resize pane to top                                |
+| M-K           | Resize pane to bottom                             |
 | M-space       | Copy mode                                         |
 | C-M-space     | Search                                            |
 
