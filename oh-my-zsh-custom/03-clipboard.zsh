@@ -1,7 +1,9 @@
 pm-kill-line () {
   zle kill-line
   if [[ $(uname -s) = Linux ]]; then
-    echo -n $CUTBUFFER | xclip -selection clipboard -i
+    if [ "$DISPLAY" != "" ]; then
+      echo -n $CUTBUFFER | xclip -selection clipboard -i
+    fi
   elif [[ $(uname -s) = Darwin ]]; then
     echo -n $CUTBUFFER | pbcopy
   fi
@@ -10,7 +12,9 @@ pm-kill-line () {
 
 pm-yank-line () {
   if [[ $(uname -s) = Linux ]]; then
-    CUTBUFFER=$(xclip -selection clipboard -o)
+    if [ "$DISPLAY" != "" ]; then
+      CUTBUFFER=$(xclip -selection clipboard -o)
+    fi
   elif [[ $(uname -s) = Darwin ]]; then
     CUTBUFFER=$(pbpaste)
   fi
