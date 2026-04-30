@@ -15,6 +15,7 @@
     use-package
     doom-modeline
     all-the-icons
+    indent-bars
     adaptive-wrap             ; correct indentation in visual-line-mode
     which-key
     realgud                   ; realgud for debugging
@@ -23,6 +24,10 @@
     projectile                ; for project management (i
                               ; don't use it, but lsp does)
     company                   ; company for auto-complete
+
+    all-the-icons             ; icons / fonts used
+    nerd-icons                ; by various things
+
     flycheck                  ; flycheck for linting
     flycheck-color-mode-line
     virtualenvwrapper         ; for python venvs

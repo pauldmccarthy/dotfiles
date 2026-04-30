@@ -79,6 +79,8 @@
     ;  - ruff
     (pyenv-auto-activate)
 
+    (indent-bars-mode)      ; highlight indentation
+
     (projectile-mode)       ; projectile (used by lsp, not me)
     (company-mode)          ; company for auto completion
     (lsp)                   ; lsp-mode for IDE features

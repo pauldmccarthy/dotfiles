@@ -182,6 +182,16 @@ files are stored at:
 | `C-c C-d`     | Start `realgud:pdb` |
 
 
+### Fonts
+
+You may need to run these once, to ensure that modeline icons used by flycheck are installed:
+
+```
+M-x all-the-icons-install-fonts
+M-x nerd-icons-install-fonts
+```
+
+
 ## Miscellaneous
 
  - Disable _Quick Find_ in Firefox (opening a search bar when `/` is typed):
