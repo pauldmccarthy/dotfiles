@@ -54,15 +54,15 @@
 (global-set-key (kbd "M-<up>")    'windmove-up)
 (global-set-key (kbd "M-<down>")  'windmove-down)
 
-;; use C-S-(jkli) for window resizing
-(global-set-key (kbd "M-C-i")       (lambda () (interactive (shrink-window               5))))
-(global-set-key (kbd "M-C-k")       (lambda () (interactive (enlarge-window              5))))
-(global-set-key (kbd "M-C-j")       (lambda () (interactive (shrink-window-horizontally  5))))
-(global-set-key (kbd "M-C-l")       (lambda () (interactive (enlarge-window-horizontally 5))))
-(global-set-key (kbd "M-C-<up>")    (lambda () (interactive (shrink-window               5))))
-(global-set-key (kbd "M-C-<down>")  (lambda () (interactive (enlarge-window              5))))
-(global-set-key (kbd "M-C-<left>")  (lambda () (interactive (shrink-window-horizontally  5))))
-(global-set-key (kbd "M-C-<right>") (lambda () (interactive (enlarge-window-horizontally 5))))
+;; use M-S-(jkli) for window resizing
+(global-set-key (kbd "M-I")         (lambda () (interactive (shrink-window               5))))
+(global-set-key (kbd "M-K")         (lambda () (interactive (enlarge-window              5))))
+(global-set-key (kbd "M-J")         (lambda () (interactive (shrink-window-horizontally  5))))
+(global-set-key (kbd "M-L")         (lambda () (interactive (enlarge-window-horizontally 5))))
+(global-set-key (kbd "M-S-<up>")    (lambda () (interactive (shrink-window               5))))
+(global-set-key (kbd "M-S-<down>")  (lambda () (interactive (enlarge-window              5))))
+(global-set-key (kbd "M-S-<left>")  (lambda () (interactive (shrink-window-horizontally  5))))
+(global-set-key (kbd "M-S-<right>") (lambda () (interactive (enlarge-window-horizontally 5))))
 
 ;; use M-C-S+arrows for buffer moving
 (global-set-key (kbd "M-C-S-j")       'buf-move-left)
@@ -93,6 +93,10 @@
     (local-unset-key (kbd "C-S-<down>"))
     (local-unset-key (kbd "C-S-<left>"))
     (local-unset-key (kbd "C-S-<right>"))
+    (local-unset-key (kbd "M-C-S-<up>"))
+    (local-unset-key (kbd "M-C-S-<down>"))
+    (local-unset-key (kbd "M-C-S-<left>"))
+    (local-unset-key (kbd "M-C-S-<right>"))
     (local-unset-key (kbd "M-S-<up>"))
     (local-unset-key (kbd "M-S-<down>"))
     (local-unset-key (kbd "M-S-<left>"))

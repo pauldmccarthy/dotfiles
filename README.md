@@ -26,14 +26,22 @@ Clipboard integration depends on the presence of `xclip`.
 | M-l           | Select right pane                                 |
 | M-i           | Select pane above                                 |
 | M-k           | Select pane below                                 |
-| M-C-Left      | Resize pane to left                               |
-| M-C-Right     | Resize pane to right                              |
-| M-C-Up        | Resize pane to top                                |
-| M-C-Down      | Select pane to bottom                             |
-| M-J           | Resize pane to left                               |
-| M-L           | Resize pane to right                              |
-| M-I           | Resize pane to top                                |
-| M-K           | Resize pane to bottom                             |
+| M-S-Left      | Resize pane to left                               |
+| M-S-Right     | Resize pane to right                              |
+| M-S-Up        | Resize pane to top                                |
+| M-S-Down      | Select pane to bottom                             |
+| M-S-j         | Resize pane to left                               |
+| M-S-l         | Resize pane to right                              |
+| M-S-i         | Resize pane to top                                |
+| M-S-k         | Resize pane to bottom                             |
+| M-C-S-Left    | Move pane to left                                 |
+| M-C-S-Right   | Move pane to right                                |
+| M-C-S-Up      | Move pane to top                                  |
+| M-C-S-Down    | Select pane to bottom                             |
+| M-C-S-j       | Move pane to left                                 |
+| M-C-S-l       | Move pane to right                                |
+| M-C-S-i       | Move pane to top                                  |
+| M-C-S-k       | Move pane to bottom                               |
 | M-space       | Copy mode                                         |
 | C-M-space     | Search                                            |
 
