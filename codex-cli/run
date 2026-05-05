@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+thisdir=$(cd $(dirname $0) && pwd -P)
+workdir=${1}
+image=mycodex-image
+
+if [ "${workdir}" = "" ]; then
+    workdir=$(pwd)
+fi
+
+# check for codex updates, rebuild 
+# image if a new version is available
+installed=$(docker run ${image}:latest codex --version)
+installed=$(echo ${installed} | cut -d ' ' -f 2)
+available=$(docker run ${image}:latest npm view @openai/codex version)
+
+if [ ${installed} != ${available} ];  then
+  echo "New version of codex is available - rebuilding image...."
+  ${thisdir}/build
+fi
+
+# You need to install codex on host and run it
+# once and log in, so that the ~/.codex/
+# directory is populated with authentication
+# information.
+
+echo "Running codex on ${workdir}"
+
+docker run -it                      \
+ -v ${workdir}:/home/paulmc/project \
+ -v ~/.codex/:/home/paulmc/.codex/  \
+ --workdir=/home/paulmc/project     \
+ --network=host                     \
+ ${image}                           \
+ codex --dangerously-bypass-approvals-and-sandbox

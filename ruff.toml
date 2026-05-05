@@ -1,0 +1,5 @@
+[lint]
+ignore = [
+    "E701", # multiple statements on one line
+    "E731", # use of lambda functions
+]
