@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 thisdir=$(dirname $(readlink $0))
-${thisdir}/../codex-cli/run "$@"
+${thisdir}/../codex-cli/run

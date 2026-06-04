@@ -29,6 +29,6 @@ EOF
 
 cat ${workdir}/Dockerfile
 
-docker build -t ${image} -f ${workdir}/Dockerfile ${workdir}
+docker build -t ${image}:latest -f ${workdir}/Dockerfile ${workdir}
 
 rm -r ${workdir}

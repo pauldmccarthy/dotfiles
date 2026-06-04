@@ -3,14 +3,16 @@
 set -e
 
 thisdir=$(cd $(dirname $0) && pwd -P)
-workdir=${1}
+workdir=$(pwd)
 image=mycodex-image
 
-if [ "${workdir}" = "" ]; then
-    workdir=$(pwd)
+if [ "$#" -eq 1 ]; then
+    args=()
+else
+    args="$@"
 fi
 
-# check for codex updates, rebuild 
+# check for codex updates, rebuild
 # image if a new version is available
 installed=$(docker run ${image}:latest codex --version)
 installed=$(echo ${installed} | cut -d ' ' -f 2)
@@ -33,5 +35,5 @@ docker run -it                      \
  -v ~/.codex/:/home/paulmc/.codex/  \
  --workdir=/home/paulmc/project     \
  --network=host                     \
- ${image}                           \
- codex --dangerously-bypass-approvals-and-sandbox
+ ${image}:latest                    \
+ codex --dangerously-bypass-approvals-and-sandbox ${args[@]}
