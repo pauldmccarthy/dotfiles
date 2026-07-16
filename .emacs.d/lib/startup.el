@@ -124,3 +124,12 @@
 )
 
 (add-hook 'server-after-make-frame-hook 'load-desktop-hook)
+
+; Start server, use emacsclient to open files
+(require 'server)
+
+; stop emacs from complaining about unsafe directory for server files
+(defun server-ensure-safe-dir (dir) "Noop" t)
+(setq server-name "~/.emacs.d/emacs-server")
+
+(when (not (server-running-p)) (server-start))

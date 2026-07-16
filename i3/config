@@ -240,7 +240,7 @@ bar {
   mode hide
   position top
   separator_symbol "|"
-  status_command i3xrocks -c ~/.config/regolith2/i3xrocks/config
+  status_command /usr/bin/i3xrocks -c ~/.config/regolith3/i3xrocks/config
   # status_command i3status
   tray_output primary
   strip_workspace_numbers yes

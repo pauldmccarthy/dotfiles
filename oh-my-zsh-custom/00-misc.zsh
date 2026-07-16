@@ -16,7 +16,7 @@ unsetopt auto_cd
 autoload -U select-word-style
 select-word-style bash
 
-export EDITOR="emacsclient -n -a=''"
+export EDITOR="emacsclient -s ~/.emacs.d/emacs-server -n -a nano"
 
 # Report runtime for long
 # commands
