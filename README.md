@@ -124,7 +124,8 @@ The Python development configuration currently assumes that:
   environments (and maybe some others that I've forgotten):
   - `flake8`
   - `pylint`
-  - `python-lsp-server[all]`
+  - `ty`
+  - `ruff`
 
 To have the correct environment automatically activated when you
 open a given `.py` file:
@@ -141,7 +142,7 @@ open a given `.py` file:
    ```
 
    As an alternative to adding the project directory to `$PYTHONPATH`, you
-   could (for example) install your project using `python setup.py develop`.
+   could (for example) install your project using `pip install -e .`.
 
 
 

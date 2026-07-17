@@ -29,3 +29,6 @@ ln -s $thisdir/.ssh/config ~/.ssh/
 
 mkdir -p ~/.config/gdb
 ln -s $thisdir/gdbinit ~/.config/gdb/
+
+mkdir -p ~/.config/ruff/
+ln -s $thisdir/ruff.toml ~/.config/ruff/ruff.toml

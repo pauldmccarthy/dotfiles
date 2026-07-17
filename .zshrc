@@ -121,7 +121,10 @@ else
   source /usr/share/doc/fzf/examples/key-bindings.zsh
   source /usr/share/doc/fzf/examples/completion.zsh
 
+  export PATH=/opt/cisco/secureclient/bin/:$PATH
+
 fi
 
+# completions
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
