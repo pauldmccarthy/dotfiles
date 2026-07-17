@@ -30,9 +30,6 @@
   ; auto-activate a conda environment
   (defun conda-env-auto-activate ()
 
-    ; $PATH seems to get cleared by something in LSP or conda.el
-    (setq-local path-var (getenv "PATH"))
-
     ; conda.el defaults to reading settings from .condarc,
     ; but I just want it to search for envs in ~/venvs
     (setf (alist-get 'envs_dirs conda--config) ["/home/paulmc/venvs/"])
@@ -40,8 +37,7 @@
     (message "Activating conda environment %s" project-venv-name)
     (setq project-venv-location (concat venv-location project-venv-name))
     (setq conda-project-env-path project-venv-name)
-    (conda-env-activate-for-buffer)
-    (setenv "PATH" path-var))
+    (conda-env-activate-for-buffer))
 
   ; auto-activate a virtual or conda environment
   (defun pyenv-auto-activate ()
@@ -92,10 +88,6 @@
 
     ; don't use LSP server for flycheck linting
     (setq lsp-diagnostic-package :none)
-
-    ; add project root to $PYTHONPATH
-    (setenv "PYTHONPATH"
-            (concat (projectile-project-root) ":" (getenv "PYTHONPATH")))
 
     ; General syntax settings
     (subword-mode              1)
