@@ -14,9 +14,13 @@ fi
 
 # check for codex updates, rebuild
 # image if a new version is available
-installed=$(docker run ${image}:latest codex --version)
-installed=$(echo ${installed} | cut -d ' ' -f 2)
-available=$(docker run ${image}:latest npm view @openai/codex version)
+installed="None"
+available="New"
+if [[ $(docker images) == *"mycodex-image"* ]]; then
+  installed=$(docker run ${image}:latest codex --version)
+  installed=$(echo ${installed} | cut -d ' ' -f 2)
+  available=$(docker run ${image}:latest npm view @openai/codex version)
+fi
 
 if [ ${installed} != ${available} ];  then
   echo "New version of codex is available - rebuilding image...."

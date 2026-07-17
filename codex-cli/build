@@ -10,23 +10,36 @@ USER=$(whoami)
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
 
-cat << EOF > ${workdir}/Dockerfile
-FROM ubuntu:24.04
+cat << EOF > ${workdir}/build.sh
+#!/usr/bin/env bash
+
+set -e
+
+# Delete default ubuntu user
+if [[ \$(cat /etc/group) == *"ubuntu"* ]]; then
+  userdel ubuntu
+fi
 
 # Create a user with same
 # permissions as host user
-RUN groupadd -g ${GROUP_ID} ${USER}
-RUN useradd -l -u ${USER_ID} -g ${USER} ${USER}
-RUN install -d -m 0755 -o ${USER} -g ${USER} /home/${USER}
+groupadd -g ${GROUP_ID} ${USER}
+useradd -l -u ${USER_ID} -g ${USER} ${USER}
+install -d -m 0755 -o ${USER} -g ${USER} /home/${USER}
 
 # Install codex and basic utilities
-RUN apt update -y
-RUN apt install -y sudo nodejs npm git ripgrep build-essential bubblewrap
-RUN npm i -g @openai/codex
+apt update -y
+apt install -y sudo nodejs npm git ripgrep build-essential bubblewrap
+npm i -g @openai/codex
+EOF
 
+cat << EOF > ${workdir}/Dockerfile
+FROM ubuntu:24.04
+ADD build.sh /
+RUN bash /build.sh && rm /build.sh
 USER ${USER}
 EOF
 
+cat ${workdir}/build.sh
 cat ${workdir}/Dockerfile
 
 docker build -t ${image}:latest -f ${workdir}/Dockerfile ${workdir}
