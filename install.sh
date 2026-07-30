@@ -32,3 +32,6 @@ ln -s $thisdir/gdbinit ~/.config/gdb/
 
 mkdir -p ~/.config/ruff/
 ln -s $thisdir/ruff.toml ~/.config/ruff/ruff.toml
+
+mkdir -p ~/.ipython/profile_default/
+ln -s $thisdir/ipython/ipython_config.py ~/.ipython/profile_default/

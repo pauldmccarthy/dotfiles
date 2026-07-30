@@ -137,12 +137,15 @@ open a given `.py` file:
    of your of project(s), containing the following:
 
    ```
-   ((nil . ((eval . (setenv "PYTHONPATH" "<path-to-project-dir>"))))
-    (python-mode . ((project-venv-name . "<name-of-venv-dir>"))))
+   ((python-mode . ((project-venv-name . "<name-of-venv-dir>"))))
    ```
 
-   As an alternative to adding the project directory to `$PYTHONPATH`, you
-   could (for example) install your project using `pip install -e .`.
+   If you need other directories on your `$PYTHONPATH`:
+
+   ```
+   ((nil . ((eval . (setenv "PYTHONPATH" "<other-dirs>"))))
+    (python-mode . ((project-venv-name . "<name-of-venv-dir>"))))
+   ```
 
 
 
@@ -212,7 +215,7 @@ M-x nerd-icons-install-fonts
 
  - Always suspend laptop on lid closed (including when external monitor is attached). What a ball-ache.
 
-    - ```sudo nano /usr/lib/systemd/logind.conf.d/lid-switch-always-suspend.conf```, and add:
+    - `sudo nano /etc/systemd/logind.conf`, and change:
       ```
       HandleSuspendKey=suspend
       HandleLidSwitch=suspend
@@ -221,3 +224,5 @@ M-x nerd-icons-install-fonts
       LidSwitchIgnoreInhibited=no
       ```
     - But this isn't enough as Gnome configures a "low-level inhibitor" which causes these rules to be ignored (run `systemd-inhibit --list` to check). You also need to edit `/etc/UPower/UPower.conf`, and set `IgnoreLid=true` (it defaults to `false`).
+
+ - macOS: https://superuser.com/a/1679740

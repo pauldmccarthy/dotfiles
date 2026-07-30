@@ -126,6 +126,10 @@ def open_editor(keys, filepath, style='section'):
             f.write(f'\n - {" ".join(keys)}')
 
     cmd = op.expandvars(f'${{EDITOR}} {filepath}')
+
+    if '~' in cmd:
+        cmd = cmd.replace('~', os.expanduser('~'))
+
     sp.run(shlex.split(cmd), check=True)
 
 
