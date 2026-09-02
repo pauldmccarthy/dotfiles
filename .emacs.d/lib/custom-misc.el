@@ -12,5 +12,11 @@
   (fill-paragraph)
   (setq fill-column 'oldfill))
 
+(defun delete-horizontal-space-forward ()
+  (interactive "*")
+  (delete-region (point) (progn (skip-chars-forward " \t") (point))))
+
+
+(define-key global-map (kbd "M-M")   'delete-horizontal-space-forward)
 (define-key global-map (kbd "C-S-q") 'fill-paragraph-to-point)
 (define-key global-map (kbd "C-M-q") 'unfill-paragraph)

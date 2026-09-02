@@ -30,6 +30,7 @@ install -d -m 0755 -o ${USER} -g ${USER} /home/${USER}
 apt update -y
 apt install -y sudo nodejs npm git ripgrep build-essential bubblewrap
 npm i -g @openai/codex
+echo "Installed codex \$(codex --version)"
 EOF
 
 cat << EOF > ${workdir}/Dockerfile
@@ -42,6 +43,13 @@ EOF
 cat ${workdir}/build.sh
 cat ${workdir}/Dockerfile
 
-docker build -t ${image}:latest -f ${workdir}/Dockerfile ${workdir}
+TAG="$(date +%Y%m%d%H%M%S)"
+
+docker build               \
+  -t "${image}:${TAG}"     \
+  -f ${workdir}/Dockerfile \
+  ${workdir}
+
+docker tag "${image}:${TAG}" "${image}:latest"
 
 rm -r ${workdir}

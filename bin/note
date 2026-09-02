@@ -128,7 +128,7 @@ def open_editor(keys, filepath, style='section'):
     cmd = op.expandvars(f'${{EDITOR}} {filepath}')
 
     if '~' in cmd:
-        cmd = cmd.replace('~', os.expanduser('~'))
+        cmd = cmd.replace('~', op.expanduser('~'))
 
     sp.run(shlex.split(cmd), check=True)
 

@@ -1,0 +1,182 @@
+#!/usr/bin/env python3
+"""Print the current user's recent merge requests in FSL GitLab projects.
+
+Written by Codex, to replace a script I'd previously written by hand and lost.
+"""
+
+import argparse
+import collections
+import datetime as dt
+import os
+import sys
+import urllib.parse as urlparse
+
+from fsl_ci import gitlab, diskcache
+
+
+DEFAULT_SERVER = "https://git.fmrib.ox.ac.uk"
+DEFAULT_NAMESPACES = ("fsl", "fsl/conda")
+DEFAULT_DAYS = 45
+
+def print_columns(titles, columns):
+    """Convenience function which pretty-prints a collection of columns in a
+    tabular format.
+
+    :arg titles:  A list of titles, one for each column.
+
+    :arg columns: A list of columns, where each column is a list of strings.
+    """
+
+    cols  = []
+
+    for t, c in zip(titles, columns):
+        cols.append([t] + list(map(str, c)))
+
+    columns = cols
+    colLens = []
+
+    for col in columns:
+        maxLen = max([len(r) for r in col])
+        colLens.append(maxLen)
+
+    fmtStr = ' | '.join(['{{:<{}s}}'.format(l) for l in colLens])
+
+    titles  = [col[0]  for col in columns]
+    columns = [col[1:] for col in columns]
+
+    separator = ['-' * l for l in colLens]
+
+    print(fmtStr.format(*titles))
+    print(fmtStr.format(*separator))
+
+    nrows = len(columns[0])
+    for i in range(nrows):
+
+        row = [col[i] for col in columns]
+        print(fmtStr.format(*row))
+
+    print(fmtStr.format(*separator))
+
+
+def print_merge_requests_by_project(merge_requests):
+    """Print merge requests in separate tables, grouped by project."""
+
+    grouped = collections.defaultdict(list)
+    for mr in merge_requests:
+        grouped[mr['project_path']].append(mr)
+
+    for project in sorted(grouped):
+        mrs = grouped[project]
+
+        dates    = [m['merged_at'] for m in mrs]
+        dates    = [m['created_at'] if d is None else d for m, d in zip(mrs, dates)]
+        iids     = [m['iid']                            for m in mrs]
+        titles   = [m['title']                          for m in mrs]
+        states   = [m['state'].upper()                  for m in mrs]
+
+        dates = [d.split('T')[0] if d is not None else '?' for d in dates]
+        ids   = [f'!{iid}' for iid in iids]
+
+        print('-'*len(project))
+        print(project)
+        print('-'*len(project))
+        print()
+        print_columns(
+            ['Date', 'ID', 'State', 'Title'],
+            [dates, ids, states, titles])
+        print()
+
+
+
+def start_date(days):
+    start = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)
+    return start.strftime("%Y-%m-%d")
+
+
+@diskcache
+def get_user_merge_requests(server,
+                            token,
+                            namespaces,
+                            created_or_merged_after):
+    url         = f'{server}/api/v4/merge_requests'
+    created_url = gitlab.add_params_to_url(
+        url, created_after=created_or_merged_after)
+    merged_url = gitlab.add_params_to_url(
+        url, merged_after=created_or_merged_after)
+
+    created_mrs = gitlab.http_request_all_pages(created_url, token)
+    merged_mrs  = gitlab.http_request_all_pages(merged_url,  token)
+    mmr_ids     = [mr['id'] for mr in merged_mrs]
+    created_mrs = [mr for mr in created_mrs if mr['id'] not in mmr_ids]
+
+    def in_namespace(mr):
+        url  = mr['web_url']
+        path = urlparse.urlparse(url).path
+        path = path.lstrip('/')
+        path = path.split('/-/')[0]
+
+        mr['project_path'] = path
+
+        for ns in namespaces:
+            if path.startswith(ns):
+                return True
+        return False
+
+
+    sort_key = lambda mr: gitlab.parse_gitlab_date(mr['updated_at'])
+
+    all_mrs = list(created_mrs) + list(merged_mrs)
+    all_mrs = [mr for mr in all_mrs if in_namespace(mr)]
+    all_mrs = sorted(all_mrs, key=sort_key)
+
+    return all_mrs
+
+
+def parse_args(argv):
+    parser = argparse.ArgumentParser(
+        description="Show the current user's recent merged merge requests."
+    )
+    parser.add_argument(
+        "-d", "--days", type=float, default=DEFAULT_DAYS,
+        help=f"number of days to look back (default: {DEFAULT_DAYS})",
+    )
+    parser.add_argument(
+        "-s", "--server", default=DEFAULT_SERVER,
+        help=f"GitLab instance URL (default: {DEFAULT_SERVER})",
+    )
+    parser.add_argument(
+        "-t", "--token", default=os.environ.get("GITLAB_API_TOKEN"),
+        help="GitLab API token (default: GITLAB_API_TOKEN)",
+    )
+    parser.add_argument(
+        "-n", "--namespace", action="append", dest="namespaces",
+        help="namespace to search; may be given more than once "
+             "(default: fsl and fsl/conda)",
+    )
+    args = parser.parse_args(argv)
+
+    if not args.token:
+        raise ValueError(
+            "A GitLab API token is required "
+            "(use --token or GITLAB_API_TOKEN).")
+    if args.days < 0:
+        raise ValueError("--days must be non-negative.")
+
+    if args.namespaces is None or len(args.namespaces) == 0:
+        args.namespaces = DEFAULT_NAMESPACES
+
+    return args
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    mrs  = get_user_merge_requests(args.server,
+                                   args.token,
+                                   args.namespaces,
+                                   start_date(args.days))
+
+    print_merge_requests_by_project(mrs)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

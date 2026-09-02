@@ -17,9 +17,12 @@ fi
 installed="None"
 available="New"
 if [[ $(docker images) == *"mycodex-image"* ]]; then
-  installed=$(docker run ${image}:latest codex --version)
+  installed=$(docker run --network=host ${image}:latest codex --version)
   installed=$(echo ${installed} | cut -d ' ' -f 2)
-  available=$(docker run ${image}:latest npm view @openai/codex version)
+  available=$(docker run --network=host ${image}:latest npm view @openai/codex version)
+  echo "Installed codex version:  ${installed}"
+  echo "Latest available version: ${available}"
+
 fi
 
 if [ ${installed} != ${available} ];  then
