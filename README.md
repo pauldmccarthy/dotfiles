@@ -211,6 +211,8 @@ M-x nerd-icons-install-fonts
  - Disable Firefox search suggestions in address bar
    (_Firefox settings_ -> _Search_ -> deselect _Provide search suggestions_).
 
+ - Dark mode for PDFs in Firefox: https://stackoverflow.com/a/71777470
+
  - Remove incorrect password delay: https://askubuntu.com/a/877390
 
  - Always suspend laptop on lid closed (including when external monitor is attached). What a ball-ache.
