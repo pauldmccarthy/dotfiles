@@ -38,7 +38,7 @@ pushd /micromamba
 curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 export MAMBA_ROOT_PREFIX=/micromamba
 export PATH=/micromamba/bin/:$PATH
-micromamba install -y -p /micromamba python=3.14 pytest pytest-cov coverage numpy scipy matplotlib, nibabel, scikit-learn fslpy
+micromamba install -y -p /micromamba python=3.14 pytest pytest-cov coverage numpy scipy matplotlib nibabel scikit-learn fslpy
 popd
 
 # Install default prompt
@@ -50,8 +50,8 @@ cat << EOF > ${workdir}/Dockerfile
 FROM ubuntu:24.04
 ADD build.sh /
 RUN bash /build.sh && rm /build.sh
-ENV MAMBA_ROOT_PREFIX "/micromamba"
-ENV PATH              "/micromamba/bin/:${PATH}"
+ENV MAMBA_ROOT_PREFIX="/micromamba"
+ENV PATH="/micromamba/bin/:${PATH}"
 USER ${USER}
 EOF
 

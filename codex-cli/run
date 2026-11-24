@@ -29,7 +29,7 @@ if [ ${installed} != ${available} ];  then
   echo -n "New version of codex is available - rebuild image? [Y/n]: "
   read rebuild
   rebuild=$(echo "${rebuild}" | tr "[:upper:]" "[:lower:]")
-  if [ "${rebuild}" = "y" ]; then
+  if [ "${rebuild}" = "y" ] || [ "${rebuild}" = "" ]; then
     ${thisdir}/build
   fi
 fi
