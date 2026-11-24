@@ -26,8 +26,12 @@ if [[ $(docker images) == *"mycodex-image"* ]]; then
 fi
 
 if [ ${installed} != ${available} ];  then
-  echo "New version of codex is available - rebuilding image...."
-  ${thisdir}/build
+  echo -n "New version of codex is available - rebuild image? [Y/n]: "
+  read rebuild
+  rebuild=$(echo "${rebuild}" | tr "[:upper:]" "[:lower:]")
+  if [ "${rebuild}" = "y" ]; then
+    ${thisdir}/build
+  fi
 fi
 
 # You need to install codex on host and run it
@@ -37,10 +41,11 @@ fi
 
 echo "Running codex on ${workdir}"
 
-docker run -it                      \
- -v ${workdir}:/home/paulmc/project \
- -v ~/.codex/:/home/paulmc/.codex/  \
- --workdir=/home/paulmc/project     \
- --network=host                     \
- ${image}:latest                    \
+docker run -it                                         \
+ -v ${workdir}:/home/paulmc/project                    \
+ -v ~/.codex/:/home/paulmc/.codex/                     \
+ -v ${thisdir}/AGENTS.md:/home/paulmc/.codex/AGENTS.md \
+ --workdir=/home/paulmc/project                        \
+ --network=host                                        \
+ ${image}:latest                                       \
  codex --dangerously-bypass-approvals-and-sandbox ${args[@]}

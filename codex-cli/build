@@ -28,15 +28,30 @@ install -d -m 0755 -o ${USER} -g ${USER} /home/${USER}
 
 # Install codex and basic utilities
 apt update -y
-apt install -y sudo nodejs npm git ripgrep build-essential bubblewrap
+apt install -y sudo nodejs npm git ripgrep build-essential bubblewrap curl
 npm i -g @openai/codex
 echo "Installed codex \$(codex --version)"
+
+# Install micromamba and a base environment
+mkdir /micromamba
+pushd /micromamba
+curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+export MAMBA_ROOT_PREFIX=/micromamba
+export PATH=/micromamba/bin/:$PATH
+micromamba install -y -p /micromamba python=3.14 pytest pytest-cov coverage numpy scipy matplotlib, nibabel, scikit-learn fslpy
+popd
+
+# Install default prompt
 EOF
+
+
 
 cat << EOF > ${workdir}/Dockerfile
 FROM ubuntu:24.04
 ADD build.sh /
 RUN bash /build.sh && rm /build.sh
+ENV MAMBA_ROOT_PREFIX "/micromamba"
+ENV PATH              "/micromamba/bin/:${PATH}"
 USER ${USER}
 EOF
 
