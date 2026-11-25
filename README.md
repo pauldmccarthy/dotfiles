@@ -16,7 +16,7 @@ Clipboard integration depends on the presence of `xclip`.
 | C-q           | prefix                                            |
 | C-q r         | reload config                                     |
 | C-q C-l       | clear screen and history                          |
-| C-q |         | split horizontally                                |
+| C-q &vert;    | split horizontally                                |
 | C-q -         | split vertically                                  |
 | M-Left        | Select left pane                                  |
 | M-Right       | Select right pane                                 |
