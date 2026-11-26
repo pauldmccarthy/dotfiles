@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+im1=$1
+im2=$2
+
+if [ ! -e "${TMPDIR}" ]; then
+  TMPDIR=/tmp
+fi
+
+export FSLDIR=~/fsl/fsl-latest/
+. $FSLDIR/etc/fslconf/fsl.sh
+
+fslmaths  ${im1} -sub ${im2} -abs ${TMPDIR}/diff
+fslmaths ${TMPDIR}/diff -bin      ${TMPDIR}/mask
+
+
+echo "${im1} range: $(fslstats ${im1} -R)"
+echo "${im2} range: $(fslstats ${im2} -R)"
+echo "max diff:     $(fslstats ${TMPDIR}/diff -R | cut -d ' ' -f 2)"
+echo "# voxels:     $(fslstats ${TMPDIR}/mask -V | cut -d ' ' -f 1)"
